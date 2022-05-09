@@ -3,9 +3,12 @@ import type { NextPage } from "next";
 import FieldGroup from "../components/FieldGroup";
 import Input from "../components/Input";
 
+import Counter from "../features/counter/Counter";
+
 const Home: NextPage = () => {
   return (
     <div className="container mx-auto mt-6 flex text-sm">
+      <Counter />
       <div className="w-1/3 p-6">
         <h2 className="text-lg">Presets</h2>
         <div className="bg-gray-200 text-gray-600 rounded p-4 mb-6 h-40 flex items-center justify-center">
