@@ -1,14 +1,17 @@
 import React from "react";
 
-const Slider: React.FC<{ name: string }> = ({ name }) => {
-  return (
-    <div>
-      <p className="pt-2 pb-1">{name}</p>
-      <div className="bg-gray-300 rounded h-1 relative my-1">
-        <div className="bg-gray-400 rounded-full h-3 w-3 absolute left-10 -top-1" />
-      </div>
-    </div>
-  );
+import { Slider as ReachSlider } from "@reach/slider";
+import "@reach/slider/styles.css";
+
+interface SliderProps {
+  max: number;
+  min: number;
+  onChange?: (value: number) => void;
+  value: number;
+}
+
+const Slider: React.FC<SliderProps> = ({ max, min, onChange, value }) => {
+  return <ReachSlider min={min} max={max} value={value} onChange={onChange} />;
 };
 
 export default Slider;
