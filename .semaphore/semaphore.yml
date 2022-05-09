@@ -1,0 +1,18 @@
+version: v1.0
+name: Test
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
+blocks:
+  - name: Run tests
+    task:
+      jobs:
+        - name: Test
+          commands:
+            - sem-version node 17
+            - checkout
+            - cache restore
+            - yarn install
+            - cache store
+            - yarn test
