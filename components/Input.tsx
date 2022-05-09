@@ -3,7 +3,7 @@ import { useState } from "react";
 import Slider from "./Slider";
 
 interface InputProps {
-  initialValue: number;
+  defaultValue?: number;
   max: number;
   min: number;
   name: string;
@@ -12,8 +12,13 @@ interface InputProps {
 /**
  * A Wrapper around a Slider which abstracts away the application state.
  */
-export default function Input({ initialValue, max, min, name }: InputProps) {
-  const [value, setValue] = useState(initialValue);
+export default function Input({
+  defaultValue,
+  max,
+  min,
+  name,
+}: InputProps): React.ReactElement {
+  const [value, setValue] = useState(defaultValue || min);
 
   return (
     <div>
