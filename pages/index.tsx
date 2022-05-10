@@ -22,10 +22,7 @@ const Home: NextPage = () => {
         </FieldGroup>
         <div className="mt-3 px-5 text-center text-xs">
           Want more options? Go to the full version of the{" "}
-          <a href="https://pro.energytransitionmodel.com/">
-            Energy Transition Model
-          </a>
-          .
+          <a href="https://pro.energytransitionmodel.com/">Energy Transition Model</a>.
         </div>
       </div>
       <div className="w-1/3 p-6">

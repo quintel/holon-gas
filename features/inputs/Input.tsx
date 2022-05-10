@@ -15,8 +15,7 @@ export default function Input({ id }: { id: string }): React.ReactElement {
       name={input.name}
       value={value}
       onChange={(newValue) => {
-        if (value !== newValue)
-          dispatch(setInputValue({ key: id, value: newValue }));
+        if (value !== newValue) dispatch(setInputValue({ key: id, value: newValue }));
       }}
     />
   );

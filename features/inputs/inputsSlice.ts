@@ -149,10 +149,7 @@ const inputsSlice = createSlice({
   name: "inputs",
   initialState: createInitialState(),
   reducers: {
-    setInputValue: (
-      state,
-      action: PayloadAction<{ key: Input["key"]; value: Input["user"] }>
-    ) => {
+    setInputValue: (state, action: PayloadAction<{ key: string; value: Input["user"] }>) => {
       const input = state[action.payload.key];
 
       if (input) {
@@ -164,9 +161,7 @@ const inputsSlice = createSlice({
 
 export const { setInputValue } = inputsSlice.actions;
 
-export const createInputSelector = (
-  key: Input["key"]
-): ((state: RootState) => Input) => {
+export const createInputSelector = (key: string): ((state: RootState) => Input) => {
   return (state: RootState) => {
     if (state.inputs[key]) {
       return state.inputs[key];
