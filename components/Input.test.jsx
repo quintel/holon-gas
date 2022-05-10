@@ -22,7 +22,7 @@ describe("Input", () => {
 
   describe("with custom min, max, and value props", () => {
     it("sets the custom min, max, and value props", () => {
-      render(<Input name="" min={10} max={20} defaultValue={15} />);
+      render(<Input name="" min={10} max={20} value={15} />);
 
       const handle = screen.getByRole("slider");
 
@@ -32,22 +32,24 @@ describe("Input", () => {
       expect(handle).toHaveAttribute("aria-valuemax", "20");
     });
 
-    it("does not allow the value to be changed with user events", () => {
-      render(<Input name="" min={10} max={20} defaultValue={15} />);
+    it("allows the value to be changed with user events", () => {
+      const onChange = jest.fn();
+
+      render(<Input name="" min={10} max={20} value={15} onChange={onChange} />);
 
       const handle = screen.getByRole("slider");
 
       fireEvent.keyDown(handle, { key: "ArrowRight", code: 39 });
-      expect(handle).toHaveAttribute("aria-valuenow", "16");
+      expect(onChange.mock.calls[0][0]).toBe(16);
 
       fireEvent.keyDown(handle, { key: "ArrowLeft", code: 37 });
-      expect(handle).toHaveAttribute("aria-valuenow", "15");
+      expect(onChange.mock.calls[1][0]).toBe(14);
 
       fireEvent.keyDown(handle, { key: "End", code: 35 });
-      expect(handle).toHaveAttribute("aria-valuenow", "20");
+      expect(onChange.mock.calls[2][0]).toBe(20);
 
       fireEvent.keyDown(handle, { key: "Home", code: 36 });
-      expect(handle).toHaveAttribute("aria-valuenow", "10");
+      expect(onChange.mock.calls[3][0]).toBe(10);
     });
   });
 });

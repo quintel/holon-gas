@@ -1,3 +1,3 @@
-import test from "./test";
+import example from "./example";
 
-export default { test: test } as const;
+export default { example: example } as const;

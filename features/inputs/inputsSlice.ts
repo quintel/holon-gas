@@ -45,7 +45,7 @@ function createInitialState(preset: PresetSchema) {
 
 const inputsSlice = createSlice({
   name: "inputs",
-  initialState: createInitialState(presets.test),
+  initialState: createInitialState(presets.example),
   reducers: {
     setInputValue: (state, action: PayloadAction<{ key: InputKey; value: Input["user"] }>) => {
       const input = state[action.payload.key];
