@@ -1,52 +1,24 @@
 import type { NextPage } from "next";
 
 import FieldGroup from "../components/FieldGroup";
-import Input from "../components/Input";
-
-import Counter from "../features/counter/Counter";
+import Input from "../features/inputs/Input";
 
 const Home: NextPage = () => {
   return (
     <div className="container mx-auto mt-6 flex text-sm">
-      <Counter />
       <div className="w-1/3 p-6">
         <h2 className="text-lg">Presets</h2>
         <div className="bg-gray-200 text-gray-600 rounded p-4 mb-6 h-40 flex items-center justify-center">
           Presets
         </div>
         <FieldGroup title="Gas production" className="mb-6">
-          <Input
-            name="Extra gas from Groningen"
-            min={0}
-            max={10}
-            defaultValue={5}
-          />
-          <Input
-            name="Extra gas from other EU countries"
-            min={0}
-            max={50}
-            defaultValue={0}
-          />
+          <Input id="extra_gas_from_groningen" />
+          <Input id="extra_gas_from_eu" />
         </FieldGroup>
         <FieldGroup title="Other production">
-          <Input
-            name="Re-use of coal-fired power stations"
-            min={0}
-            max={25}
-            defaultValue={0}
-          />
-          <Input
-            name="Injection of biomethane in gas mix"
-            min={0}
-            max={20}
-            defaultValue={10}
-          />
-          <Input
-            name="Green hydrogen as an alternative"
-            min={3}
-            max={6}
-            defaultValue={4}
-          />
+          <Input id="reuse_of_coal_fired_power_stations" />
+          <Input id="injection_of_biomethane_in_gas_mix" />
+          <Input id="green_hydrogen_as_an_alternative" />
         </FieldGroup>
         <div className="mt-3 px-5 text-center text-xs">
           Want more options? Go to the full version of the{" "}
@@ -58,64 +30,19 @@ const Home: NextPage = () => {
       </div>
       <div className="w-1/3 p-6">
         <FieldGroup title="Savings at home and office" className="mb-6">
-          <Input name="Insulate buildings" min={0} max={100} defaultValue={0} />
-          <Input
-            name="Optimal boiler settings"
-            min={0}
-            max={100}
-            defaultValue={0}
-          />
-          <Input
-            name="Purchase solar collectors"
-            min={0}
-            max={100}
-            defaultValue={0}
-          />
-          <Input
-            name="Population percentage"
-            min={0}
-            max={100}
-            defaultValue={0}
-          />
-          <Input
-            name="Number of degrees lower"
-            min={0}
-            max={100}
-            defaultValue={0}
-          />
-          <Input
-            name="Switch to heat pumps"
-            min={0}
-            max={100}
-            defaultValue={0}
-          />
-          <Input name="PV on roofs" min={0} max={100} defaultValue={0} />
-          <Input
-            name="Electricity storage behind the meter"
-            min={0}
-            max={100}
-            defaultValue={0}
-          />
+          <Input id="insulate_buildings" />
+          <Input id="optimal_boiler_settings" />
+          <Input id="purchase_solar_collectors" />
+          <Input id="population_percentage" />
+          <Input id="number_of_degrees_lower" />
+          <Input id="switch_to_heat_pumps" />
+          <Input id="pv_on_roofs" />
+          <Input id="electricity_storage_behind_the_meter" />
         </FieldGroup>
         <FieldGroup title="Other" className="mb-6">
-          <Input
-            name="Large-scale storage"
-            min={0}
-            max={100}
-            defaultValue={0}
-          />
-          <Input
-            name="Closure of industry with gas as raw material"
-            min={0}
-            max={100}
-            defaultValue={0}
-          />
-          <Input
-            name="Industry: bio-methane as raw material"
-            min={0}
-            max={100}
-            defaultValue={0}
-          />
+          <Input id="large_scale_storage" />
+          <Input id="closure_of_industry_with_gas" />
+          <Input id="bio_methane_as_raw_material" />
         </FieldGroup>
       </div>
       <div className="w-1/3 p-6">
