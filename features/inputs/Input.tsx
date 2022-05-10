@@ -1,9 +1,9 @@
 import { useAppSelector, useAppDispatch } from "../hooks";
-import { setInputValue, createInputSelector } from "./inputsSlice";
+import { setInputValue, createInputSelector, InputKey } from "./inputsSlice";
 
 import StatelessInput from "../../components/Input";
 
-export default function Input({ id }: { id: string }): React.ReactElement {
+export default function Input({ id }: { id: InputKey }): React.ReactElement {
   const input = useAppSelector(createInputSelector(id));
   const dispatch = useAppDispatch();
   const value = input.user || input.default;
