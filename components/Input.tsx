@@ -28,10 +28,10 @@ export default function Input({ max, min, name, onChange, value }: InputProps): 
   );
 
   return (
-    <div>
-      <p className="pb-2 -mb-1">{name}</p>
+    <div className="pb-1 last:pb-0">
+      <p className="pb-1 -mb-1">{name}</p>
       <div className="flex align-middle">
-        <div className="w-5/6 pt-1">
+        <div className="w-5/6 pt-2">
           <Slider
             min={min}
             max={max}
