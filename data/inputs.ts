@@ -118,6 +118,6 @@ const inputs = {
 
 export type PresetSchema = {
   [K in keyof typeof inputs]: number;
-} & { key: string; name: string };
+} & { key: string };
 
 export default inputs;

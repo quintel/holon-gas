@@ -1,8 +1,7 @@
 import { PresetSchema } from "../inputs";
 
 const preset: PresetSchema = {
-  name: "Test",
-  key: "test",
+  key: "custom",
 
   // Gas production
   extra_gas_from_groningen: 0,
