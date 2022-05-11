@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, prettyDOM } from "@testing-library/react";
 
 import Input from "./Input";
 
@@ -10,7 +10,7 @@ describe("Input", () => {
   });
 
   it("renders a simple slider", () => {
-    render(<Input name="" min={0} max={100} />);
+    render(<Input name="" min={0} max={100} value={0} />);
 
     const handle = screen.getByRole("slider");
 
@@ -40,16 +40,19 @@ describe("Input", () => {
       const handle = screen.getByRole("slider");
 
       fireEvent.keyDown(handle, { key: "ArrowRight", code: 39 });
+
+      // Internal state is updated.
+      expect(screen.getByRole("status")).toHaveTextContent(16);
+
+      // Application state is updated when key is depressed.
+      fireEvent.keyUp(handle, { key: "ArrowRight", code: 39 });
       expect(onChange.mock.calls[0][0]).toBe(16);
 
       fireEvent.keyDown(handle, { key: "ArrowLeft", code: 37 });
-      expect(onChange.mock.calls[1][0]).toBe(14);
+      expect(screen.getByRole("status")).toHaveTextContent(15);
 
-      fireEvent.keyDown(handle, { key: "End", code: 35 });
-      expect(onChange.mock.calls[2][0]).toBe(20);
-
-      fireEvent.keyDown(handle, { key: "Home", code: 36 });
-      expect(onChange.mock.calls[3][0]).toBe(10);
+      fireEvent.keyUp(handle, { key: "ArrowLeft", code: 37 });
+      expect(onChange.mock.calls[1][0]).toBe(15);
     });
   });
 });
