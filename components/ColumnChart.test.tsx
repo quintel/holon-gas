@@ -38,7 +38,7 @@ describe("ColumnChart", () => {
           min={0}
           max={100}
           value={value}
-          bands={[{ color: "emerald" }, { at: 40, color: "yellow" }, { at: 50, color: "red" }]}
+          bands={[{ color: "green" }, { at: 40, color: "yellow" }, { at: 50, color: "red" }]}
         />
       );
     }
