@@ -4,6 +4,21 @@ import FieldGroup from "../components/FieldGroup";
 import Input from "../features/inputs/Input";
 import PresetSelection from "../features/inputs/PresetSelection";
 import ResultsChart from "../components/ResultsChart";
+import ColumnChart from "../components/ColumnChart";
+
+/**
+ * Formats EUR values in column charts.
+ */
+function formatEuros(value: number): string {
+  return `${value} EUR`;
+}
+
+/**
+ * Formats percentage values in column charts.
+ */
+function formatPercent(value: number): string {
+  return `${value}%`;
+}
 
 const Home: NextPage = () => {
   return (
@@ -49,16 +64,31 @@ const Home: NextPage = () => {
         </div> */}
 
         <h2 className="text-lg mt-3">Money to Putin</h2>
-        <p>Payments to Russia for gas this year</p>
-        <div className="h-6 bg-gray-200 rounded mt-1" />
+        <p className="mb-1">Payments to Russia for gas this year</p>
+        <ColumnChart
+          max={100}
+          value={20}
+          bands={[{ color: "emerald" }, { color: "yellow", at: 1 }, { color: "red", at: 20 }]}
+          formatter={formatEuros}
+        />
 
         <h2 className="text-lg mt-3">Costs</h2>
-        <p>Required (one-off) investment</p>
-        <div className="h-6 bg-gray-200 rounded mt-1" />
+        <p className="mb-1">Required (one-off) investment</p>
+        <ColumnChart
+          max={100}
+          value={12}
+          bands={[{ color: "emerald" }, { color: "yellow", at: 10 }, { color: "red", at: 20 }]}
+          formatter={formatEuros}
+        />
 
         <h2 className="text-lg mt-3">Emissions</h2>
-        <p>Effect on EU emissions figures</p>
-        <div className="h-6 bg-gray-200 rounded mt-1" />
+        <p className="mb-1">Effect on EU emissions figures</p>
+        <ColumnChart
+          max={100}
+          value={-4}
+          bands={[{ color: "emerald" }, { color: "yellow", at: 10 }, { color: "red", at: 20 }]}
+          formatter={formatPercent}
+        />
       </div>
     </div>
   );
