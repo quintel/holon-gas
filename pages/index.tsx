@@ -3,6 +3,7 @@ import type { NextPage } from "next";
 import FieldGroup from "../components/FieldGroup";
 import Input from "../features/inputs/Input";
 import PresetSelection from "../features/inputs/PresetSelection";
+import ResultsChart from "../components/ResultsChart";
 
 const Home: NextPage = () => {
   return (
@@ -42,9 +43,10 @@ const Home: NextPage = () => {
       </div>
       <div className="w-1/3 p-6">
         <h2 className="text-lg">Results</h2>
-        <div className="bg-gray-200 text-gray-600 rounded p-4 mb-6 h-48 flex items-center justify-center">
+        <ResultsChart />
+        {/* <div className="bg-gray-200 text-gray-600 rounded p-4 mb-6 h-48 flex items-center justify-center">
           Chart
-        </div>
+        </div> */}
 
         <h2 className="text-lg mt-3">Money to Putin</h2>
         <p>Payments to Russia for gas this year</p>
