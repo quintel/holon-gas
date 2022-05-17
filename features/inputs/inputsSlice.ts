@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
 import { PresetSchema } from "../../data/inputs";
@@ -32,6 +32,21 @@ interface Input {
   user: number | null;
 }
 
+interface Result {
+  /**
+   * Value calculated from the present graph.
+   */
+  present: number;
+  /**
+   * Value calculated from the future graph.
+   */
+  future: number;
+  /**
+   * The unit name of the result.
+   */
+  unit: string;
+}
+
 /**
  * Creates the initial inputs data based on a given preset.
  */
@@ -48,37 +63,89 @@ function createInputState(preset: PresetSchema) {
  * Creates the initial state of the slice by combining the inputs with the selected preset data.
  */
 function createInitialState(preset: PresetSchema) {
-  return { selectedPreset: preset.key, inputs: createInputState(preset) };
+  return {
+    selectedPreset: preset.key,
+    inputs: createInputState(preset),
+    results: {} as { [k: string]: Result },
+  };
 }
+
+const sendRequest = async () => {
+  const response = await fetch(
+    "https://beta.engine.energytransitionmodel.com/api/v3/scenarios/1631927",
+    {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ gqueries: ["dashboard_total_costs", "dashboard_renewability"] }),
+    }
+  );
+
+  return await response.json();
+};
+
+/**
+ * Thunk which sends an API request to ETEngine with the input data and requests results.
+ */
+export const sendAPIRequest = createAsyncThunk("inputs/sendAPIRequest", async () => {
+  return await sendRequest();
+});
+
+/**
+ * Triggered when the user changes an input value.
+ */
+export const setInputValue = createAsyncThunk(
+  "inputs/setInputValue",
+  async (arg: { key: InputKey; value: Input["user"] }, thunkAPI) => {
+    thunkAPI.dispatch(sendAPIRequest());
+  }
+);
+
+/**
+ * Triggered when the user selects a preset. Updates all the input values, except when the
+ * chosen preset is "custom", in which case we leave them as they are.
+ */
+export const setPreset = createAsyncThunk("inputs/setPreset", async (arg: PresetKey, thunkAPI) => {
+  thunkAPI.dispatch(sendAPIRequest);
+});
 
 const inputsSlice = createSlice({
   name: "inputs",
   initialState: createInitialState(presets.custom),
-  reducers: {
-    /**
-     * Triggered when the user changes an input value.
-     */
-    setInputValue: (state, action: PayloadAction<{ key: InputKey; value: Input["user"] }>) => {
-      const input = state.inputs[action.payload.key];
+  reducers: {},
+  extraReducers: (builder) => {
+    // API Requests
+    // ------------
+
+    builder.addCase(sendAPIRequest.fulfilled, (state, action) => {
+      state.results = action.payload.gqueries;
+    });
+
+    // Inputs
+    // ------
+
+    builder.addCase(setInputValue.pending, (state, action) => {
+      const input = state.inputs[action.meta.arg.key];
 
       if (input) {
-        state.inputs[action.payload.key] = { ...input, user: action.payload.value };
+        state.inputs[action.meta.arg.key] = { ...input, user: action.meta.arg.value };
         state.selectedPreset = "custom";
       }
-    },
+    });
 
-    /**
-     * Triggered when the user selects a preset. Updates all the input values, except when the
-     * chosen preset is "custom", in which case we leave them as they are.
-     */
-    setPreset: (state, action: PayloadAction<PresetKey>) => {
-      state.selectedPreset = action.payload;
+    // Presets
+    // -------
+
+    builder.addCase(setPreset.pending, (state, action) => {
+      state.selectedPreset = action.meta.arg;
 
       if (action.payload === "custom") {
         return;
       }
 
-      const preset = presets[action.payload];
+      const preset = presets[action.meta.arg];
       const inputKeys = Object.keys(inputs) as InputKey[];
 
       for (const inputKey of inputKeys) {
@@ -86,11 +153,9 @@ const inputsSlice = createSlice({
           state.inputs[inputKey] = { ...inputs[inputKey], user: preset[inputKey] };
         }
       }
-    },
+    });
   },
 });
-
-export const { setInputValue, setPreset } = inputsSlice.actions;
 
 export const createInputSelector = (key: InputKey): ((state: RootState) => Input) => {
   return (state: RootState) => {
@@ -103,5 +168,19 @@ export const createInputSelector = (key: InputKey): ((state: RootState) => Input
 };
 
 export const presetSelector = (state: RootState) => state.inputs.selectedPreset;
+
+/**
+ * Creates a function which can be used to fetch a future value from a result set. If no such
+ * result exists, 0 is returned.
+ */
+export const createFutureResultSelector = (key: string) => {
+  return (state: RootState) => {
+    if (state.inputs.results[key]) {
+      return state.inputs.results[key].future;
+    }
+
+    return 0;
+  };
+};
 
 export default inputsSlice.reducer;

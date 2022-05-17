@@ -3,7 +3,7 @@ import type { NextPage } from "next";
 import FieldGroup from "../components/FieldGroup";
 import Input from "../features/inputs/Input";
 import PresetSelection from "../features/inputs/PresetSelection";
-import ResultsChart from "../components/ResultsChart";
+import ResultsChart from "../features/inputs/ResultsChart";
 import ColumnResultsExample from "../components/ColumnResultsExample";
 
 const Home: NextPage = () => {
