@@ -1,4 +1,17 @@
-const inputs = {
+/**
+ * Default function for converting an ETEngine input value to a UI input value.
+ */
+const defaultLoad = (value: number) => value;
+
+/**
+ * Default function for transforming a UI input into ETEngine input. This returns a document with
+ * the key and value without any changes.
+ */
+const defaultDump = (key: keyof typeof inputs, value: number, all: typeof inputs) => {
+  return { [key]: value };
+};
+
+const inputs: { [k: string]: Input } = {
   extra_gas_from_groningen: {
     default: 0,
     max: 100,
@@ -115,6 +128,49 @@ const inputs = {
     user: null,
   },
 };
+
+interface Input {
+  /**
+   * The default, starting value.
+   */
+  default: number;
+  /**
+   * The maximum permitted value.
+   */
+  max: number;
+  /**
+   * The minimum permitted value.
+   */
+  min: number;
+  /**
+   * Human-readable name of the input.
+   */
+  name: string;
+  /**
+   * The current value set by the user.
+   */
+  user: number | null;
+
+  load?: typeof defaultLoad;
+  dump?: typeof defaultDump;
+}
+
+/**
+ * Converts UI values to a hash of inputs to be sent to ETEngine.
+ */
+export const dumpTransforms: { [k: keyof typeof inputs]: typeof defaultDump } = {
+  extra_gas_from_groningen(key, value, all) {
+    return { capacity_of_energy_power_ultra_supercritical_coal: value * 125 };
+  },
+};
+
+export function dumpInput(
+  key: keyof typeof inputs,
+  value: number,
+  all: typeof inputs
+): { [k: string]: number } {
+  return dumpTransforms[key]?.(key, value, all) || {};
+}
 
 export type PresetSchema = {
   [K in keyof typeof inputs]: number;

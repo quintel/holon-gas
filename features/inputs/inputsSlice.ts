@@ -4,7 +4,7 @@ import { RootState } from "../store";
 import { PresetSchema } from "../../data/inputs";
 
 import presets from "../../data/presets";
-import inputs from "../../data/inputs";
+import inputs, { dumpInput } from "../../data/inputs";
 
 export type InputKey = keyof typeof inputs;
 export type PresetKey = keyof typeof presets;
@@ -70,7 +70,7 @@ function createInitialState(preset: PresetSchema) {
   };
 }
 
-const sendRequest = async () => {
+const sendRequest = async (inputs: { [k: string]: number }) => {
   const response = await fetch(
     "https://beta.engine.energytransitionmodel.com/api/v3/scenarios/1631927",
     {
@@ -79,7 +79,11 @@ const sendRequest = async () => {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ gqueries: ["dashboard_total_costs", "dashboard_renewability"] }),
+      body: JSON.stringify({
+        autobalance: true,
+        gqueries: ["dashboard_total_costs", "dashboard_renewability"],
+        scenario: { user_values: inputs },
+      }),
     }
   );
 
@@ -87,10 +91,20 @@ const sendRequest = async () => {
 };
 
 /**
+ * Iterates through all UI inputs and returns an object containing the values to be sent to the API.
+ */
+const dumpInputs = (inputs: RootState["inputs"]) => {
+  return Object.keys(inputs.inputs).reduce((rest, key) => {
+    const input = inputs.inputs[key];
+    return { ...rest, ...dumpInput(key, input.user || input.default, inputs.inputs) };
+  }, {});
+};
+
+/**
  * Thunk which sends an API request to ETEngine with the input data and requests results.
  */
-export const sendAPIRequest = createAsyncThunk("inputs/sendAPIRequest", async () => {
-  return await sendRequest();
+export const sendAPIRequest = createAsyncThunk("inputs/sendAPIRequest", async (_, thunkAPI) => {
+  return await sendRequest(dumpInputs((thunkAPI.getState() as RootState).inputs));
 });
 
 /**
