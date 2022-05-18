@@ -67,6 +67,7 @@ function createInitialState(preset: PresetSchema) {
     selectedPreset: preset.key,
     inputs: createInputState(preset),
     results: {} as { [k: string]: Result },
+    uiReady: false,
   };
 }
 
@@ -135,6 +136,7 @@ const inputsSlice = createSlice({
 
     builder.addCase(sendAPIRequest.fulfilled, (state, action) => {
       state.results = action.payload.gqueries;
+      state.uiReady = true;
     });
 
     // Inputs
@@ -196,5 +198,7 @@ export const createFutureResultSelector = (key: string) => {
     return 0;
   };
 };
+
+export const uiReadySelector = (state: RootState) => state.inputs.uiReady;
 
 export default inputsSlice.reducer;

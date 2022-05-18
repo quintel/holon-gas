@@ -150,9 +150,6 @@ interface Input {
    * The current value set by the user.
    */
   user: number | null;
-
-  load?: typeof defaultLoad;
-  dump?: typeof defaultDump;
 }
 
 /**
@@ -164,6 +161,13 @@ export const dumpTransforms: { [k: keyof typeof inputs]: typeof defaultDump } = 
   },
 };
 
+/**
+ * Given information about a UI input, dumps its value to a hash of inputs to be sent to ETEngine.
+ *
+ * @param key   The key of the input.
+ * @param value The value of the input.
+ * @param all   The full set of all UI inputs.
+ */
 export function dumpInput(
   key: keyof typeof inputs,
   value: number,

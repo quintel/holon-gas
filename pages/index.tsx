@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import { useEffect } from "react";
 
 import FieldGroup from "../components/FieldGroup";
 import Input from "../features/inputs/Input";
@@ -6,7 +7,26 @@ import PresetSelection from "../features/inputs/PresetSelection";
 import ResultsChart from "../features/inputs/ResultsChart";
 import ColumnResultsExample from "../components/ColumnResultsExample";
 
+import { useAppSelector, useAppDispatch } from "../features/hooks";
+import { uiReadySelector, sendAPIRequest } from "../features/inputs/inputsSlice";
+
 const Home: NextPage = () => {
+  const uiReady = useAppSelector(uiReadySelector);
+  const dispatch = useAppDispatch();
+
+  // Sends an initial API request to ETEngine to set default input values and get data for charts.
+  useEffect(() => {
+    dispatch(sendAPIRequest());
+  }, [dispatch]);
+
+  if (!uiReady) {
+    return (
+      <div className="flex align-center justify-center pt-10 w-full">
+        <span className="bg-gray-200 rounded py-2 px-3">Loading&hellip;</span>
+      </div>
+    );
+  }
+
   return (
     <div className="container mx-auto mt-6 flex text-sm">
       <div className="w-1/3 p-6">
