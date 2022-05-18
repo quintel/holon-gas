@@ -66,7 +66,7 @@ export default function ResultsChart(): React.ReactElement {
         columnWidth: "50%",
       },
     },
-    colors: ["#6ee7b7", "#34d399", "#10b981", "#059669", "#047857", "#c2410c"],
+    colors: ["#6ee7b7", "#eab308", "#0ea5e9", "#8b5cf6", "#14b8a6", "#c2410c"],
     dataLabels: {
       offsetY: 2,
       formatter(value: number) {
