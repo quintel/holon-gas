@@ -64,6 +64,7 @@ function createInputState(preset: PresetSchema) {
  */
 function createInitialState(preset: PresetSchema) {
   return {
+    currentRequestId: undefined as undefined | string,
     selectedPreset: preset.key,
     inputs: createInputState(preset),
     results: {} as { [k: string]: Result },
@@ -71,7 +72,7 @@ function createInitialState(preset: PresetSchema) {
   };
 }
 
-const sendRequest = async (inputs: { [k: string]: number }) => {
+const sendRequest = async (inputs: { [k: string]: number }, signal?: AbortSignal) => {
   const response = await fetch(
     "https://beta.engine.energytransitionmodel.com/api/v3/scenarios/1631927",
     {
@@ -85,6 +86,7 @@ const sendRequest = async (inputs: { [k: string]: number }) => {
         gqueries: ["dashboard_total_costs", "dashboard_renewability"],
         scenario: { user_values: inputs },
       }),
+      signal,
     }
   );
 
@@ -105,7 +107,7 @@ const dumpInputs = (inputs: RootState["inputs"]) => {
  * Thunk which sends an API request to ETEngine with the input data and requests results.
  */
 export const sendAPIRequest = createAsyncThunk("inputs/sendAPIRequest", async (_, thunkAPI) => {
-  return await sendRequest(dumpInputs((thunkAPI.getState() as RootState).inputs));
+  return await sendRequest(dumpInputs((thunkAPI.getState() as RootState).inputs), thunkAPI.signal);
 });
 
 /**
@@ -134,7 +136,18 @@ const inputsSlice = createSlice({
     // API Requests
     // ------------
 
+    builder.addCase(sendAPIRequest.pending, (state, action) => {
+      state.currentRequestId = action.meta.requestId;
+    });
+
     builder.addCase(sendAPIRequest.fulfilled, (state, action) => {
+      if (action.meta.requestId != state.currentRequestId) {
+        // Do nothing if this is a response to an older request.
+        console.log("skipped fulfil");
+        return;
+      }
+
+      console.log("fulfil");
       state.results = action.payload.gqueries;
       state.uiReady = true;
     });
