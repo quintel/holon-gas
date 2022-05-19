@@ -4,7 +4,7 @@ import Input from "./Input";
 
 describe("Input", () => {
   it("renders the input name", () => {
-    render(<Input name="My slider" min={0} max={100} />);
+    render(<Input name="My slider" min={0} max={100} value={0} />);
 
     expect(screen.queryByText(/My slider/)).toBeInTheDocument();
   });
