@@ -55,7 +55,7 @@ describe("ColumnChart", () => {
 
     it("renders using colors from the second band", () => {
       renderColumnChart(40);
-      expect(screen.getByTestId("column-chart-fill")).toHaveClass("bg-yellow-200");
+      expect(screen.getByTestId("column-chart-fill")).toHaveClass("bg-amber-200");
     });
 
     it("renders using colors from the third band", () => {
