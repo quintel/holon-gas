@@ -11,10 +11,6 @@ export type PresetKey = keyof typeof presets;
 
 interface Input {
   /**
-   * The default, starting value.
-   */
-  default: number;
-  /**
    * The maximum permitted value.
    */
   max: number;
@@ -27,9 +23,9 @@ interface Input {
    */
   name: string;
   /**
-   * The current value set by the user.
+   * The current value set by the user or the default if no user value is set.
    */
-  user: number | null;
+  value: number;
 }
 
 interface Result {
@@ -54,7 +50,7 @@ function createInputState(preset: PresetSchema) {
   const keys = Object.keys(inputs) as InputKey[];
 
   return keys.reduce((acc, key) => {
-    acc[key] = { ...inputs[key], user: preset[key] };
+    acc[key] = { ...inputs[key], value: preset[key] };
     return acc;
   }, {} as { [key in InputKey]: Input });
 }
@@ -99,7 +95,7 @@ const sendRequest = async (inputs: { [k: string]: number }, signal?: AbortSignal
 const dumpInputs = (inputs: RootState["inputs"]) => {
   return Object.keys(inputs.inputs).reduce((rest, key) => {
     const input = inputs.inputs[key];
-    return { ...rest, ...dumpInput(key, input.user || input.default, inputs.inputs) };
+    return { ...rest, ...dumpInput(key, input.value, inputs.inputs) };
   }, {});
 };
 
@@ -115,7 +111,7 @@ export const sendAPIRequest = createAsyncThunk("inputs/sendAPIRequest", async (_
  */
 export const setInputValue = createAsyncThunk(
   "inputs/setInputValue",
-  async (arg: { key: InputKey; value: Input["user"] }, thunkAPI) => {
+  async (arg: { key: InputKey; value: Input["value"] }, thunkAPI) => {
     thunkAPI.dispatch(sendAPIRequest());
   }
 );
@@ -159,7 +155,7 @@ const inputsSlice = createSlice({
       const input = state.inputs[action.meta.arg.key];
 
       if (input) {
-        state.inputs[action.meta.arg.key] = { ...input, user: action.meta.arg.value };
+        state.inputs[action.meta.arg.key] = { ...input, value: action.meta.arg.value };
         state.selectedPreset = "custom";
       }
     });
@@ -179,7 +175,7 @@ const inputsSlice = createSlice({
 
       for (const inputKey of inputKeys) {
         if (preset[inputKey] != undefined) {
-          state.inputs[inputKey] = { ...inputs[inputKey], user: preset[inputKey] };
+          state.inputs[inputKey] = { ...inputs[inputKey], value: preset[inputKey] };
         }
       }
     });

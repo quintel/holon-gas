@@ -6,16 +6,15 @@ import StatelessInput from "../../components/Input";
 export default function Input({ id }: { id: InputKey }): React.ReactElement {
   const input = useAppSelector(createInputSelector(id));
   const dispatch = useAppDispatch();
-  const value = input.user || input.default;
 
   return (
     <StatelessInput
       {...input}
       key={id}
       name={input.name}
-      value={value}
+      value={input.value}
       onChange={(newValue) => {
-        if (value !== newValue) dispatch(setInputValue({ key: id, value: newValue }));
+        if (input.value !== newValue) dispatch(setInputValue({ key: id, value: newValue }));
       }}
     />
   );

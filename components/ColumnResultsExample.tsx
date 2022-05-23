@@ -23,10 +23,10 @@ function formatPercent(value: number): string {
 
 export default function ColumnResultsExample(): React.ReactElement {
   const groningen = useAppSelector(createInputSelector("extra_gas_from_groningen"));
-  const costs = 0.1 * (groningen.user || groningen.default);
+  const costs = 0.1 * groningen.value;
 
   const coal = useAppSelector(createInputSelector("reuse_of_coal_fired_power_stations"));
-  const co2 = (coal.user || coal.default) * 0.15;
+  const co2 = coal.value * 0.15;
 
   return (
     <div>
