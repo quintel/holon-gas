@@ -5,18 +5,20 @@ import { Range } from "react-range";
 interface SliderProps {
   max: number;
   min: number;
+  step?: number;
   onChange?: (value: number[]) => void;
   onFinalChange?: (value: number[]) => void;
   values: number[];
 }
 
-const Slider: React.FC<SliderProps> = ({ max, min, onChange, onFinalChange, values }) => {
-  const percent = (100 * values[0]) / (max - min);
+const Slider: React.FC<SliderProps> = ({ max, min, step, onChange, onFinalChange, values }) => {
+  const percent = (100 * (values[0] - min)) / (max - min);
 
   return (
     <Range
       min={min}
       max={max}
+      step={step}
       values={values}
       onChange={onChange || (() => {})}
       onFinalChange={onFinalChange || (() => {})}

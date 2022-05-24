@@ -1,27 +1,18 @@
-/**
- * Default function for converting an ETEngine input value to a UI input value.
- */
-const defaultLoad = (value: number) => value;
-
-/**
- * Default function for transforming a UI input into ETEngine input. This returns a document with
- * the key and value without any changes.
- */
-const defaultDump = (key: keyof typeof inputs, value: number, all: typeof inputs) => {
-  return { [key]: value };
-};
+import { dumpTransforms } from "./inputTransforms";
 
 const inputs: { [k: string]: Input } = {
   extra_gas_from_groningen: {
-    value: 0,
-    max: 100,
-    min: 0,
+    value: 3.9,
+    max: 27.8,
+    min: 3.9,
+    step: 0.1,
     name: "Extra gas from Groningen",
   },
   extra_gas_from_eu: {
-    value: 0,
-    max: 100,
-    min: 0,
+    value: 27.8,
+    max: 33.5,
+    min: 27.8,
+    step: 0.1,
     name: "Extra gas from other EU countries",
   },
   // Other production
@@ -127,19 +118,14 @@ interface Input {
    */
   name: string;
   /**
+   * Interval between each user-selectable value.
+   */
+  step?: number;
+  /**
    * The value of the input. Prior to any changes made by the user, this is the default value.
    */
   value: number;
 }
-
-/**
- * Converts UI values to a hash of inputs to be sent to ETEngine.
- */
-export const dumpTransforms: { [k: keyof typeof inputs]: typeof defaultDump } = {
-  extra_gas_from_groningen(key, value, all) {
-    return { capacity_of_energy_power_ultra_supercritical_coal: value * 125 };
-  },
-};
 
 /**
  * Given information about a UI input, dumps its value to a hash of inputs to be sent to ETEngine.

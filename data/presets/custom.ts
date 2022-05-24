@@ -4,8 +4,8 @@ const preset: PresetSchema = {
   key: "custom",
 
   // Gas production
-  extra_gas_from_groningen: 0,
-  extra_gas_from_eu: 0,
+  extra_gas_from_groningen: 3.9,
+  extra_gas_from_eu: 27.8,
 
   // Other production
   reuse_of_coal_fired_power_stations: 0,

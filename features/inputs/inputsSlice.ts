@@ -44,6 +44,16 @@ interface Result {
 }
 
 /**
+ * Describes the state of the request sent when the page initially loads.
+ */
+enum InitialRequestState {
+  Idle,
+  Inflight,
+  Done,
+  Failure,
+}
+
+/**
  * Creates the initial inputs data based on a given preset.
  */
 function createInputState(preset: PresetSchema) {
@@ -64,7 +74,7 @@ function createInitialState(preset: PresetSchema) {
     selectedPreset: preset.key,
     inputs: createInputState(preset),
     results: {} as { [k: string]: Result },
-    uiReady: false,
+    initialRequestState: InitialRequestState.Idle,
   };
 }
 
@@ -90,6 +100,14 @@ const sendRequest = async (inputs: { [k: string]: number }, signal?: AbortSignal
 };
 
 /**
+ * Takes an input and a new value, returning the value constrained by the min and the max preventing
+ * out-of-bounds values.
+ */
+const constrainedInputValue = (value: number, { min, max }: Input) => {
+  return Math.min(Math.max(value, min), max);
+};
+
+/**
  * Iterates through all UI inputs and returns an object containing the values to be sent to the API.
  */
 const dumpInputs = (inputs: RootState["inputs"]) => {
@@ -102,9 +120,21 @@ const dumpInputs = (inputs: RootState["inputs"]) => {
 /**
  * Thunk which sends an API request to ETEngine with the input data and requests results.
  */
-export const sendAPIRequest = createAsyncThunk("inputs/sendAPIRequest", async (_, thunkAPI) => {
-  return await sendRequest(dumpInputs((thunkAPI.getState() as RootState).inputs), thunkAPI.signal);
-});
+export const sendAPIRequest = createAsyncThunk(
+  "inputs/sendAPIRequest",
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState() as RootState;
+    return await sendRequest(dumpInputs(state.inputs), thunkAPI.signal);
+  },
+  {
+    condition: (_, { getState }) => {
+      const state = getState() as RootState;
+      // Prevent extra requests during initialization which are caused by settings the value in
+      // slider useEffect.
+      return state.inputs.initialRequestState !== InitialRequestState.Inflight;
+    },
+  }
+);
 
 /**
  * Triggered when the user changes an input value.
@@ -121,7 +151,7 @@ export const setInputValue = createAsyncThunk(
  * chosen preset is "custom", in which case we leave them as they are.
  */
 export const setPreset = createAsyncThunk("inputs/setPreset", async (arg: PresetKey, thunkAPI) => {
-  thunkAPI.dispatch(sendAPIRequest);
+  thunkAPI.dispatch(sendAPIRequest());
 });
 
 const inputsSlice = createSlice({
@@ -134,18 +164,21 @@ const inputsSlice = createSlice({
 
     builder.addCase(sendAPIRequest.pending, (state, action) => {
       state.currentRequestId = action.meta.requestId;
+
+      if (state.initialRequestState === InitialRequestState.Idle) {
+        state.initialRequestState = InitialRequestState.Inflight;
+      }
     });
 
     builder.addCase(sendAPIRequest.fulfilled, (state, action) => {
-      if (action.meta.requestId != state.currentRequestId) {
-        // Do nothing if this is a response to an older request.
-        console.log("skipped fulfil");
+      if (action.meta.requestId != state.currentRequestId || action.payload.errors) {
+        // Do nothing if this is a response to an older request or if the HTTP request returned
+        // validation errors.
         return;
       }
 
-      console.log("fulfil");
       state.results = action.payload.gqueries;
-      state.uiReady = true;
+      state.initialRequestState = InitialRequestState.Done;
     });
 
     // Inputs
@@ -155,7 +188,10 @@ const inputsSlice = createSlice({
       const input = state.inputs[action.meta.arg.key];
 
       if (input) {
-        state.inputs[action.meta.arg.key] = { ...input, value: action.meta.arg.value };
+        state.inputs[action.meta.arg.key] = {
+          ...input,
+          value: constrainedInputValue(action.meta.arg.value, input),
+        };
         state.selectedPreset = "custom";
       }
     });
@@ -175,7 +211,10 @@ const inputsSlice = createSlice({
 
       for (const inputKey of inputKeys) {
         if (preset[inputKey] != undefined) {
-          state.inputs[inputKey] = { ...inputs[inputKey], value: preset[inputKey] };
+          state.inputs[inputKey] = {
+            ...inputs[inputKey],
+            value: constrainedInputValue(preset[inputKey], inputs[inputKey]),
+          };
         }
       }
     });
@@ -208,6 +247,7 @@ export const createFutureResultSelector = (key: string) => {
   };
 };
 
-export const uiReadySelector = (state: RootState) => state.inputs.uiReady;
+export const uiReadySelector = (state: RootState) =>
+  state.inputs.initialRequestState === InitialRequestState.Done;
 
 export default inputsSlice.reducer;
