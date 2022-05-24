@@ -81,7 +81,18 @@ function createInputState(preset: PresetSchema) {
 function createInitialState(preset: PresetSchema): ScenarioState {
   const fromStore = loadState();
   if (fromStore) {
-    return fromStore;
+    // Update any input settings (other than the value) from the defaults.
+    const withDefaults = Object.keys(inputs).reduce((acc, key) => {
+      const value = constrainedInputValue(
+        fromStore.inputs[key].value ?? inputs[key].value,
+        inputs[key]
+      );
+
+      acc[key] = { ...inputs[key], value };
+      return acc;
+    }, {} as { [key in InputKey]: Input });
+
+    return { ...fromStore, inputs: withDefaults };
   }
 
   return {
