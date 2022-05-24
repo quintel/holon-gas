@@ -105,4 +105,6 @@ export const formatTransforms: {
   electricity_storage_behind_the_meter: formatPercentage,
   large_scale_storage_batteries: formatMW,
   large_scale_storage_reservoirs: formatMW,
+  green_hydrogen: formatPercentage,
+  injection_of_biomethane_in_gas_mix: formatPercentage,
 };
