@@ -1,9 +1,9 @@
 import { configureStore, Action } from "@reduxjs/toolkit";
-import inputsReducer from "./inputs/inputsSlice";
+import scenarioReducer from "./scenario/scenario-slice";
 
 export const store = configureStore({
   reducer: {
-    inputs: inputsReducer,
+    scenario: scenarioReducer,
   },
 });
 

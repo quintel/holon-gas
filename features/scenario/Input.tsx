@@ -1,5 +1,5 @@
 import { useAppSelector, useAppDispatch } from "../hooks";
-import { setInputValue, createInputSelector, InputKey } from "./inputsSlice";
+import { setInputValue, createInputSelector, InputKey } from "./scenario-slice";
 
 import StatelessInput from "../../components/Input";
 

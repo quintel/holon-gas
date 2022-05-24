@@ -3,13 +3,13 @@ import dynamic from "next/dynamic";
 import { useEffect } from "react";
 
 import FieldGroup from "../components/FieldGroup";
-import Input from "../features/inputs/Input";
-import PresetSelection from "../features/inputs/PresetSelection";
-import ResultsChart from "../features/inputs/ResultsChart";
+import Input from "../features/scenario/Input";
+import PresetSelection from "../features/scenario/PresetSelection";
+import ResultsChart from "../features/scenario/ResultsChart";
 import ColumnResultsExample from "../components/ColumnResultsExample";
 
 import { useAppSelector, useAppDispatch } from "../features/hooks";
-import { uiReadySelector, sendAPIRequest } from "../features/inputs/inputsSlice";
+import { uiReadySelector, sendAPIRequest } from "../features/scenario/scenario-slice";
 
 const Home: NextPage = () => {
   const uiReady = useAppSelector(uiReadySelector);

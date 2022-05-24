@@ -1,15 +1,14 @@
 import { isEqual } from "lodash";
 
-import { RootState } from "../store";
-import { InputsState } from "./inputsSlice";
+import { ScenarioState } from "./scenario-slice";
 import inputs from "../../data/inputs";
 import expectedQueries from "../../data/queries";
 
-export function saveState(state: RootState["inputs"]) {
+export function saveState(state: ScenarioState) {
   localStorage.setItem("scenario-state", JSON.stringify(state));
 }
 
-export function loadState(): InputsState | undefined {
+export function loadState(): ScenarioState | undefined {
   if (typeof window === "undefined") {
     return undefined;
   }

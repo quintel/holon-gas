@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 import { useAppSelector } from "../hooks";
-import { createFutureResultSelector } from "./inputsSlice";
+import { createFutureResultSelector } from "./scenario-slice";
 
 export default function ResultsChart(): React.ReactElement {
   const costs = useAppSelector(createFutureResultSelector("dashboard_total_costs"));

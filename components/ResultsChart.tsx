@@ -3,10 +3,9 @@ import dynamic from "next/dynamic";
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 import { useAppSelector } from "../features/hooks";
-import { createInputSelector } from "../features/inputs/inputsSlice";
+import { createInputSelector } from "../features/scenario/scenario-slice";
 
-const inputValue = (input: { user: number | null; default: number }) =>
-  (input.user || input.default) * 0.1;
+const inputValue = (input: { value: number }) => input.value * 0.1;
 
 export default function ResultsChart(): React.ReactElement {
   const groningenSelector = useAppSelector(createInputSelector("extra_gas_from_groningen"));

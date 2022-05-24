@@ -1,7 +1,7 @@
 import ColumnChart from "../components/ColumnChart";
 
 import { useAppSelector } from "../features/hooks";
-import { createInputSelector } from "../features/inputs/inputsSlice";
+import { createInputSelector } from "../features/scenario/scenario-slice";
 
 function round(value: number): number {
   return Math.round(value * 10) / 10;

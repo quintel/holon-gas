@@ -4,7 +4,7 @@ import { RadioGroup } from "@headlessui/react";
 
 import PresetOption from "../../components/PresetOption";
 import { useAppSelector, useAppDispatch } from "../hooks";
-import { presetSelector, setPreset } from "./inputsSlice";
+import { presetSelector, setPreset } from "./scenario-slice";
 
 import { PresetKey } from "../../data/presets";
 

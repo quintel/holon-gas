@@ -44,7 +44,7 @@ interface Result {
   unit: string;
 }
 
-export interface InputsState {
+export interface ScenarioState {
   currentRequestId: undefined | string;
   initialRequestState: InitialRequestState;
   inputs: ReturnType<typeof createInputState>;
@@ -78,7 +78,7 @@ function createInputState(preset: PresetSchema) {
 /**
  * Creates the initial state of the slice by combining the inputs with the selected preset data.
  */
-function createInitialState(preset: PresetSchema): InputsState {
+function createInitialState(preset: PresetSchema): ScenarioState {
   const fromStore = loadState();
   if (fromStore) {
     return fromStore;
@@ -149,7 +149,7 @@ const constrainedInputValue = (value: number, { min, max }: Input) => {
 /**
  * Iterates through all UI inputs and returns an object containing the values to be sent to the API.
  */
-const dumpInputs = (inputs: RootState["inputs"]) => {
+const dumpInputs = (inputs: RootState["scenario"]) => {
   return Object.keys(inputs.inputs).reduce((rest, key) => {
     const input = inputs.inputs[key];
     return { ...rest, ...dumpInput(key, input.value, inputs.inputs) };
@@ -157,8 +157,8 @@ const dumpInputs = (inputs: RootState["inputs"]) => {
 };
 
 const getScenarioId = async (state: RootState) => {
-  if (state.inputs.scenarioId) {
-    return state.inputs.scenarioId;
+  if (state.scenario.scenarioId) {
+    return state.scenario.scenarioId;
   } else {
     return createScenario();
   }
@@ -168,18 +168,22 @@ const getScenarioId = async (state: RootState) => {
  * Thunk which sends an API request to ETEngine with the input data and requests results.
  */
 export const sendAPIRequest = createAsyncThunk(
-  "inputs/sendAPIRequest",
+  "scenario/sendAPIRequest",
   async (_, thunkAPI) => {
     const state = thunkAPI.getState() as RootState;
 
-    return await sendRequest(await getScenarioId(state), dumpInputs(state.inputs), thunkAPI.signal);
+    return await sendRequest(
+      await getScenarioId(state),
+      dumpInputs(state.scenario),
+      thunkAPI.signal
+    );
   },
   {
     condition: (_, { getState }) => {
       const state = getState() as RootState;
       // Prevent extra requests during initialization which are caused by settings the value in
       // slider useEffect.
-      return state.inputs.initialRequestState !== InitialRequestState.Inflight;
+      return state.scenario.initialRequestState !== InitialRequestState.Inflight;
     },
   }
 );
@@ -188,7 +192,7 @@ export const sendAPIRequest = createAsyncThunk(
  * Triggered when the user changes an input value.
  */
 export const setInputValue = createAsyncThunk(
-  "inputs/setInputValue",
+  "scenario/setInputValue",
   async (arg: { key: InputKey; value: Input["value"] }, thunkAPI) => {
     thunkAPI.dispatch(sendAPIRequest());
   }
@@ -198,12 +202,15 @@ export const setInputValue = createAsyncThunk(
  * Triggered when the user selects a preset. Updates all the input values, except when the
  * chosen preset is "custom", in which case we leave them as they are.
  */
-export const setPreset = createAsyncThunk("inputs/setPreset", async (arg: PresetKey, thunkAPI) => {
-  thunkAPI.dispatch(sendAPIRequest());
-});
+export const setPreset = createAsyncThunk(
+  "scenario/setPreset",
+  async (arg: PresetKey, thunkAPI) => {
+    thunkAPI.dispatch(sendAPIRequest());
+  }
+);
 
-const inputsSlice = createSlice({
-  name: "inputs",
+const scenarioSlice = createSlice({
+  name: "scenario",
   initialState: createInitialState(presets.custom),
   reducers: {},
   extraReducers: (builder) => {
@@ -274,15 +281,15 @@ const inputsSlice = createSlice({
 
 export const createInputSelector = (key: InputKey): ((state: RootState) => Input) => {
   return (state: RootState) => {
-    if (state.inputs.inputs[key]) {
-      return state.inputs.inputs[key];
+    if (state.scenario.inputs[key]) {
+      return state.scenario.inputs[key];
     }
 
     throw new Error(`No such input: ${key}`);
   };
 };
 
-export const presetSelector = (state: RootState) => state.inputs.selectedPreset;
+export const presetSelector = (state: RootState) => state.scenario.selectedPreset;
 
 /**
  * Creates a function which can be used to fetch a future value from a result set. If no such
@@ -290,8 +297,8 @@ export const presetSelector = (state: RootState) => state.inputs.selectedPreset;
  */
 export const createFutureResultSelector = (key: string) => {
   return (state: RootState) => {
-    if (state.inputs.results[key]) {
-      return state.inputs.results[key].future;
+    if (state.scenario.results[key]) {
+      return state.scenario.results[key].future;
     }
 
     return 0;
@@ -299,6 +306,6 @@ export const createFutureResultSelector = (key: string) => {
 };
 
 export const uiReadySelector = (state: RootState) =>
-  state.inputs.initialRequestState === InitialRequestState.Done;
+  state.scenario.initialRequestState === InitialRequestState.Done;
 
-export default inputsSlice.reducer;
+export default scenarioSlice.reducer;
