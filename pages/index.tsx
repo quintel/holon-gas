@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import dynamic from "next/dynamic";
 import { useEffect } from "react";
 
 import FieldGroup from "../components/FieldGroup";
@@ -16,8 +17,10 @@ const Home: NextPage = () => {
 
   // Sends an initial API request to ETEngine to set default input values and get data for charts.
   useEffect(() => {
-    dispatch(sendAPIRequest());
-  }, [dispatch]);
+    if (!uiReady) {
+      dispatch(sendAPIRequest());
+    }
+  }, [uiReady, dispatch]);
 
   if (!uiReady) {
     return (
@@ -71,4 +74,6 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+// Opt out of SSR since we're loading data from localStorage which differs from the server causing
+// hydration errors. There's probably a better way to fix this.
+export default dynamic(() => Promise.resolve(Home), { ssr: false });

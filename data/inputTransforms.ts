@@ -30,7 +30,7 @@ export const dumpTransforms: { [k: keyof typeof inputs]: InputSerializer } = {
    * Other production
    */
   injection_of_biomethane_in_gas_mix: (key, value, all) => ({
-    green_gas_total_share: value / 100,
+    green_gas_total_share: value,
   }),
   green_hydrogen_as_an_alternative: (key, value, all) => ({
     capacity_of_energy_hydrogen_wind_turbine_offshore: value,

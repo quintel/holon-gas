@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
+import { loadState, saveState } from "./browser-storage";
 
 import { PresetSchema } from "../../data/inputs";
 
@@ -43,6 +44,15 @@ interface Result {
   unit: string;
 }
 
+export interface InputsState {
+  currentRequestId: undefined | string;
+  initialRequestState: InitialRequestState;
+  inputs: ReturnType<typeof createInputState>;
+  results: { [k: string]: Result };
+  scenarioId: null | number;
+  selectedPreset: string;
+}
+
 /**
  * Describes the state of the request sent when the page initially loads.
  */
@@ -68,19 +78,48 @@ function createInputState(preset: PresetSchema) {
 /**
  * Creates the initial state of the slice by combining the inputs with the selected preset data.
  */
-function createInitialState(preset: PresetSchema) {
+function createInitialState(preset: PresetSchema): InputsState {
+  const fromStore = loadState();
+  if (fromStore) {
+    return fromStore;
+  }
+
   return {
-    currentRequestId: undefined as undefined | string,
-    selectedPreset: preset.key,
-    inputs: createInputState(preset),
-    results: {} as { [k: string]: Result },
+    currentRequestId: undefined,
     initialRequestState: InitialRequestState.Idle,
+    inputs: createInputState(preset),
+    results: {},
+    scenarioId: null,
+    selectedPreset: preset.key,
   };
 }
 
-const sendRequest = async (inputs: { [k: string]: number }, signal?: AbortSignal) => {
+/**
+ * Creates a new scenario. Returns the ID of the new scenario.
+ */
+const createScenario = async () => {
+  // Create a scenario
+  const response = await fetch("https://beta.engine.energytransitionmodel.com/api/v3/scenarios", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      scenario: { area_code: "nl", end_year: 2050, source: "HOLON Russian Gas" },
+    }),
+  });
+
+  return parseInt((await response.json()).id, 10);
+};
+
+const sendRequest = async (
+  scenarioId: number,
+  inputs: { [k: string]: number },
+  signal?: AbortSignal
+) => {
   const response = await fetch(
-    "https://beta.engine.energytransitionmodel.com/api/v3/scenarios/1631927",
+    `https://beta.engine.energytransitionmodel.com/api/v3/scenarios/${scenarioId}`,
     {
       method: "PUT",
       headers: {
@@ -117,6 +156,14 @@ const dumpInputs = (inputs: RootState["inputs"]) => {
   }, {});
 };
 
+const getScenarioId = async (state: RootState) => {
+  if (state.inputs.scenarioId) {
+    return state.inputs.scenarioId;
+  } else {
+    return createScenario();
+  }
+};
+
 /**
  * Thunk which sends an API request to ETEngine with the input data and requests results.
  */
@@ -124,7 +171,8 @@ export const sendAPIRequest = createAsyncThunk(
   "inputs/sendAPIRequest",
   async (_, thunkAPI) => {
     const state = thunkAPI.getState() as RootState;
-    return await sendRequest(dumpInputs(state.inputs), thunkAPI.signal);
+
+    return await sendRequest(await getScenarioId(state), dumpInputs(state.inputs), thunkAPI.signal);
   },
   {
     condition: (_, { getState }) => {
@@ -178,7 +226,10 @@ const inputsSlice = createSlice({
       }
 
       state.results = action.payload.gqueries;
+      state.scenarioId = action.payload.scenario.id;
       state.initialRequestState = InitialRequestState.Done;
+
+      saveState(state);
     });
 
     // Inputs
