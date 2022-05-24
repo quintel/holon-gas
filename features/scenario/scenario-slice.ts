@@ -70,7 +70,7 @@ function createInputState(preset: PresetSchema) {
   const keys = Object.keys(inputs) as InputKey[];
 
   return keys.reduce((acc, key) => {
-    acc[key] = { ...inputs[key], value: preset[key] };
+    acc[key] = { ...inputs[key], value: preset[key] ?? inputs[key].value };
     return acc;
   }, {} as { [key in InputKey]: Input });
 }
@@ -106,7 +106,11 @@ const createScenario = async () => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      scenario: { area_code: "nl", end_year: 2050, source: "HOLON Russian Gas" },
+      scenario: {
+        area_code: "EU27_european_union_27_countries",
+        end_year: 2050,
+        source: "HOLON Russian Gas",
+      },
     }),
   });
 

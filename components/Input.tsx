@@ -1,12 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
 
 import Slider from "./Slider";
+import { formatInput } from "../data/inputs";
 
 interface InputProps {
   max: number;
   min: number;
   step?: number;
   name: string;
+  formatValue: (value: number, precision: number) => string;
   onChange?: (value: number) => void;
   value: number;
 }
@@ -27,11 +29,12 @@ const stepToPrecision = (step?: number) => {
  * A Wrapper around a Slider which abstracts away the application state.
  */
 export default function Input({
+  formatValue,
   max,
   min,
-  step,
   name,
   onChange,
+  step,
   value,
 }: InputProps): React.ReactElement {
   // Store the value of the slider internally. This allows us to show the slider moving, and update
@@ -51,7 +54,7 @@ export default function Input({
     <div className="pb-1 last:pb-0">
       <p className="pb-1 -mb-1">{name}</p>
       <div className="flex align-middle">
-        <div className="w-5/6 pt-2">
+        <div className="w-3/4 pt-2">
           <Slider
             min={min}
             max={max}
@@ -61,8 +64,8 @@ export default function Input({
             onFinalChange={onFinalChange}
           />
         </div>
-        <output className="w-1/6 min-w-fit pl-3 text-right tabular-nums">
-          {currentValue[0].toFixed(stepToPrecision(step))}
+        <output className="w-1/4 min-w-fit pl-3 text-right tabular-nums">
+          {formatValue(currentValue[0], stepToPrecision(step))}
         </output>
       </div>
     </div>

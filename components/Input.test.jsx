@@ -2,15 +2,17 @@ import { render, screen, fireEvent, prettyDOM } from "@testing-library/react";
 
 import Input from "./Input";
 
+const formatValue = (number) => number.toString();
+
 describe("Input", () => {
   it("renders the input name", () => {
-    render(<Input name="My slider" min={0} max={100} value={0} />);
+    render(<Input name="My slider" min={0} max={100} value={0} formatValue={formatValue} />);
 
     expect(screen.queryByText(/My slider/)).toBeInTheDocument();
   });
 
   it("renders a simple slider", () => {
-    render(<Input name="" min={0} max={100} value={0} />);
+    render(<Input name="" min={0} max={100} value={0} formatValue={formatValue} />);
 
     const handle = screen.getByRole("slider");
 
@@ -22,7 +24,7 @@ describe("Input", () => {
 
   describe("with custom min, max, and value props", () => {
     it("sets the custom min, max, and value props", () => {
-      render(<Input name="" min={10} max={20} value={15} />);
+      render(<Input name="" min={10} max={20} value={15} formatValue={formatValue} />);
 
       const handle = screen.getByRole("slider");
 
@@ -35,7 +37,9 @@ describe("Input", () => {
     it("allows the value to be changed with user events", () => {
       const onChange = jest.fn();
 
-      render(<Input name="" min={10} max={20} value={15} onChange={onChange} />);
+      render(
+        <Input name="" min={10} max={20} value={15} onChange={onChange} formatValue={formatValue} />
+      );
 
       const handle = screen.getByRole("slider");
 

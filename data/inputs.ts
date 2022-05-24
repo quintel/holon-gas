@@ -1,4 +1,4 @@
-import { dumpTransforms } from "./input-transforms";
+import { dumpTransforms, formatTransforms } from "./input-transforms";
 
 const inputs: { [k: string]: Input } = {
   extra_gas_from_groningen: {
@@ -16,91 +16,70 @@ const inputs: { [k: string]: Input } = {
     name: "Extra gas from other EU countries",
   },
   // Other production
-  reuse_of_coal_fired_power_stations: {
-    value: 0,
-    max: 100,
+  coal_power_plant_capacity_conventional: {
+    value: 51914,
+    max: 1929824,
     min: 0,
-    name: "Re-use of coal-fired power stations",
+    name: "Conventional",
+  },
+  coal_power_plant_capacity_lignite: {
+    value: 44650,
+    max: 726697,
+    min: 0,
+    name: "Lignite",
   },
   injection_of_biomethane_in_gas_mix: {
     value: 0,
     max: 100,
     min: 0,
-    name: "Injection of biomethane in gas mix",
+    name: "Natural gas displacement (bio-methane)",
   },
-  green_hydrogen_as_an_alternative: {
+  lng_imports: {
     value: 0,
     max: 100,
     min: 0,
-    name: "Green hydrogen as an alternative",
+    name: "LNG imports",
+  },
+  green_hydrogen: {
+    value: 0,
+    max: 100,
+    min: 0,
+    name: "Green hydrogen",
   },
   // Savings at home and in business
-  insulate_buildings: {
-    value: 0,
-    max: 100,
-    min: 0,
-    name: "Insulate buildings",
+  rooftop_pv_households: {
+    value: 7.6,
+    max: 10.6,
+    min: 7.6,
+    step: 0.01,
+    name: "Homes",
   },
-  optimal_boiler_settings: {
-    value: 0,
-    max: 100,
-    min: 0,
-    name: "Optimal boiler settings",
-  },
-  purchase_solar_collectors: {
-    value: 0,
-    max: 100,
-    min: 0,
-    name: "Purchase solar collectors",
-  },
-  population_percentage: {
-    value: 0,
-    max: 100,
-    min: 0,
-    name: "Population percentage",
-  },
-  number_of_degrees_lower: {
-    value: 0,
-    max: 100,
-    min: 0,
-    name: "Number of degrees lower",
-  },
-  switch_to_heat_pumps: {
-    value: 0,
-    max: 100,
-    min: 0,
-    name: "Switch to heat pumps",
-  },
-  pv_on_roofs: {
-    value: 0,
-    max: 100,
-    min: 0,
-    name: "PV on roofs",
+  rooftop_pv_buildings: {
+    value: 6.3,
+    max: 10,
+    min: 6.3,
+    step: 0.01,
+    name: "Businesses",
   },
   electricity_storage_behind_the_meter: {
-    value: 0,
-    max: 100,
-    min: 0,
+    value: 0.039,
+    max: 0.06,
+    min: 0.039,
+    step: 0.0001,
     name: "Electricity storage behind the meter",
   },
   // Other
-  large_scale_storage: {
-    value: 0,
-    max: 100,
-    min: 0,
-    name: "Large-scale storage",
+  large_scale_storage_batteries: {
+    value: 647,
+    max: 1997,
+    min: 647,
+    name: "Batteries",
   },
-  closure_of_industry_with_gas: {
-    value: 0,
-    max: 100,
-    min: 0,
-    name: "Closure of industry with gas as a raw material",
-  },
-  bio_methane_as_raw_material: {
-    value: 0,
-    max: 100,
-    min: 0,
-    name: "Bio-methane as a raw material in industry",
+  large_scale_storage_reservoirs: {
+    value: 45669,
+    max: 67634,
+    min: 45669,
+    name: "Reservoirs",
   },
 };
 
@@ -140,6 +119,13 @@ export function dumpInput(
   all: typeof inputs
 ): { [k: string]: number } {
   return dumpTransforms[key]?.(key, value, all) || {};
+}
+
+/**
+ * Given an input key, the value as a formatted string.
+ */
+export function formatInput(key: keyof typeof inputs, value: number, precision: number): string {
+  return formatTransforms[key] ? formatTransforms[key](value, precision) : value.toFixed(precision);
 }
 
 export type PresetSchema = {

@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import { useEffect } from "react";
 
 import FieldGroup from "../components/FieldGroup";
+import FieldSubGroup from "../components/FieldSubGroup";
 import Input from "../features/scenario/Input";
 import PresetSelection from "../features/scenario/PresetSelection";
 import ResultsChart from "../features/scenario/ResultsChart";
@@ -39,9 +40,13 @@ const Home: NextPage = () => {
           <Input id="extra_gas_from_eu" />
         </FieldGroup>
         <FieldGroup title="Other production">
-          <Input id="reuse_of_coal_fired_power_stations" />
+          <FieldSubGroup title="Coal power plant capacity">
+            <Input id="coal_power_plant_capacity_conventional" />
+            <Input id="coal_power_plant_capacity_lignite" />
+          </FieldSubGroup>
           <Input id="injection_of_biomethane_in_gas_mix" />
-          <Input id="green_hydrogen_as_an_alternative" />
+          <Input id="lng_imports" />
+          <Input id="green_hydrogen" />
         </FieldGroup>
         <div className="mt-3 px-5 text-center text-xs">
           Want more options? Go to the full version of the{" "}
@@ -50,19 +55,17 @@ const Home: NextPage = () => {
       </div>
       <div className="w-1/3 p-6">
         <FieldGroup title="Savings at home and office" className="mb-6">
-          <Input id="insulate_buildings" />
-          <Input id="optimal_boiler_settings" />
-          <Input id="purchase_solar_collectors" />
-          <Input id="population_percentage" />
-          <Input id="number_of_degrees_lower" />
-          <Input id="switch_to_heat_pumps" />
-          <Input id="pv_on_roofs" />
           <Input id="electricity_storage_behind_the_meter" />
+          <FieldSubGroup title="Rooftop solar">
+            <Input id="rooftop_pv_households" />
+            <Input id="rooftop_pv_buildings" />
+          </FieldSubGroup>
         </FieldGroup>
         <FieldGroup title="Other" className="mb-6">
-          <Input id="large_scale_storage" />
-          <Input id="closure_of_industry_with_gas" />
-          <Input id="bio_methane_as_raw_material" />
+          <FieldSubGroup title="Large-scale energy storage">
+            <Input id="large_scale_storage_batteries" />
+            <Input id="large_scale_storage_reservoirs" />
+          </FieldSubGroup>
         </FieldGroup>
       </div>
       <div className="w-1/3 p-6">
