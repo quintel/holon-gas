@@ -1,4 +1,4 @@
-import { dumpTransforms } from "./inputTransforms";
+import { dumpTransforms } from "./input-transforms";
 
 const inputs: { [k: string]: Input } = {
   extra_gas_from_groningen: {
