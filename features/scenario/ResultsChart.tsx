@@ -33,10 +33,7 @@ export default function ResultsChart(): React.ReactElement {
     },
     colors: ["#6ee7b7", "#34d399", "#10b981", "#059669", "#047857", "#c2410c"],
     dataLabels: {
-      offsetY: 2,
-      formatter(value: number) {
-        return value.toFixed(1);
-      },
+      enabled: false,
     },
     xaxis: {
       categories: ["Results"],
