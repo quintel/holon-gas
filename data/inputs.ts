@@ -17,15 +17,15 @@ const inputs: { [k: string]: Input } = {
   },
   // Other production
   coal_power_plant_capacity_conventional: {
-    value: 51914,
-    max: 1929824,
-    min: 0,
+    value: 16,
+    max: 100,
+    min: 16,
     name: "Conventional",
   },
   coal_power_plant_capacity_lignite: {
-    value: 44650,
-    max: 726697,
-    min: 0,
+    value: 58,
+    max: 100,
+    min: 58,
     name: "Lignite",
   },
   injection_of_biomethane_in_gas_mix: {
@@ -41,12 +41,59 @@ const inputs: { [k: string]: Input } = {
     name: "LNG imports",
   },
   green_hydrogen: {
+    value: 110,
+    max: 1250,
+    min: 110,
+    name: "Green hydrogen",
+  },
+  renewable_energy_capacity: {
+    value: 489762,
+    max: 560822,
+    min: 489762,
+    name: "Renewable energy capacity",
+  },
+  // Savings at home and in business
+  electricity_storage_behind_the_meter: {
+    value: 0.039,
+    max: 0.06,
+    min: 0.039,
+    step: 0.0001,
+    name: "Electricity storage behind the meter",
+  },
+  insulation: {
+    value: 0,
+    max: 2,
+    min: 0,
+    step: 1,
+    name: "Insulation",
+  },
+  growth_of_installed_heat_pumps: {
+    value: 0,
+    max: 14.7,
+    min: 0,
+    step: 0.1,
+    name: "Growth of installed heat pumps",
+  },
+  thermostat_settings_percentage: {
     value: 0,
     max: 100,
     min: 0,
-    name: "Green hydrogen",
+    name: "Percentage of residences",
   },
-  // Savings at home and in business
+  thermostat_settings_reduce_temperature: {
+    value: 0,
+    max: 2,
+    min: 0.0,
+    step: 0.1,
+    name: "Reduce thermostat temperature",
+  },
+  behavioural_change_percentage: {
+    value: 0,
+    max: 100,
+    min: 0.0,
+    name: "Percentage of residences",
+  },
+  // Other
   rooftop_pv_households: {
     value: 7.6,
     max: 10.6,
@@ -61,14 +108,6 @@ const inputs: { [k: string]: Input } = {
     step: 0.01,
     name: "Businesses",
   },
-  electricity_storage_behind_the_meter: {
-    value: 0.039,
-    max: 0.06,
-    min: 0.039,
-    step: 0.0001,
-    name: "Electricity storage behind the meter",
-  },
-  // Other
   large_scale_storage_batteries: {
     value: 647,
     max: 1997,
@@ -80,6 +119,25 @@ const inputs: { [k: string]: Input } = {
     max: 67634,
     min: 45669,
     name: "Reservoirs",
+  },
+  solar_thermal_collectors: {
+    value: 9.0,
+    max: 9.4,
+    min: 9.0,
+    step: 0.01,
+    name: "Solar thermal collectors",
+  },
+  replacement_of_gas_by_oil_in_chemical_industry: {
+    value: 0.0,
+    max: 100.0,
+    min: 0.0,
+    name: "Replacement of gas by oil in chemical industry",
+  },
+  closure_of_fertiliser_industry: {
+    value: 0.0,
+    max: 100.0,
+    min: 0.0,
+    name: "Closure of fertiliser industry",
   },
 };
 

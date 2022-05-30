@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import FieldGroup from "../components/FieldGroup";
 import FieldSubGroup from "../components/FieldSubGroup";
 import Input from "../features/scenario/Input";
+import InsulationInput from "../features/scenario/InsulationInput";
 import PresetSelection from "../features/scenario/PresetSelection";
 import ResultsChart from "../features/scenario/ResultsChart";
 import ColumnResultsExample from "../components/ColumnResultsExample";
@@ -47,6 +48,7 @@ const Home: NextPage = () => {
           <Input id="injection_of_biomethane_in_gas_mix" />
           <Input id="lng_imports" />
           <Input id="green_hydrogen" />
+          <Input id="renewable_energy_capacity" />
         </FieldGroup>
         <div className="mt-3 px-5 text-center text-xs">
           Want more options? Go to the full version of the{" "}
@@ -56,15 +58,30 @@ const Home: NextPage = () => {
       <div className="w-1/3 p-6">
         <FieldGroup title="Savings at home and office" className="mb-6">
           <Input id="electricity_storage_behind_the_meter" />
+          <Input id="insulation" />
+          <InsulationInput id="insulation" />
+          <Input id="growth_of_installed_heat_pumps" />
+          <FieldSubGroup title="Thermostat settings">
+            <Input id="thermostat_settings_percentage" />
+            <Input id="thermostat_settings_reduce_temperature" />
+          </FieldSubGroup>
+          <FieldSubGroup title="Behavioural changes">
+            <Input id="behavioural_change_percentage" />
+          </FieldSubGroup>
+        </FieldGroup>
+        <FieldGroup title="Other" className="mb-6">
+          <Input id="solar_thermal_collectors" />
           <FieldSubGroup title="Rooftop solar">
             <Input id="rooftop_pv_households" />
             <Input id="rooftop_pv_buildings" />
           </FieldSubGroup>
-        </FieldGroup>
-        <FieldGroup title="Other" className="mb-6">
           <FieldSubGroup title="Large-scale energy storage">
             <Input id="large_scale_storage_batteries" />
             <Input id="large_scale_storage_reservoirs" />
+          </FieldSubGroup>
+          <FieldSubGroup title="Gas use in industry">
+            <Input id="replacement_of_gas_by_oil_in_chemical_industry" />
+            <Input id="closure_of_fertiliser_industry" />
           </FieldSubGroup>
         </FieldGroup>
       </div>

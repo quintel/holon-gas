@@ -3,9 +3,9 @@ const FieldSubGroup: React.FC<{ children: React.ReactNode; title: string }> = ({
   title,
 }) => {
   return (
-    <div>
+    <div className="mb-3 last:mb-0">
       <h3 className="pb-2 font-medium">{title}</h3>
-      <div className="pl-6 mb-3 border-l-2">{children}</div>
+      <div className="pl-6 border-l-2">{children}</div>
     </div>
   );
 };
