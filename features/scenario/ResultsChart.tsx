@@ -44,6 +44,9 @@ export default function ResultsChart(): React.ReactElement {
         formatter(value: number) {
           return value.toFixed(1);
         },
+        style: {
+          fontSize: "0.875rem",
+        },
       },
       forceNiceScale: true,
     },
