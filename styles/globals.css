@@ -10,6 +10,10 @@ body {
 }
 
 @layer base {
+  html {
+    @apply bg-gray-50;
+  }
+
   a {
     @apply text-blue-600;
   }

@@ -6,10 +6,8 @@ const FieldGroup: React.FC<{
   title: string;
 }> = ({ children, className, title }) => {
   return (
-    <div
-      className={`bg-white rounded border-2 border-gray-300 p-6 pb-5 mt-3 relative ${className}`}
-    >
-      <h3 className="bg-white text-lg rounded text-gray-600 px-2 -top-3.5 left-4 absolute">
+    <div className={`bg-white rounded border-2 border-gray-300 px-6 py-5 mt-3 ${className}`}>
+      <h3 className="bg-gray-50 text-base font-medium rounded-t text-gray-600 -mt-5 -mx-6 px-6 pt-4 pb-3 mb-4 border-b-2">
         {title}
       </h3>
       {children}
