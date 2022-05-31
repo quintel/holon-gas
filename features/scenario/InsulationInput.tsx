@@ -4,7 +4,7 @@ import { RadioGroup } from "@headlessui/react";
 import { useAppSelector, useAppDispatch } from "../hooks";
 import { setInputValue, createInputSelector, InputKey } from "./scenario-slice";
 
-const baseItemClasses = "text-center bg-gray-100 py-0.5 cursor-pointer rounded";
+const baseItemClasses = "text-center bg-gray-200 py-0.5 cursor-pointer rounded";
 const checkedItemClasses = `${baseItemClasses} bg-blue-500 text-white border-blue-500`;
 
 function Item({
