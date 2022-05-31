@@ -38,3 +38,11 @@ export function loadState(): ScenarioState | undefined {
 
   return parsed;
 }
+
+export function clearState() {
+  if (typeof window === "undefined") {
+    return undefined;
+  }
+
+  localStorage.removeItem("scenario-state");
+}
