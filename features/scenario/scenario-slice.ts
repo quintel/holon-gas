@@ -30,7 +30,8 @@ interface Result {
 
 export interface ScenarioState {
   currentRequestId: undefined | string;
-  initialRequestState: InitialRequestState;
+  initialRequestState: RequestState;
+  requestState: RequestState;
   inputs: ReturnType<typeof createInputState>;
   results: { [k: string]: Result };
   scenarioId: null | number;
@@ -40,7 +41,7 @@ export interface ScenarioState {
 /**
  * Describes the state of the request sent when the page initially loads.
  */
-enum InitialRequestState {
+enum RequestState {
   Idle,
   Inflight,
   Done,
@@ -81,7 +82,8 @@ function createInitialState(preset: PresetSchema): ScenarioState {
 
   return {
     currentRequestId: undefined,
-    initialRequestState: InitialRequestState.Idle,
+    initialRequestState: RequestState.Idle,
+    requestState: RequestState.Idle,
     inputs: createInputState(preset),
     results: {},
     scenarioId: null,
@@ -182,7 +184,7 @@ export const sendAPIRequest = createAsyncThunk(
       const state = getState() as RootState;
       // Prevent extra requests during initialization which are caused by settings the value in
       // slider useEffect.
-      return state.scenario.initialRequestState !== InitialRequestState.Inflight;
+      return state.scenario.initialRequestState !== RequestState.Inflight;
     },
   }
 );
@@ -219,9 +221,11 @@ const scenarioSlice = createSlice({
     builder.addCase(sendAPIRequest.pending, (state, action) => {
       state.currentRequestId = action.meta.requestId;
 
-      if (state.initialRequestState === InitialRequestState.Idle) {
-        state.initialRequestState = InitialRequestState.Inflight;
+      if (state.initialRequestState === RequestState.Idle) {
+        state.initialRequestState = RequestState.Inflight;
       }
+
+      state.requestState = RequestState.Inflight;
     });
 
     builder.addCase(sendAPIRequest.fulfilled, (state, action) => {
@@ -233,9 +237,14 @@ const scenarioSlice = createSlice({
 
       state.results = action.payload.gqueries;
       state.scenarioId = action.payload.scenario.id;
-      state.initialRequestState = InitialRequestState.Done;
+      state.initialRequestState = RequestState.Done;
+      state.requestState = RequestState.Done;
 
       saveState(state);
+    });
+
+    builder.addCase(sendAPIRequest.rejected, (state) => {
+      state.requestState = RequestState.Failure;
     });
 
     // Inputs
@@ -290,6 +299,12 @@ export const createInputSelector = (key: InputKey): ((state: RootState) => Input
 
 export const presetSelector = (state: RootState) => state.scenario.selectedPreset;
 
+export const requestStateSelector = (state: RootState) => ({
+  isLoading: state.scenario.requestState === RequestState.Inflight,
+  isDone: state.scenario.requestState === RequestState.Done,
+  isFailure: state.scenario.requestState === RequestState.Failure,
+});
+
 /**
  * Creates a function which can be used to fetch a future value from a result set. If no such
  * result exists, 0 is returned.
@@ -305,6 +320,6 @@ export const createFutureResultSelector = (key: string) => {
 };
 
 export const uiReadySelector = (state: RootState) =>
-  state.scenario.initialRequestState === InitialRequestState.Done;
+  state.scenario.initialRequestState === RequestState.Done;
 
 export default scenarioSlice.reducer;
