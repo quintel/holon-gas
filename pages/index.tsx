@@ -13,6 +13,14 @@ import ColumnResults from "../components/ColumnResults";
 import { useAppSelector, useAppDispatch } from "../features/hooks";
 import { uiReadySelector, sendAPIRequest } from "../features/scenario/scenario-slice";
 
+const Filler = ({ n = 50 }: { n?: number }) => (
+  <div>
+    {new Array(n).fill(0).map((_, i) => (
+      <p key={i}>Hello {i}</p>
+    ))}
+  </div>
+);
+
 const Home: NextPage = () => {
   const uiReady = useAppSelector(uiReadySelector);
   const dispatch = useAppDispatch();
@@ -33,8 +41,8 @@ const Home: NextPage = () => {
   }
 
   return (
-    <div className="container mx-auto mt-6 flex text-sm">
-      <div className="w-1/3 p-6">
+    <div className="container mx-auto flex text-sm">
+      <div className="w-1/3 p-6 pt-12">
         <PresetSelection />
         <FieldGroup title="Gas production" className="mb-6">
           <Input id="extra_gas_from_groningen" />
@@ -55,11 +63,11 @@ const Home: NextPage = () => {
           <a href="https://pro.energytransitionmodel.com/">Energy Transition Model</a>.
         </div>
       </div>
-      <div className="w-1/3 p-6">
+      <div className="w-1/3 p-6 pt-12">
         <FieldGroup title="Savings at home and office" className="mb-6">
           <Input id="electricity_storage_behind_the_meter" />
-          <InsulationInput id="insulation" />
           <Input id="growth_of_installed_heat_pumps" />
+          <InsulationInput id="insulation" />
           <FieldSubGroup title="Thermostat settings">
             <Input id="thermostat_settings_percentage" />
             <Input id="thermostat_settings_reduce_temperature" />
@@ -84,7 +92,7 @@ const Home: NextPage = () => {
           </FieldSubGroup>
         </FieldGroup>
       </div>
-      <div className="w-1/3 p-6">
+      <div className="w-1/3 p-6 pt-12 sticky top-0 self-start">
         <h2 className="text-lg">Results</h2>
         <ResultsChart />
         <ColumnResults />

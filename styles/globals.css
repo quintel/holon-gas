@@ -14,11 +14,23 @@ body {
     @apply bg-gray-50;
   }
 
+  body {
+    position: relative;
+  }
+
+  #__next {
+    position: relative;
+  }
+
   a {
     @apply text-blue-600;
   }
 
   a:hover {
     @apply text-blue-700 underline;
+  }
+
+  .field-sub-group + .field-sub-group {
+    @apply border-t-0 -mt-4;
   }
 }

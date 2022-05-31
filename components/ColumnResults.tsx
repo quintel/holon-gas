@@ -1,4 +1,4 @@
-import ColumnChart from "../components/ColumnChart";
+import ColumnChart from "./ColumnChart";
 
 import { useAppSelector } from "../features/hooks";
 import { createFutureResultSelector } from "../features/scenario/scenario-slice";
