@@ -205,7 +205,8 @@ export function formatInput(key: keyof typeof inputs, value: number, precision: 
 }
 
 export type PresetSchema = {
-  [K in keyof typeof inputs]: number;
+  key: string;
+  values: { [K in keyof typeof inputs]: number };
 } & { key: string };
 
 export default inputs;

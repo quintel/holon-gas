@@ -55,7 +55,7 @@ function createInputState(preset: PresetSchema) {
   const keys = Object.keys(inputs) as InputKey[];
 
   return keys.reduce((acc, key) => {
-    acc[key] = { ...inputs[key], value: preset[key] ?? inputs[key].value };
+    acc[key] = { ...inputs[key], value: preset.values[key] ?? inputs[key].value };
     return acc;
   }, {} as { [key in InputKey]: Input });
 }
@@ -276,10 +276,10 @@ const scenarioSlice = createSlice({
       const inputKeys = Object.keys(inputs) as InputKey[];
 
       for (const inputKey of inputKeys) {
-        if (preset[inputKey] != undefined) {
+        if (preset.values[inputKey] != undefined) {
           state.inputs[inputKey] = {
             ...inputs[inputKey],
-            value: constrainedInputValue(preset[inputKey], inputs[inputKey]),
+            value: constrainedInputValue(preset.values[inputKey], inputs[inputKey]),
           };
         }
       }
