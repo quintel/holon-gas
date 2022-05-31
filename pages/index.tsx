@@ -71,13 +71,6 @@ const Home: NextPage = () => {
             <Input id="green_hydrogen" />
             <Input id="renewable_energy_capacity" />
           </FieldGroup>
-          <div className="mt-6 px-5 text-center text-xs leading-5">
-            Want more options? Go to the full version of the
-            <br />
-            <a href="https://pro.energytransitionmodel.com/" className="p-1">
-              Energy Transition Model
-            </a>
-          </div>
         </div>
         <div className="w-full xl:w-1/2 p-6">
           <FieldGroup title="Savings at home and office" className="mb-6">
@@ -113,6 +106,18 @@ const Home: NextPage = () => {
         <h2 className="text-lg">Results</h2>
         <ResultsChart />
         <ColumnResults />
+        <div className="mt-12 px-5 text-gray-500 text-center text-xs leading-5">
+          Want more options? Go to the full version of the
+          <br />
+          <a
+            href="https://pro.energytransitionmodel.com/"
+            className="p-1 text-blue-500 hover:text-blue-700"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Energy Transition Model
+          </a>
+        </div>
       </div>
       <LoadingStatus />
     </div>
