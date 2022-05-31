@@ -4,7 +4,7 @@ import { RadioGroup } from "@headlessui/react";
 import { useAppSelector, useAppDispatch } from "../hooks";
 import { setInputValue, createInputSelector, InputKey } from "./scenario-slice";
 
-const baseItemClasses = "text-center py-0.5 border-2 rounded cursor-pointer";
+const baseItemClasses = "text-center bg-gray-100 py-0.5 cursor-pointer rounded";
 const checkedItemClasses = `${baseItemClasses} bg-blue-500 text-white border-blue-500`;
 
 function Item({
@@ -33,12 +33,12 @@ export default function InsulationInput({ id }: { id: InputKey }): React.ReactEl
   );
 
   return (
-    <div className="pb-3">
-      <p className="pb-1">{input.name}</p>
-      <RadioGroup value={input.value} onChange={onChange} className="flex align-middle gap-3">
+    <div className="pb-4">
+      <p className="pb-2">{input.name}</p>
+      <RadioGroup value={input.value} onChange={onChange} className="flex align-middle gap-2">
         <Item value={0}>None</Item>
-        <Item value={1}>Some</Item>
-        <Item value={2}>Lots</Item>
+        <Item value={1}>Linear</Item>
+        <Item value={2}>Exponential</Item>
       </RadioGroup>
     </div>
   );

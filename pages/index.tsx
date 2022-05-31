@@ -58,7 +58,6 @@ const Home: NextPage = () => {
       <div className="w-1/3 p-6">
         <FieldGroup title="Savings at home and office" className="mb-6">
           <Input id="electricity_storage_behind_the_meter" />
-          <Input id="insulation" />
           <InsulationInput id="insulation" />
           <Input id="growth_of_installed_heat_pumps" />
           <FieldSubGroup title="Thermostat settings">

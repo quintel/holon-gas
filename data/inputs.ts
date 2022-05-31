@@ -65,7 +65,7 @@ const inputs: { [k: string]: Input } = {
     max: 2,
     min: 0,
     step: 1,
-    name: "Insulation",
+    name: "Insulation growth",
   },
   growth_of_installed_heat_pumps: {
     value: 0,
