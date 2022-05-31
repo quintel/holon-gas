@@ -8,7 +8,7 @@ import Input from "../features/scenario/Input";
 import InsulationInput from "../features/scenario/InsulationInput";
 import PresetSelection from "../features/scenario/PresetSelection";
 import ResultsChart from "../features/scenario/ResultsChart";
-import ColumnResultsExample from "../components/ColumnResultsExample";
+import ColumnResults from "../components/ColumnResults";
 
 import { useAppSelector, useAppDispatch } from "../features/hooks";
 import { uiReadySelector, sendAPIRequest } from "../features/scenario/scenario-slice";
@@ -87,7 +87,7 @@ const Home: NextPage = () => {
       <div className="w-1/3 p-6">
         <h2 className="text-lg">Results</h2>
         <ResultsChart />
-        <ColumnResultsExample />
+        <ColumnResults />
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ import { PresetSchema } from "../../data/inputs";
 
 import presets from "../../data/presets";
 import inputs, { dumpInput } from "../../data/inputs";
+import queries from "../../data/queries";
 
 export type InputKey = keyof typeof inputs;
 export type PresetKey = keyof typeof presets;
@@ -143,7 +144,7 @@ const sendRequest = async (
       },
       body: JSON.stringify({
         autobalance: true,
-        gqueries: ["dashboard_total_costs", "dashboard_renewability"],
+        gqueries: queries,
         scenario: { user_values: inputs },
       }),
       signal,
