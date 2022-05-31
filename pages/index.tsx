@@ -53,7 +53,7 @@ const Home: NextPage = () => {
   }
 
   return (
-    <div className="container mx-auto flex text-sm">
+    <div className="container mx-auto flex text-sm flex-wrap lg:flex-nowrap">
       <div className="w-full xl:w-2/3 pt-6 flex flex-wrap">
         <div className="w-full xl:w-1/2 p-6">
           <PresetSelection />
@@ -72,7 +72,7 @@ const Home: NextPage = () => {
             <Input id="renewable_energy_capacity" />
           </FieldGroup>
         </div>
-        <div className="w-full xl:w-1/2 p-6">
+        <div className="w-full xl:w-1/2 px-6 md:pt-6">
           <FieldGroup title="Savings at home and office" className="mb-6">
             <Input id="electricity_storage_behind_the_meter" />
             <Input id="growth_of_installed_heat_pumps" />
@@ -102,7 +102,7 @@ const Home: NextPage = () => {
           </FieldGroup>
         </div>
       </div>
-      <div className="w-full xl:w-1/3 p-6 pt-12 sticky top-0 self-start">
+      <div className="w-full xl:w-1/3 px-6 md:pt-12 sticky top-0 self-start">
         <h2 className="text-lg">Results</h2>
         <ResultsChart />
         <ColumnResults />
