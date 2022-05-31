@@ -33,4 +33,39 @@ body {
   .field-sub-group + .field-sub-group {
     @apply border-t-0 -mt-4;
   }
+
+  /* React Slider */
+
+  .slider {
+    @apply h-3.5;
+  }
+
+  .slider .track {
+    @apply mt-1 h-1.5 bg-gray-300 rounded-full;
+  }
+
+  .slider .track.track-0 {
+    @apply bg-blue-500 rounded-full;
+  }
+
+  .slider .thumb {
+    @apply h-3.5 w-3.5 bg-blue-500 rounded-full;
+    transition: box-shadow 0.15s ease;
+  }
+
+  .slider .thumb:focus {
+    outline: none;
+  }
+
+  .slider .thumb:focus-visible {
+    @apply ring-2 ring-offset-2;
+  }
+
+  .slider .mark {
+    @apply ml-1.5 h-3.5 w-0.5 bg-gray-300;
+  }
+
+  .slider .active-mark {
+    @apply bg-blue-500;
+  }
 }

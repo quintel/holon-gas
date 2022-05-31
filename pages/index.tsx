@@ -13,14 +13,6 @@ import ColumnResults from "../components/ColumnResults";
 import { useAppSelector, useAppDispatch } from "../features/hooks";
 import { uiReadySelector, sendAPIRequest } from "../features/scenario/scenario-slice";
 
-const Filler = ({ n = 50 }: { n?: number }) => (
-  <div>
-    {new Array(n).fill(0).map((_, i) => (
-      <p key={i}>Hello {i}</p>
-    ))}
-  </div>
-);
-
 const Home: NextPage = () => {
   const uiReady = useAppSelector(uiReadySelector);
   const dispatch = useAppDispatch();

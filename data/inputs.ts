@@ -5,6 +5,7 @@ const inputs: { [k: string]: Input } = {
     value: 3.9,
     max: 27.8,
     min: 3.9,
+    recommended: 12,
     step: 0.1,
     name: "Extra gas from Groningen",
   },
@@ -20,36 +21,44 @@ const inputs: { [k: string]: Input } = {
     value: 16,
     max: 100,
     min: 16,
+    recommended: 24,
     name: "Conventional",
   },
   coal_power_plant_capacity_lignite: {
     value: 58,
     max: 100,
     min: 58,
+    recommended: 69,
     name: "Lignite",
   },
   injection_of_biomethane_in_gas_mix: {
-    value: 0,
-    max: 100,
-    min: 0,
+    value: 4.5,
+    max: 9,
+    min: 4.5,
+    recommended: 6,
+    step: 0.1,
     name: "Natural gas displacement (bio-methane)",
   },
   lng_imports: {
-    value: 0,
-    max: 100,
-    min: 0,
+    value: 10,
+    max: 20,
+    min: 10,
+    recommended: 15,
+    step: 0.1,
     name: "LNG imports",
   },
   green_hydrogen: {
-    value: 110,
+    value: 118,
     max: 1250,
-    min: 110,
+    min: 118,
+    recommended: 507,
     name: "Green hydrogen",
   },
   renewable_energy_capacity: {
     value: 489762,
     max: 560822,
     min: 489762,
+    recommended: 520822,
     name: "Renewable energy capacity",
   },
   // Savings at home and in business
@@ -57,6 +66,7 @@ const inputs: { [k: string]: Input } = {
     value: 0.039,
     max: 0.06,
     min: 0.039,
+    recommended: 0.052,
     step: 0.0001,
     name: "Electricity storage behind the meter",
   },
@@ -71,6 +81,7 @@ const inputs: { [k: string]: Input } = {
     value: 0,
     max: 14.7,
     min: 0,
+    recommended: 9,
     step: 0.1,
     name: "Growth of installed heat pumps",
   },
@@ -85,6 +96,7 @@ const inputs: { [k: string]: Input } = {
     max: 2,
     min: 0.0,
     step: 0.1,
+    recommended: 1,
     name: "Reduce thermostat temperature",
   },
   behavioural_change_percentage: {
@@ -124,6 +136,7 @@ const inputs: { [k: string]: Input } = {
     value: 9.0,
     max: 9.4,
     min: 9.0,
+    recommended: 9.2,
     step: 0.01,
     name: "Solar thermal collectors",
   },
@@ -141,7 +154,7 @@ const inputs: { [k: string]: Input } = {
   },
 };
 
-interface Input {
+export interface Input {
   /**
    * The maximum permitted value.
    */
@@ -154,6 +167,11 @@ interface Input {
    * Human-readable name of the input.
    */
   name: string;
+  /**
+   * An optional recommended value for the slider. A mark will be placed on the slider track at the
+   * corresponding position.
+   */
+  recommended?: number;
   /**
    * Interval between each user-selectable value.
    */

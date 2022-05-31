@@ -8,27 +8,10 @@ import presets from "../../data/presets";
 import inputs, { dumpInput } from "../../data/inputs";
 import queries from "../../data/queries";
 
+import { Input } from "../../data/inputs";
+
 export type InputKey = keyof typeof inputs;
 export type PresetKey = keyof typeof presets;
-
-interface Input {
-  /**
-   * The maximum permitted value.
-   */
-  max: number;
-  /**
-   * The minimum permitted value.
-   */
-  min: number;
-  /**
-   * Human-readable name of the input.
-   */
-  name: string;
-  /**
-   * The current value set by the user or the default if no user value is set.
-   */
-  value: number;
-}
 
 interface Result {
   /**

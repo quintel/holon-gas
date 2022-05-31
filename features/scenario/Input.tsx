@@ -18,6 +18,7 @@ export default function Input({ id }: { id: InputKey }): React.ReactElement {
       key={id}
       name={input.name}
       value={input.value}
+      recommended={input.recommended}
       formatValue={formatValue}
       onChange={(newValue) => {
         if (input.value !== newValue) dispatch(setInputValue({ key: id, value: newValue }));
