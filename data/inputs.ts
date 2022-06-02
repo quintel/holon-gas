@@ -211,12 +211,14 @@ const inputs: { [k: string]: Input } = {
     value: 647,
     max: 1997,
     min: 647,
+    recommended: 881,
     name: "Batteries",
   },
   large_scale_storage_reservoirs: {
     value: 45669,
     max: 67634,
     min: 45669,
+    recommended: 48078,
     name: "Reservoirs",
   },
   solar_thermal_collectors: {
