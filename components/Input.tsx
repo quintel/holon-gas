@@ -1,16 +1,17 @@
 import { useCallback, useEffect, useState } from "react";
 
+import HelpButton from "./HelpButton";
 import Slider from "./Slider";
-import { formatInput } from "../data/inputs";
 
 interface InputProps {
+  formatValue: (value: number, precision: number) => string;
+  helpText?: string;
   max: number;
   min: number;
+  name: string;
+  onChange?: (value: number) => void;
   recommended?: number;
   step?: number;
-  name: string;
-  formatValue: (value: number, precision: number) => string;
-  onChange?: (value: number) => void;
   value: number;
 }
 
@@ -31,6 +32,7 @@ const stepToPrecision = (step?: number) => {
  */
 export default function Input({
   formatValue,
+  helpText,
   max,
   min,
   name,
@@ -51,7 +53,10 @@ export default function Input({
 
   return (
     <div className="pb-3 last:pb-0">
-      <p className="pb-1">{name}</p>
+      <p className="pb-1">
+        <span>{name}</span>
+        {helpText && <HelpButton text={helpText} />}
+      </p>
       <div className="flex align-middle">
         <div className="w-3/4 pt-1">
           <Slider

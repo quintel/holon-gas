@@ -13,6 +13,8 @@ import PresetSelection from "../features/scenario/PresetSelection";
 import ResultsChart from "../features/scenario/ResultsChart";
 import ResponseError from "../components/ResponseError";
 
+import helpTexts from "../data/help-texts";
+
 import { useAppSelector, useAppDispatch } from "../features/hooks";
 import {
   uiReadySelector,
@@ -67,7 +69,10 @@ const Home: NextPage = () => {
               <Input id="extra_gas_from_eu" />
             </FieldGroup>
             <FieldGroup title="Other production">
-              <FieldSubGroup title="Coal power plant capacity">
+              <FieldSubGroup
+                title="Coal power plant capacity"
+                helpText={helpTexts.coalPowerPlantCapacity}
+              >
                 <Input id="coal_power_plant_capacity_conventional" />
                 <Input id="coal_power_plant_capacity_lignite" />
               </FieldSubGroup>
@@ -92,15 +97,18 @@ const Home: NextPage = () => {
             </FieldGroup>
             <FieldGroup title="Other" className="mb-6">
               <Input id="solar_thermal_collectors" />
-              <FieldSubGroup title="Rooftop solar">
+              <FieldSubGroup title="Rooftop solar" helpText={helpTexts.rooftopSolar}>
                 <Input id="rooftop_pv_households" />
                 <Input id="rooftop_pv_buildings" />
               </FieldSubGroup>
-              <FieldSubGroup title="Large-scale energy storage">
+              <FieldSubGroup
+                title="Large-scale energy storage"
+                helpText={helpTexts.largeScaleEnergyStorage}
+              >
                 <Input id="large_scale_storage_batteries" />
                 <Input id="large_scale_storage_reservoirs" />
               </FieldSubGroup>
-              <FieldSubGroup title="Gas use in industry">
+              <FieldSubGroup title="Gas use in industry" helpText={helpTexts.gasUseInIndustry}>
                 <Input id="replacement_of_gas_by_oil_in_chemical_industry" />
                 <Input id="closure_of_fertiliser_industry" />
               </FieldSubGroup>

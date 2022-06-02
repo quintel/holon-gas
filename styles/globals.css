@@ -34,6 +34,18 @@ body {
     @apply border-t-0 -mt-4;
   }
 
+  .prose-sm ol li {
+    @apply list-decimal;
+  }
+
+  .prose-sm ul li {
+    @apply list-disc;
+  }
+
+  .prose-sm ul li::marker {
+    @apply text-gray-400;
+  }
+
   /* React Slider */
 
   .slider {
@@ -67,5 +79,30 @@ body {
 
   .slider .active-mark {
     @apply bg-blue-500;
+  }
+
+  /* Tooltips */
+
+  .tooltip a, .tooltip a:hover {
+    @apply text-blue-300;
+  }
+
+  .tooltip a[data-footnote-ref="true"] {
+    pointer-events: none;
+    @apply text-white;
+  }
+  .tooltip a[data-footnote-ref="true"]::before {
+    content: "["
+  }
+  .tooltip a[data-footnote-ref="true"]::after {
+    content: "]"
+  }
+
+  .tooltip a[data-footnote-backref="true"] {
+    display: none;
+  }
+
+  .tooltip .footnotes {
+    @apply text-xs text-gray-300 -mb-3;
   }
 }

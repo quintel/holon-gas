@@ -1,3 +1,4 @@
+import { stripIndent } from "common-tags";
 import { dumpTransforms, formatTransforms } from "./input-transforms";
 
 const inputs: { [k: string]: Input } = {
@@ -8,6 +9,19 @@ const inputs: { [k: string]: Input } = {
     recommended: 12,
     step: 0.1,
     name: "Extra gas from Groningen",
+    helpText: stripIndent`
+      For this year (2022), the Dutch government has set an extraction limit of 3.9bcm for the
+      Groningen gas field[^1]. However, this decision was made at a different time. There are
+      sufficient reserves, so, given that the income is distributed fairly amongst those affected by
+      the extraction-induced earthquakes, more Russian gas could be replaced. Several news media
+      report that an annual 12bcm extraction cap is considered safe[^2]. Considering the maximum
+      annual extraction since 2015 as the technically feasible rate, 27.8bcm of gas could be won per
+      annum[^3].
+
+      [^1]: Ministerie van Economische Zaken en Klimaat, “Kamerbrief: Gaswinningsniveau Groningen gasjaar 2021-2022.” 2021.
+      [^2]: Ministerie van Economische Zaken en Klimaat, “[SodM waarschuwt: Gaswinning Groningen nog steeds een veiligheidsrisico](https://www.sodm.nl/actueel/nieuws/2022/03/08/sodm-gaswinning-groningen-nog-steeds-een-veiligheidsrisico),” Mar. 08, 2022. Accessed: May 18, 2022.
+      [^3]: NAM, “[Gas- en olie productiecijfers](https://www.nam.nl/gas-en-olie/gaswinning.html#iframe=L2VtYmVkL2NvbXBvbmVudC8_aWQ9Z2Fzd2lubmluZw),” 2022.
+    `,
   },
   extra_gas_from_eu: {
     value: 27.8,
@@ -15,6 +29,14 @@ const inputs: { [k: string]: Input } = {
     min: 27.8,
     step: 0.1,
     name: "Extra gas from other EU countries",
+    helpText: stripIndent`
+      Starting 2015 the highest extraction of natural gas from Denmark, Germany, Italy, Poland and
+      Romania amounted 33.5bcm[^1] (the estimated theoretical maximum). All preceding countries have
+      sufficient proven reserves to meet this demand. In 2021, 27.8bcm worth of natural gas was
+      extracted from these countries instead[^1].
+
+      [^1]: BP Energy, “Statistical Review of World Energy globally consistent data on world energy markets and authoritative publications in the field of energy,” 2021.
+    `,
   },
   // Other production
   coal_power_plant_capacity_conventional: {
@@ -38,6 +60,19 @@ const inputs: { [k: string]: Input } = {
     recommended: 6,
     step: 0.1,
     name: "Natural gas displacement (bio-methane)",
+    helpText: stripIndent`
+      Bio-methane is a biogas that can directly replace natural gas[^1]. In 2019, this
+      injection-rate equalled 4.5%. For this year (2022), the EU wants to double bio-methane
+      production under REPowerEU[^2]. When we assume that the injection rate of bio-gas increases
+      proportionally, it would provide 9% of the EU’s natural gas as theoretical maximum for our
+      reference year. However, we see that the maximum increase in biomethane plants in one year
+      (since 2011) is only 33%[^3]. When we take this as realistic estimate, the gas injection rate
+      would equal 6% instead.
+
+      [^1]: W. Urban, “Biomethane injection into natural gas networks,” in The Biogas Handbook: Science, Production and Applications, 2013, pp. 378–403. doi: 10.1533/9780857097415.3.378.
+      [^2]: Gas for Climate, “Commission announces groundbreaking biomethane target: ‘REPowerEU to cut dependence on Russian gas,’” 2022. https://gasforclimate2050.eu/news-item/commission-announces-groundbreaking-biomethane-target-repowereu-to-cut-dependence-on-russian-gas/
+      [^3]: EBA, “EBA Statistical Report 2020,” 2020.
+    `,
   },
   lng_imports: {
     value: 10,
@@ -46,6 +81,15 @@ const inputs: { [k: string]: Input } = {
     recommended: 15,
     step: 0.1,
     name: "LNG imports",
+    helpText: stripIndent`
+      Theoretically, the EU could import an extra 60bcm worth of natural gas through LNG. However,
+      according to the IEA[^1], the tight LNG market would drive up prices to the point of
+      infeasibility when a 20bcm threshold is passed. In 2021, 13 EU countries together imported
+      80bcm worth of natural gas[^2].
+
+      [^1]: IEA, “A 10-Point Plan to Reduce the European Union’s Reliance on Russian Natural Gas,” 2022.
+      [^2]: European Commission, “[Liquefied natural gas](https://energy.ec.europa.eu/topics/oil-gas-and-coal/liquefied-natural-gas_en).” (accessed May 19, 2022).
+    `,
   },
   green_hydrogen: {
     value: 118,
@@ -53,6 +97,17 @@ const inputs: { [k: string]: Input } = {
     min: 118,
     recommended: 507,
     name: "Green hydrogen",
+    helpText: stripIndent`
+      Similar to gas, we can use green hydrogen as a demand-response source for electricity. When we
+      take the ‘Hydrogen strategy for a climate-neutral Europe’-approximation (40GW of green
+      hydrogen by 2040 [^1], [^2]) for reference we find a theoretical 1.25GW maximum and a more
+      realistic estimate using announced electrolyser capacity of 0.5GW [3]. The operational
+      capacity by the end of 2021 was roughly 118MW [^3].
+
+      [^1]: European Commission, “[A Hydrogen Strategy for a climate neutral Europe](https://ec.europa.eu/commission/presscorner/home/en),” 2020.
+      [^2]: A. Wolf and N. Zander, “[Green Hydrogen in Europe: Do Strategies Meet Expectations?](https://www.intereconomics.eu/contents/year/2021/number/6/article/green-hydrogen-in-europe-do-strategies-meet-expectations.html),” Intereconomics, 2021.
+      [^3]: J. S. Jones, “[Green hydrogen in Europe – 2022 is the year to make it a reality](https://www.enlit.world/hydrogen/green-hydrogen-in-europe-2022-is-the-year-to-make-it-a-reality/),” Feb. 22, 2022
+    `,
   },
   renewable_energy_capacity: {
     value: 489762,
@@ -60,6 +115,15 @@ const inputs: { [k: string]: Input } = {
     min: 489762,
     recommended: 520822,
     name: "Renewable energy capacity",
+    helpText: stripIndent`
+      According to data from the European Commission incorporated in the ETM, by 2019, there was
+      258GW of renewable energy capacity installed. This grew by roughly 10 percent in 2020.
+      According to the IEA’s ten-year plan, 20tWh of generated electricity could be added though a
+      concerted policy effort (see [^1]). Adding this to our original estimate, we arrive at a total
+      theoretical increase of 14.5%.
+
+      [^1] IEA, “A 10-Point Plan to Reduce the European Union’s Reliance on Russian Natural Gas,” 2022.
+    `,
   },
   // Savings at home and in business
   electricity_storage_behind_the_meter: {
@@ -69,6 +133,15 @@ const inputs: { [k: string]: Input } = {
     recommended: 0.052,
     step: 0.0001,
     name: "Electricity storage behind the meter",
+    helpText: stripIndent`
+      Using the Database of the European energy storage technologies and facilities[^1], an 436MW
+      capacity of behind-the-meter energy storage is estimated. We take a realistic growth estimate
+      of 33% and a theoretical estimate of 54% (taken from charts in[^2]). The latter correspond to
+      0.052% and 0.060% of European homes.
+
+      [^1]: Directorate-General For Energy, “Database of the European energy storage technologies and facilities [Data set],” 2020.
+      [^2]: EASE Storage, “European Market Monitor on Energy Storage,” Eur. Mark. Monit. Energy Storage, vol. 44, no. March, p. 62, 2021.
+    `,
   },
   insulation: {
     value: 0,
@@ -76,6 +149,11 @@ const inputs: { [k: string]: Input } = {
     min: 0,
     step: 1,
     name: "Insulation growth",
+    helpText: stripIndent`
+      Since there is no clear data on how fast homes and other buildings can be insulated, we look
+      at the statistic development from 2011 to 2019 and project this ahead using an exponential
+      approximation (theoretical scenario) and a linear approximation (realistic scenario).
+    `,
   },
   growth_of_installed_heat_pumps: {
     value: 0,
@@ -84,6 +162,15 @@ const inputs: { [k: string]: Input } = {
     recommended: 9,
     step: 0.1,
     name: "Growth of installed heat pumps",
+    helpText: stripIndent`
+      Heat pumps can be used to satisfy heat demand through electricity rather than through the
+      combustion of gas. From 2019 to 2020, the number of heat pumps in Europe grew by 9
+      percent[^1], while the global scenario prediction by the IEA (approached linearly) amounts up
+      to 14.7 percent. These will be our realistic and theoretical scenarios respectively. We
+      presume an equal growth for all heat pump types (air, ground).
+
+      [^1]: IEA, “Heat Pumps,” 2021.
+    `,
   },
   thermostat_settings_percentage: {
     value: 0,
@@ -139,6 +226,15 @@ const inputs: { [k: string]: Input } = {
     recommended: 9.2,
     step: 0.01,
     name: "Solar thermal collectors",
+    helpText: stripIndent`
+      Solar collectors can help meet part of a building’s heat demand. In 2015, the installed
+      capacity grew by 4.4%[^1], while from 2018 to our reference year, this growth amounted to only
+      2.5%[^2]. We take the growth rate of the previous year as our realistic estimate, and the 4.4%
+      growth from 2015 as our theoretical maximum growth.
+
+      [^1]: ESTIF, “Solar Heat Markets in Europe: Trends and Market Statistics 2019,” 2020.
+      [^2]: ESTIF, “Solar Thermal Markets in Europe: Trends and Market Statistics 2015,” 2016.
+    `,
   },
   replacement_of_gas_by_oil_in_chemical_industry: {
     value: 0.0,
@@ -155,6 +251,10 @@ const inputs: { [k: string]: Input } = {
 };
 
 export interface Input {
+  /**
+   * Optional markdown text shown when the user clicks the (?) button.
+   */
+  helpText?: string;
   /**
    * The maximum permitted value.
    */

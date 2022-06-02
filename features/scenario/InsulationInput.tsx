@@ -4,6 +4,9 @@ import { RadioGroup } from "@headlessui/react";
 import { useAppSelector, useAppDispatch } from "../hooks";
 import { setInputValue, createInputSelector, InputKey } from "./scenario-slice";
 
+import HelpButton from "../../components/HelpButton";
+import helpTexts from "../../data/help-texts";
+
 const baseItemClasses =
   "text-center bg-gray-200 hover:bg-gray-300 transition py-0.5 cursor-pointer";
 const checkedItemClasses = `${baseItemClasses} bg-blue-500 hover:bg-blue-500 text-white border-blue-500`;
@@ -39,7 +42,10 @@ export default function InsulationInput({ id }: { id: InputKey }): React.ReactEl
 
   return (
     <div className="pb-4">
-      <p className="pb-2">{input.name}</p>
+      <p className="pb-2">
+        {input.name}
+        {input.helpText && <HelpButton text={input.helpText} />}
+      </p>
       <RadioGroup value={input.value} onChange={onChange} className="flex align-middle">
         <Item value={0} className="rounded-l mr-px">
           None

@@ -4,8 +4,9 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
     "./features/**/*.{js,ts,jsx,tsx}",
   ],
+  safelist: ["sr-only"],
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 };
