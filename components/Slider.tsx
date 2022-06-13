@@ -3,6 +3,7 @@ import React from "react";
 import ReactSlider from "react-slider";
 
 interface SliderProps {
+  disabled?: boolean;
   max: number;
   min: number;
   mark?: number;
@@ -13,6 +14,7 @@ interface SliderProps {
 }
 
 const Slider: React.FC<SliderProps> = ({
+  disabled,
   max,
   min,
   mark,
@@ -27,6 +29,7 @@ const Slider: React.FC<SliderProps> = ({
       max={max}
       step={step}
       value={value}
+      disabled={disabled}
       marks={mark != undefined ? [mark] : undefined}
       onChange={onChange || (() => {})}
       onAfterChange={onFinalChange || (() => {})}
