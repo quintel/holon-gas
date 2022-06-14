@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-import { loadState, saveState } from "./browser-storage";
+import { clearState, loadState, saveState } from "./browser-storage";
 
 import { PresetSchema } from "../../data/inputs";
 
@@ -189,6 +189,10 @@ export const sendAPIRequest = createAsyncThunk(
   }
 );
 
+export const resetScenario = createAsyncThunk("scenario/resetScenario", async (_, thunkAPI) => {
+  thunkAPI.dispatch(sendAPIRequest());
+});
+
 /**
  * Triggered when the user changes an input value.
  */
@@ -284,6 +288,10 @@ const scenarioSlice = createSlice({
         }
       }
     });
+
+    builder.addCase(resetScenario.pending, (state) => {
+      state.inputs = createInputState(presets.custom);
+    });
   },
 });
 
@@ -321,5 +329,20 @@ export const createFutureResultSelector = (key: string) => {
 
 export const uiReadySelector = (state: RootState) =>
   state.scenario.initialRequestState === RequestState.Done;
+
+/**
+ * Returns if the user has modified any of the inputs from the default "Custom" preset
+ */
+export const isUnmodifiedSelector = (state: RootState) => {
+  const inputKeys = Object.keys(inputs) as InputKey[];
+
+  for (const inputKey of inputKeys) {
+    if (state.scenario.inputs[inputKey].value !== inputs[inputKey].value) {
+      return false;
+    }
+  }
+
+  return true;
+};
 
 export default scenarioSlice.reducer;
