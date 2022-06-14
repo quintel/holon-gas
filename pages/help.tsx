@@ -10,12 +10,12 @@ const Help: NextPage = () => {
   return (
     <Fragment>
       <Head>
-        <title>Hello</title>
+        <title>Help - Russian Gas Tool</title>
       </Head>
       <div className="mx-auto py-3 px-6 text-sm sm:py-12 md:px-0" style={{ maxWidth: "65ch" }}>
         <h1 className="flex items-center border-b pb-3 text-xl text-gray-600">
           <Link href="/">
-            <a className="">HOLON Russian Gas Tool</a>
+            <a className="">Russian Gas Tool</a>
           </Link>
           <svg
             xmlns="http://www.w3.org/2000/svg"
