@@ -1,9 +1,12 @@
 import { configureStore, Action } from "@reduxjs/toolkit";
+
 import scenarioReducer from "./scenario/scenario-slice";
+import tourReducer from "./tour/tour-slice";
 
 export const store = configureStore({
   reducer: {
     scenario: scenarioReducer,
+    tour: tourReducer,
   },
 });
 

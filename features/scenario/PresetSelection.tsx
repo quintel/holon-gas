@@ -15,8 +15,8 @@ export default function PresetSelection(): React.ReactElement {
   const onChange = useCallback((preset: PresetKey) => dispatch(setPreset(preset)), [dispatch]);
 
   return (
-    <div className="bg-gray-200 rounded p-6 pb-4 mb-6">
-      <h2 className="text-lg mb-3">Presets</h2>
+    <div className="mb-6 rounded bg-gray-200 p-6 pb-4" id="presets">
+      <h2 className="mb-3 text-lg">Presets</h2>
       <p className="mb-3">
         Different organisations have their own approaches lined up to reduce dependence on Russian
         gas. Try one below, or create your own scenario:

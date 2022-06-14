@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  // Strict mode breaks react-joyride. We enable it on a case-by-case basis.
+  reactStrictMode: false,
   experimental: { esmExternals: false },
 };
 
