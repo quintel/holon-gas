@@ -18,17 +18,22 @@ You can start editing the page by modifying `pages/index.tsx`. The page auto-upd
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## Learn More
+## Changing description texts
 
-To learn more about Next.js, take a look at the following resources:
+Most description texts in the model are written in Markdown and can be found in:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+* **Help texts for sections**: `data/help-texts.tsx~
+* **Help texts for sliders and inputs**: `data/inputs.tsx`
+* **Tour texts**: `data/tour-texts.tsx`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Changing inputs and sliders
 
-## Deploy on Vercel
+Inputs are specified in `data/inputs.tsx`. This file contains the title and help texts, as well as the minimum, maximum, and default values.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+* `value`: The default starting value of the slider.
+* `max`: The maximum value of the slider.
+* `min`: The minimum value of the slider.
+* `recommended`: An optional value which will be drawn as a vertical "tick" line.
+* `step`: Controls how large the step size is. For example, the default step size of 1 allows a slider to have values 1, 2, 3, etc. while a step size of 0.1 allows 1.1, 1.2, 1.3, etc.
+* `name`: The human-readable name of the slider.
+* `helpText`: Optional text which will be shown if the user clicks the (?) icon next to the slider name.
