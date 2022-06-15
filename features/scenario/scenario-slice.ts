@@ -13,6 +13,9 @@ import { Input } from "../../data/inputs";
 export type InputKey = keyof typeof inputs;
 export type PresetKey = keyof typeof presets;
 
+// const API_HOST = "https://beta.engine.energytransitionmodel.com";
+const API_HOST = "http://localhost:3000";
+
 interface Result {
   /**
    * Value calculated from the present graph.
@@ -96,7 +99,7 @@ function createInitialState(preset: PresetSchema): ScenarioState {
  */
 const createScenario = async () => {
   // Create a scenario
-  const response = await fetch("https://beta.engine.energytransitionmodel.com/api/v3/scenarios", {
+  const response = await fetch(`${API_HOST}/api/v3/scenarios`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -119,22 +122,19 @@ const sendRequest = async (
   inputs: { [k: string]: number },
   signal?: AbortSignal
 ) => {
-  const response = await fetch(
-    `https://beta.engine.energytransitionmodel.com/api/v3/scenarios/${scenarioId}`,
-    {
-      method: "PUT",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        autobalance: true,
-        gqueries: queries,
-        scenario: { user_values: inputs },
-      }),
-      signal,
-    }
-  );
+  const response = await fetch(`${API_HOST}/api/v3/scenarios/${scenarioId}`, {
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      autobalance: true,
+      gqueries: queries,
+      scenario: { user_values: inputs },
+    }),
+    signal,
+  });
 
   return await response.json();
 };

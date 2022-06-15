@@ -5,13 +5,53 @@ const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 import { useAppSelector } from "../hooks";
 import { createFutureResultSelector } from "./scenario-slice";
 
+const reductionToSeries = (reduction: number) => {
+  return reduction < 0 ? -reduction : 0;
+};
+
 export default function ResultsChart(): React.ReactElement {
-  const costs = useAppSelector(createFutureResultSelector("dashboard_total_costs"));
+  const importedGas = useAppSelector(createFutureResultSelector("future_import_natural_gas"));
+
+  const reductionElectricityProduction = useAppSelector(
+    createFutureResultSelector("reduction_demand_natural_gas_electricity_production")
+  );
+
+  const reductionBuildings = useAppSelector(
+    createFutureResultSelector("reduction_final_demand_natural_gas_buildings")
+  );
+
+  const reductionHouseholds = useAppSelector(
+    createFutureResultSelector("reduction_final_demand_natural_gas_households")
+  );
+
+  const reductionIndustry = useAppSelector(
+    createFutureResultSelector("reduction_final_demand_natural_gas_industry")
+  );
 
   const series = [
     {
-      name: "Costs",
-      data: [costs],
+      name: "Import",
+      data: [importedGas],
+    },
+    {
+      name: "Reduction from electricity production",
+      data: [reductionToSeries(reductionElectricityProduction)],
+    },
+    {
+      name: "Reduction in buildings",
+      data: [reductionToSeries(reductionBuildings)],
+    },
+    {
+      name: "Reduction in households",
+      data: [reductionToSeries(reductionHouseholds)],
+    },
+    {
+      name: "Reduction in industry",
+      data: [reductionToSeries(reductionIndustry)],
+    },
+    {
+      name: "Reduction in buildings",
+      data: [reductionToSeries(reductionBuildings)],
     },
   ];
 
@@ -31,7 +71,7 @@ export default function ResultsChart(): React.ReactElement {
         columnWidth: "50%",
       },
     },
-    colors: ["#6ee7b7", "#34d399", "#10b981", "#059669", "#047857", "#c2410c"],
+    colors: ["#9ca3af", "#b3de69", "#bebada", "#fb8072", "#80b1d3", "#fdb462"],
     dataLabels: {
       enabled: false,
     },
@@ -40,6 +80,13 @@ export default function ResultsChart(): React.ReactElement {
       labels: { show: false },
     },
     yaxis: {
+      title: {
+        text: "Volume (bcm)",
+        style: {
+          fontSize: "12px",
+          fontWeight: 400,
+        },
+      },
       labels: {
         formatter(value: number) {
           return value.toFixed(1);
