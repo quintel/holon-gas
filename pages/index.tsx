@@ -4,7 +4,6 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 
-import ColumnResults from "../components/ColumnResults";
 import FieldGroup from "../components/FieldGroup";
 import FieldSubGroup from "../components/FieldSubGroup";
 import Input from "../features/scenario/Input";
@@ -13,6 +12,7 @@ import LoadingStatus from "../features/scenario/LoadingStatus";
 import PresetSelection from "../features/scenario/PresetSelection";
 import ResponseError from "../components/ResponseError";
 import ResultsChart from "../features/scenario/ResultsChart";
+import SecondaryResults from "../features/scenario/SecondaryResults";
 import ToolHeader from "../components/ToolHeader";
 
 import helpTexts from "../data/help-texts";
@@ -126,7 +126,7 @@ const Home: NextPage = () => {
           <div id="results">
             <h2 className="text-lg">Results</h2>
             <ResultsChart />
-            <ColumnResults />
+            <SecondaryResults />
           </div>
           <div className="mt-8 text-center"></div>
           <div className="mt-6 px-5 text-center text-xs leading-5 text-gray-500">

@@ -13,8 +13,7 @@ import { Input } from "../../data/inputs";
 export type InputKey = keyof typeof inputs;
 export type PresetKey = keyof typeof presets;
 
-// const API_HOST = "https://beta.engine.energytransitionmodel.com";
-const API_HOST = "http://localhost:3000";
+const API_HOST = "https://beta.engine.energytransitionmodel.com";
 
 interface Result {
   /**
