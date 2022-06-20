@@ -263,6 +263,10 @@ const scenarioSlice = createSlice({
     });
 
     builder.addCase(sendAPIRequest.rejected, (state) => {
+      if (state.initialRequestState === RequestState.Inflight) {
+        state.initialRequestState = RequestState.Failure;
+      }
+
       state.requestState = RequestState.Failure;
     });
 
