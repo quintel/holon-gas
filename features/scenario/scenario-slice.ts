@@ -9,6 +9,7 @@ import inputs, { dumpInput } from "../../data/inputs";
 import queries from "../../data/queries";
 
 import { Input } from "../../data/inputs";
+import { INITIAL_RUSSIAN_GAS } from "../../data/queries";
 
 export type InputKey = keyof typeof inputs;
 export type PresetKey = keyof typeof presets;
@@ -346,24 +347,62 @@ export const createFutureResultSelector = (key: string) => {
   };
 };
 
+const selectFutureDelta = (state: RootState, key: string) => {
+  const { results, initialResults } = state.scenario;
+
+  if (results[key] && initialResults[key]) {
+    return initialResults[key].future - results[key].future;
+  }
+
+  return 0;
+};
+
 /**
  * Creates a function which compares the current future result with the value when the scenario was
  * first created.
  */
 export const createFutureResultDeltaSelector = (key: string) => {
-  return (state: RootState) => {
-    const { results, initialResults } = state.scenario;
-
-    if (results[key] && initialResults[key]) {
-      return initialResults[key].future - results[key].future;
-    }
-
-    return 0;
-  };
+  return (state: RootState) => selectFutureDelta(state, key);
 };
 
 export const uiReadySelector = (state: RootState) =>
   state.scenario.initialRequestState === RequestState.Done;
+
+/**
+ * Returns how much Russian gas is imported in the scenario.
+ */
+export const importedRussianGasSelector = (state: RootState) => {
+  const reductionImport = Math.max(0, selectFutureDelta(state, "future_import_natural_gas"));
+
+  const reductionElectricityProduction = Math.max(
+    0,
+    selectFutureDelta(state, "reduction_demand_natural_gas_electricity_production")
+  );
+
+  const reductionBuildings = Math.max(
+    0,
+    selectFutureDelta(state, "reduction_final_demand_natural_gas_buildings")
+  );
+
+  const reductionHouseholds = Math.max(
+    0,
+    selectFutureDelta(state, "reduction_final_demand_natural_gas_households")
+  );
+
+  const reductionIndustry = Math.max(
+    0,
+    selectFutureDelta(state, "reduction_final_demand_natural_gas_industry")
+  );
+
+  return (
+    INITIAL_RUSSIAN_GAS -
+    reductionImport -
+    reductionElectricityProduction -
+    reductionBuildings -
+    reductionHouseholds -
+    reductionIndustry
+  );
+};
 
 /**
  * Returns if the user has modified any of the inputs from the default "Custom" preset

@@ -3,15 +3,19 @@ import dynamic from "next/dynamic";
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 import { useAppSelector } from "../hooks";
-import { createFutureResultDeltaSelector } from "./scenario-slice";
-
-import { INITIAL_RUSSIAN_GAS } from "../../data/queries";
+import { createFutureResultDeltaSelector, importedRussianGasSelector } from "./scenario-slice";
 
 const reductionToSeries = (reduction: number) => {
   return reduction < 0 ? 0 : reduction;
 };
 
 export default function ResultsChart(): React.ReactElement {
+  const russianGas = useAppSelector(importedRussianGasSelector);
+
+  const reductionImport = reductionToSeries(
+    useAppSelector(createFutureResultDeltaSelector("future_import_natural_gas"))
+  );
+
   const reductionElectricityProduction = reductionToSeries(
     useAppSelector(
       createFutureResultDeltaSelector("reduction_demand_natural_gas_electricity_production")
@@ -30,17 +34,14 @@ export default function ResultsChart(): React.ReactElement {
     useAppSelector(createFutureResultDeltaSelector("reduction_final_demand_natural_gas_industry"))
   );
 
-  const russianGas =
-    INITIAL_RUSSIAN_GAS -
-    reductionElectricityProduction -
-    reductionBuildings -
-    reductionHouseholds -
-    reductionIndustry;
-
   const series = [
     {
       name: "Gas imported from Russia",
       data: [Math.max(0, russianGas)],
+    },
+    {
+      name: "Extra gas production",
+      data: [reductionImport],
     },
     {
       name: "Reduction from electricity production",
@@ -81,7 +82,7 @@ export default function ResultsChart(): React.ReactElement {
         columnWidth: "50%",
       },
     },
-    colors: ["#9ca3af", "#34d399", "#fbbf24", "#60a5fa", "#f9a8d4"],
+    colors: ["#9ca3af", "#34d399", "#fbbf24", "#60a5fa", "#f9a8d4", "#a3e635"],
     dataLabels: {
       enabled: false,
     },
