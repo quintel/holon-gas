@@ -1,6 +1,7 @@
 import FieldGroup from "../components/FieldGroup";
 import FieldSubGroup from "../components/FieldSubGroup";
 import Input from "../features/scenario/Input";
+import InputDescription from "./InputDescription";
 import InsulationInput from "../features/scenario/InsulationInput";
 import LoadingStatus from "../features/scenario/LoadingStatus";
 import PresetSelection from "../features/scenario/PresetSelection";
@@ -27,6 +28,10 @@ export default function App(): React.ReactElement {
                 title="Re-installing phased out coal capacity"
                 helpText={helpTexts.coalPowerPlantCapacity}
               >
+                <InputDescription isSubGroup>
+                  Set the share of available coal and lignite (brown coal) capacity that should be
+                  put in operation for electricity generation.
+                </InputDescription>
                 <Input id="coal_power_plant_capacity_conventional" />
                 <Input id="coal_power_plant_capacity_lignite" />
               </FieldSubGroup>
@@ -44,6 +49,10 @@ export default function App(): React.ReactElement {
               <Input id="growth_of_installed_heat_pumps" />
               <InsulationInput id="insulation" />
               <FieldSubGroup title="Lowering household thermostat setting">
+                <InputDescription isSubGroup>
+                  Define the how EU residents are willing to reduce their gas consumption by
+                  lowering their household temperature.
+                </InputDescription>
                 <Input id="thermostat_settings_percentage" />
                 <Input id="thermostat_settings_reduce_temperature" />
               </FieldSubGroup>
@@ -51,6 +60,10 @@ export default function App(): React.ReactElement {
             <FieldGroup title="Other" className="mb-6">
               <Input id="solar_thermal_collectors" />
               <FieldSubGroup title="Rooftop solar" helpText={helpTexts.rooftopSolar}>
+                <InputDescription isSubGroup>
+                  What will be the share of homes with a PV-system installed? And what share of
+                  businesses?
+                </InputDescription>
                 <Input id="rooftop_pv_households" />
                 <Input id="rooftop_pv_buildings" />
               </FieldSubGroup>
@@ -58,6 +71,10 @@ export default function App(): React.ReactElement {
                 title="Large-scale energy storage"
                 helpText={helpTexts.largeScaleEnergyStorage}
               >
+                <InputDescription isSubGroup>
+                  What will be the installed capacity of large-scale (generation-side) battery
+                  storage systems? And the capacity of hydro-electric storage (water reservoirs)?
+                </InputDescription>
                 <Input id="large_scale_storage_batteries" />
                 <Input id="large_scale_storage_reservoirs" />
               </FieldSubGroup>
@@ -65,6 +82,11 @@ export default function App(): React.ReactElement {
                 title="Limit the use of natural gas in industry"
                 helpText={helpTexts.gasUseInIndustry}
               >
+                <InputDescription isSubGroup>
+                  What share of natural gas should be replaced by oil as feedstock for the
+                  production of basic chemicals? What share of the fertiliser industry should be
+                  shut down completely?
+                </InputDescription>
                 <Input id="replacement_of_gas_by_oil_in_chemical_industry" />
                 <Input id="closure_of_fertiliser_industry" />
               </FieldSubGroup>

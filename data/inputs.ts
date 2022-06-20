@@ -1,4 +1,4 @@
-import { stripIndent } from "common-tags";
+import { oneLine, stripIndent } from "common-tags";
 import { dumpTransforms, formatTransforms } from "./input-transforms";
 
 const inputs: { [k: string]: Input } = {
@@ -9,6 +9,9 @@ const inputs: { [k: string]: Input } = {
     recommended: 12,
     step: 0.1,
     name: "Groningen extraction",
+    description: oneLine`
+      Define the amount of natural gas that should be extracted from the Groningen gas field.
+    `,
     helpText: stripIndent`
       For this year (2022), the Dutch government has set an extraction limit of 3.9bcm for the
       Groningen gas field[^1]. However, this decision was made at a different time. There are
@@ -29,6 +32,7 @@ const inputs: { [k: string]: Input } = {
     min: 27.8,
     step: 0.1,
     name: "Extraction other EU member states",
+    description: "Set the amount of natural gas that should be extracted from other EU countries.",
     helpText: stripIndent`
       Starting 2015 the highest extraction of natural gas from Denmark, Germany, Italy, Poland and
       Romania amounted 33.5bcm[^1] (the estimated theoretical maximum). All preceding countries have
@@ -60,6 +64,9 @@ const inputs: { [k: string]: Input } = {
     recommended: 6,
     step: 0.1,
     name: "Using bio-methane as natural gas substitute",
+    description: oneLine`
+      Determine the share of the natural gas supply that should be replaced with biogas.
+    `,
     helpText: stripIndent`
       Bio-methane is a biogas that can directly replace natural gas[^1]. In 2019, this
       injection-rate equalled 4.5%. For this year (2022), the EU wants to double bio-methane
@@ -81,6 +88,7 @@ const inputs: { [k: string]: Input } = {
     recommended: 15,
     step: 0.1,
     name: "Increase Liquified Natural Gas (LNG) imports",
+    description: "What share of the natural gas supply should be met by LNG imports?",
     helpText: stripIndent`
       Theoretically, the EU could import an extra 60bcm worth of natural gas through LNG. However,
       according to the IEA[^1], the tight LNG market would drive up prices to the point of
@@ -97,6 +105,7 @@ const inputs: { [k: string]: Input } = {
     min: 118,
     recommended: 507,
     name: "Green hydrogen as natural gas alternative",
+    description: "Set the capacity of green hydrogen production and generation capacity.",
     helpText: stripIndent`
       Similar to gas, we can use green hydrogen as a demand-response source for electricity. When we
       take the ‘Hydrogen strategy for a climate-neutral Europe’-approximation (40GW of green
@@ -115,6 +124,10 @@ const inputs: { [k: string]: Input } = {
     min: 489762,
     recommended: 520822,
     name: "Renewable energy capacity",
+    description: oneLine`
+      How much renewable energy should be installed as alternative to natural gas as electricity
+      source?
+    `,
     helpText: stripIndent`
       According to data from the European Commission incorporated in the ETM, by 2019, there was
       258GW of renewable energy capacity installed. This grew by roughly 10 percent in 2020.
@@ -133,6 +146,7 @@ const inputs: { [k: string]: Input } = {
     recommended: 0.052,
     step: 0.0001,
     name: "Behind-the-meter electricity storage",
+    description: "What share of EU households should have a storage unit installed?",
     helpText: stripIndent`
       Using the Database of the European energy storage technologies and facilities[^1], an 436MW
       capacity of behind-the-meter energy storage is estimated. We take a realistic growth estimate
@@ -149,6 +163,7 @@ const inputs: { [k: string]: Input } = {
     min: 0,
     step: 1,
     name: "Insulation of homes and offices",
+    description: "Does the insulation of buildings grow linearly or exponentially?",
     helpText: stripIndent`
       Since there is no clear data on how fast homes and other buildings can be insulated, we look
       at the statistic development from 2011 to 2019 and project this ahead using an exponential
@@ -162,6 +177,9 @@ const inputs: { [k: string]: Input } = {
     recommended: 9,
     step: 0.1,
     name: "Heat pumps as gas boiler replacement",
+    description: oneLine`
+      By what percentage does the number of heat pumps installed (both home and office) grow?
+    `,
     helpText: stripIndent`
       Heat pumps can be used to satisfy heat demand through electricity rather than through the
       combustion of gas. From 2019 to 2020, the number of heat pumps in Europe grew by 9
@@ -177,6 +195,10 @@ const inputs: { [k: string]: Input } = {
     max: 100,
     min: 0,
     name: "Share of participating households",
+    description: oneLine`
+      What share of households would be willing to reduce their heat demand by lowering their home
+      temperature?
+    `,
   },
   thermostat_settings_reduce_temperature: {
     value: 0,
@@ -185,6 +207,7 @@ const inputs: { [k: string]: Input } = {
     step: 0.1,
     recommended: 1,
     name: "Thermostat temperature reduction",
+    description: "By how much are they willing to reduce their home temperature?",
   },
   // Other
   rooftop_pv_households: {
@@ -222,6 +245,7 @@ const inputs: { [k: string]: Input } = {
     recommended: 9.2,
     step: 0.01,
     name: "Solar thermal collectors for heat demand",
+    description: "By what percentage will the installed number of solar thermal collectors grow?",
     helpText: stripIndent`
       Solar collectors can help meet part of a building’s heat demand. In 2015, the installed
       capacity grew by 4.4%[^1], while from 2018 to our reference year, this growth amounted to only
@@ -251,6 +275,10 @@ export interface Input {
    * Optional markdown text shown when the user clicks the (?) button.
    */
   helpText?: string;
+  /**
+   * Optional small text shown below the slider title.
+   */
+  description?: string;
   /**
    * The maximum permitted value.
    */

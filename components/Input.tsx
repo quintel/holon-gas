@@ -2,8 +2,10 @@ import { useCallback, useEffect, useState } from "react";
 
 import HelpButton from "./HelpButton";
 import Slider from "./Slider";
+import InputDescription from "./InputDescription";
 
 interface InputProps {
+  description?: string;
   formatValue: (value: number, precision: number) => string;
   helpText?: string;
   max: number;
@@ -31,6 +33,7 @@ const stepToPrecision = (step?: number) => {
  * A Wrapper around a Slider which abstracts away the application state.
  */
 export default function Input({
+  description,
   formatValue,
   helpText,
   max,
@@ -52,11 +55,12 @@ export default function Input({
   const onFinalChange = useCallback((value: number) => onChange && onChange(value), [onChange]);
 
   return (
-    <div className="pb-3 last:pb-0">
+    <div className="pb-4 last:pb-0">
       <p className="pb-1">
         <span>{name}</span>
         {helpText && <HelpButton text={helpText} />}
       </p>
+      {description && <InputDescription>{description}</InputDescription>}
       <div className="flex align-middle">
         <div className="w-3/4 pt-1">
           <Slider

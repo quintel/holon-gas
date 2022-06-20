@@ -17,6 +17,7 @@ export default function Input({ id }: { id: InputKey }): React.ReactElement {
       {...input}
       key={id}
       helpText={input.helpText}
+      description={input.description}
       name={input.name}
       value={input.value}
       recommended={input.recommended}

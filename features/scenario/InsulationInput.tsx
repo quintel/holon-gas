@@ -5,11 +5,10 @@ import { useAppSelector, useAppDispatch } from "../hooks";
 import { setInputValue, createInputSelector, InputKey } from "./scenario-slice";
 
 import HelpButton from "../../components/HelpButton";
-import helpTexts from "../../data/help-texts";
+import InputDescription from "../../components/InputDescription";
 
-const baseItemClasses =
-  "text-center bg-gray-200 hover:bg-gray-300 transition py-0.5 cursor-pointer";
-const checkedItemClasses = `${baseItemClasses} bg-blue-500 hover:bg-blue-500 text-white border-blue-500`;
+const baseItemClasses = "bg-gray-200 hover:bg-gray-300";
+const checkedItemClasses = "bg-blue-500 hover:bg-blue-500 text-white border-blue-500";
 
 function Item({
   children,
@@ -23,7 +22,11 @@ function Item({
   return (
     <RadioGroup.Option value={value} className="w-1/3">
       {({ checked }) => (
-        <div className={`${className} ${checked ? checkedItemClasses : baseItemClasses}`}>
+        <div
+          className={`${className} ${
+            checked ? checkedItemClasses : baseItemClasses
+          } cursor-pointer py-0.5 text-center transition`}
+        >
           {children}
         </div>
       )}
@@ -46,12 +49,13 @@ export default function InsulationInput({ id }: { id: InputKey }): React.ReactEl
         {input.name}
         {input.helpText && <HelpButton text={input.helpText} />}
       </p>
+      {input.description && <InputDescription isSubGroup>{input.description}</InputDescription>}
       <RadioGroup value={input.value} onChange={onChange} className="flex align-middle">
-        <Item value={0} className="rounded-l mr-px">
+        <Item value={0} className="mr-px rounded-l">
           None
         </Item>
         <Item value={1}>Linear</Item>
-        <Item value={2} className="rounded-r ml-px">
+        <Item value={2} className="ml-px rounded-r">
           Exponential
         </Item>
       </RadioGroup>
