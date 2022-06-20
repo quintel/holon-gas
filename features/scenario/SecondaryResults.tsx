@@ -1,6 +1,7 @@
 import CompactBarChart from "../../components/CompactBarChart";
 
 import ColorBandedBarChart from "../../components/ColorBandedBarChart";
+import CapitalFlowBarChart from "./CapitalFlowBarChart";
 
 import { useAppSelector } from "../hooks";
 import { createFutureResultSelector } from "./scenario-slice";
@@ -32,14 +33,7 @@ export default function SecondaryResults(): React.ReactElement {
     <div>
       <h2 className="mt-3 text-lg">Capital flow to Russia</h2>
       <p className="mb-1">Payments to Russia for gas this year</p>
-      <ColorBandedBarChart
-        min={0}
-        max={300}
-        value={164.35}
-        bands={[{ color: "blue" }]}
-        formatter={() => "??"}
-        tickAmount={4}
-      />
+      <CapitalFlowBarChart />
 
       <h2 className="mt-3 text-lg">Costs</h2>
       <p className="mb-1">Required (one-off) investment</p>

@@ -5,13 +5,13 @@ const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 import { useAppSelector } from "../hooks";
 import { createFutureResultSelector } from "./scenario-slice";
 
+import { INITIAL_RUSSIAN_GAS } from "../../data/queries";
+
 const reductionToSeries = (reduction: number) => {
   return reduction < 0 ? -reduction : 0;
 };
 
 export default function ResultsChart(): React.ReactElement {
-  const importedGas = useAppSelector(createFutureResultSelector("future_import_natural_gas"));
-
   const reductionElectricityProduction = useAppSelector(
     createFutureResultSelector("reduction_demand_natural_gas_electricity_production")
   );
@@ -28,30 +28,33 @@ export default function ResultsChart(): React.ReactElement {
     createFutureResultSelector("reduction_final_demand_natural_gas_industry")
   );
 
+  const russianGas =
+    INITIAL_RUSSIAN_GAS +
+    reductionElectricityProduction +
+    reductionBuildings +
+    reductionHouseholds +
+    reductionIndustry;
+
   const series = [
     {
-      name: "Import",
-      data: [importedGas],
+      name: "Gas imported from Russia",
+      data: [INITIAL_RUSSIAN_GAS, Math.max(0, russianGas)],
     },
     {
       name: "Reduction from electricity production",
-      data: [reductionToSeries(reductionElectricityProduction)],
+      data: [0, reductionToSeries(reductionElectricityProduction)],
     },
     {
       name: "Reduction in buildings",
-      data: [reductionToSeries(reductionBuildings)],
+      data: [0, reductionToSeries(reductionBuildings)],
     },
     {
       name: "Reduction in households",
-      data: [reductionToSeries(reductionHouseholds)],
+      data: [0, reductionToSeries(reductionHouseholds)],
     },
     {
       name: "Reduction in industry",
-      data: [reductionToSeries(reductionIndustry)],
-    },
-    {
-      name: "Reduction in buildings",
-      data: [reductionToSeries(reductionBuildings)],
+      data: [0, reductionToSeries(reductionIndustry)],
     },
   ];
 
@@ -68,16 +71,22 @@ export default function ResultsChart(): React.ReactElement {
     },
     plotOptions: {
       bar: {
-        columnWidth: "50%",
+        columnWidth: "75%",
       },
     },
     colors: ["#9ca3af", "#34d399", "#c4b5fd", "#60a5fa", "#f9a8d4", "#fbbf24"],
     dataLabels: {
       enabled: false,
     },
+    tooltip: {
+      y: {
+        formatter(value: number) {
+          return `${Math.round(value * 100) / 100} bcm`;
+        },
+      },
+    },
     xaxis: {
-      categories: ["Results"],
-      labels: { show: false },
+      categories: ["Before", "After"],
     },
     yaxis: {
       title: {
