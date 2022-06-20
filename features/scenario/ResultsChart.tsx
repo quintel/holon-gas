@@ -63,7 +63,12 @@ export default function ResultsChart(): React.ReactElement {
   const options = {
     chart: {
       animations: {
-        enabled: false,
+        easing: "easeinout" as const,
+        speed: 1,
+        dynamicAnimation: {
+          enabled: true,
+          speed: 250,
+        },
       },
       toolbar: {
         show: false,
