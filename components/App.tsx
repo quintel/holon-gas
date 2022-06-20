@@ -101,7 +101,7 @@ export default function App(): React.ReactElement {
           <SecondaryResults />
         </div>
         <div className="mt-8 text-center"></div>
-        <div className="mt-6 px-5 text-center text-xs leading-5 text-gray-500">
+        <div className="mt-6 px-5 pb-6 text-center text-xs leading-5 text-gray-500">
           Want more options? Go to the full version of the
           <br />
           <a
