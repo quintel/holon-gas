@@ -54,7 +54,7 @@ body {
   }
 
   .slider .track {
-    @apply mt-1 h-1.5 bg-gray-200 rounded-full;
+    @apply mt-1 h-1.5 bg-gray-300 rounded-full;
   }
 
   .slider .track.track-0 {
@@ -75,7 +75,7 @@ body {
   }
 
   .slider .mark {
-    @apply ml-1.5 h-3.5 w-0.5 bg-gray-200;
+    @apply ml-1.5 h-3.5 w-0.5 bg-gray-300;
   }
 
   .slider .active-mark {
