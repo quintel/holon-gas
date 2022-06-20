@@ -40,13 +40,13 @@ const rooftopSolar = `
 `;
 
 const gasUseInIndustry = `
-  Solar collectors can help meet part of a building’s heat demand. In 2015, the installed capacity
-  grew by 4.4%[^1], while from 2018 to our reference year, this growth amounted to only 2.5%[^2]. We
-  take the growth rate of the previous year as our realistic estimate, and the 4.4% growth from 2015
-  as our theoretical maximum growth.
+  We’ve seen during the COVID-pandemic that governments may choose to shut down certain sectors in
+  the economy. In industry, natural gas is used as feedstock by the chemical industry and as
+  hydrogen source in the fertilizer industry. In the chemical industry, oil can be used as
+  substitute for the carbon feedstock for the production of basic chemicals.
 
-  [^1]: ESTIF, “Solar Heat Markets in Europe: Trends and Market Statistics 2019,” 2020.
-  [^2]: ESTIF, “Solar Thermal Markets in Europe: Trends and Market Statistics 2015,” 2016.
+  Since sufficient amounts of hydrogen cannot be generated through alternative means, the fertilizer
+  industry will have to be shut down altogether.
 `;
 
 const allMessages: Record<string, string> = {

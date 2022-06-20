@@ -166,7 +166,6 @@ export const formatTransforms: {
   growth_of_installed_heat_pumps: formatPercentage,
   thermostat_settings_percentage: formatPercentage,
   thermostat_settings_reduce_temperature: formatCelcius,
-  behavioural_change_percentage: formatPercentage,
   electricity_storage_behind_the_meter: formatPercentage,
   large_scale_storage_batteries: formatMW,
   large_scale_storage_reservoirs: formatMW,

@@ -8,7 +8,7 @@ const inputs: { [k: string]: Input } = {
     min: 3.9,
     recommended: 12,
     step: 0.1,
-    name: "Extra gas from Groningen",
+    name: "Groningen extraction",
     helpText: stripIndent`
       For this year (2022), the Dutch government has set an extraction limit of 3.9bcm for the
       Groningen gas field[^1]. However, this decision was made at a different time. There are
@@ -28,7 +28,7 @@ const inputs: { [k: string]: Input } = {
     max: 33.5,
     min: 27.8,
     step: 0.1,
-    name: "Extra gas from other EU countries",
+    name: "Extraction other EU member states",
     helpText: stripIndent`
       Starting 2015 the highest extraction of natural gas from Denmark, Germany, Italy, Poland and
       Romania amounted 33.5bcm[^1] (the estimated theoretical maximum). All preceding countries have
@@ -59,7 +59,7 @@ const inputs: { [k: string]: Input } = {
     min: 4.5,
     recommended: 6,
     step: 0.1,
-    name: "Natural gas displacement (bio-methane)",
+    name: "Using bio-methane as natural gas substitute",
     helpText: stripIndent`
       Bio-methane is a biogas that can directly replace natural gas[^1]. In 2019, this
       injection-rate equalled 4.5%. For this year (2022), the EU wants to double bio-methane
@@ -80,7 +80,7 @@ const inputs: { [k: string]: Input } = {
     min: 10,
     recommended: 15,
     step: 0.1,
-    name: "LNG imports",
+    name: "Increase Liquified Natural Gas (LNG) imports",
     helpText: stripIndent`
       Theoretically, the EU could import an extra 60bcm worth of natural gas through LNG. However,
       according to the IEA[^1], the tight LNG market would drive up prices to the point of
@@ -96,7 +96,7 @@ const inputs: { [k: string]: Input } = {
     max: 1250,
     min: 118,
     recommended: 507,
-    name: "Green hydrogen",
+    name: "Green hydrogen as natural gas alternative",
     helpText: stripIndent`
       Similar to gas, we can use green hydrogen as a demand-response source for electricity. When we
       take the ‘Hydrogen strategy for a climate-neutral Europe’-approximation (40GW of green
@@ -132,7 +132,7 @@ const inputs: { [k: string]: Input } = {
     min: 0.039,
     recommended: 0.052,
     step: 0.0001,
-    name: "Electricity storage behind the meter",
+    name: "Behind-the-meter electricity storage",
     helpText: stripIndent`
       Using the Database of the European energy storage technologies and facilities[^1], an 436MW
       capacity of behind-the-meter energy storage is estimated. We take a realistic growth estimate
@@ -148,7 +148,7 @@ const inputs: { [k: string]: Input } = {
     max: 2,
     min: 0,
     step: 1,
-    name: "Insulation growth",
+    name: "Insulation of homes and offices",
     helpText: stripIndent`
       Since there is no clear data on how fast homes and other buildings can be insulated, we look
       at the statistic development from 2011 to 2019 and project this ahead using an exponential
@@ -161,7 +161,7 @@ const inputs: { [k: string]: Input } = {
     min: 0,
     recommended: 9,
     step: 0.1,
-    name: "Growth of installed heat pumps",
+    name: "Heat pumps as gas boiler replacement",
     helpText: stripIndent`
       Heat pumps can be used to satisfy heat demand through electricity rather than through the
       combustion of gas. From 2019 to 2020, the number of heat pumps in Europe grew by 9
@@ -176,7 +176,7 @@ const inputs: { [k: string]: Input } = {
     value: 0,
     max: 100,
     min: 0,
-    name: "Percentage of residences",
+    name: "Share of participating households",
   },
   thermostat_settings_reduce_temperature: {
     value: 0,
@@ -184,13 +184,7 @@ const inputs: { [k: string]: Input } = {
     min: 0.0,
     step: 0.1,
     recommended: 1,
-    name: "Reduce thermostat temperature",
-  },
-  behavioural_change_percentage: {
-    value: 0,
-    max: 100,
-    min: 0.0,
-    name: "Percentage of residences",
+    name: "Thermostat temperature reduction",
   },
   // Other
   rooftop_pv_households: {
@@ -227,7 +221,7 @@ const inputs: { [k: string]: Input } = {
     min: 9.0,
     recommended: 9.2,
     step: 0.01,
-    name: "Solar thermal collectors",
+    name: "Solar thermal collectors for heat demand",
     helpText: stripIndent`
       Solar collectors can help meet part of a building’s heat demand. In 2015, the installed
       capacity grew by 4.4%[^1], while from 2018 to our reference year, this growth amounted to only

@@ -24,7 +24,7 @@ export default function App(): React.ReactElement {
             </FieldGroup>
             <FieldGroup title="Other production">
               <FieldSubGroup
-                title="Coal power plant capacity"
+                title="Re-installing phased out coal capacity"
                 helpText={helpTexts.coalPowerPlantCapacity}
               >
                 <Input id="coal_power_plant_capacity_conventional" />
@@ -43,12 +43,9 @@ export default function App(): React.ReactElement {
               <Input id="electricity_storage_behind_the_meter" />
               <Input id="growth_of_installed_heat_pumps" />
               <InsulationInput id="insulation" />
-              <FieldSubGroup title="Thermostat settings">
+              <FieldSubGroup title="Lowering household thermostat setting">
                 <Input id="thermostat_settings_percentage" />
                 <Input id="thermostat_settings_reduce_temperature" />
-              </FieldSubGroup>
-              <FieldSubGroup title="Behavioural changes">
-                <Input id="behavioural_change_percentage" />
               </FieldSubGroup>
             </FieldGroup>
             <FieldGroup title="Other" className="mb-6">
@@ -64,7 +61,10 @@ export default function App(): React.ReactElement {
                 <Input id="large_scale_storage_batteries" />
                 <Input id="large_scale_storage_reservoirs" />
               </FieldSubGroup>
-              <FieldSubGroup title="Gas use in industry" helpText={helpTexts.gasUseInIndustry}>
+              <FieldSubGroup
+                title="Limit the use of natural gas in industry"
+                helpText={helpTexts.gasUseInIndustry}
+              >
                 <Input id="replacement_of_gas_by_oil_in_chemical_industry" />
                 <Input id="closure_of_fertiliser_industry" />
               </FieldSubGroup>

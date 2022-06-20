@@ -6,7 +6,7 @@ import remarkGfm from "remark-gfm";
 
 function TooltipContent({ text }: { text: string }) {
   return (
-    <div className="tooltip p-3 prose-sm prose-invert">
+    <div className="tooltip prose-sm prose-invert p-3">
       <ReactMarkdown remarkPlugins={[remarkGfm]} linkTarget="_blank">
         {text}
       </ReactMarkdown>
@@ -25,7 +25,7 @@ export default function HelpButton({ text }: { text: string }) {
     >
       <span
         role="button"
-        className="-mt-1 inline-flex ml-2 h-5 w-5 items-center justify-center text-xs font-semibold text-gray-500 cursor-pointer rounded-full bg-gray-200 hover:bg-gray-300 transition"
+        className="-mt-1 ml-2 inline-flex h-5 w-5 cursor-pointer items-center justify-center rounded-full border-2 border-gray-200 text-xs font-semibold text-gray-400 transition hover:border-gray-400 hover:text-gray-500"
       >
         ?
       </span>
