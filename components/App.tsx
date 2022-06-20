@@ -42,7 +42,7 @@ export default function App(): React.ReactElement {
             </FieldGroup>
           </div>
         </div>
-        <div className="w-full px-3 md:pt-4 xl:w-1/2">
+        <div className="w-full px-3 md:pt-4 xl:w-1/2 xl:pt-6">
           <div id="savings">
             <FieldGroup title="Savings at home and office" className="mb-6">
               <Input id="electricity_storage_behind_the_meter" />
