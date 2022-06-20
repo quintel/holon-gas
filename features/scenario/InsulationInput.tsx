@@ -8,7 +8,8 @@ import InputDescription from "../../components/InputDescription";
 import InputTitle from "../../components/InputTitle";
 
 const baseItemClasses = "bg-gray-200 hover:bg-gray-300";
-const checkedItemClasses = "bg-blue-500 hover:bg-blue-500 text-white border-blue-500";
+const checkedItemClasses =
+  "bg-gradient-to-b from-blue-400 to-blue-500 hover:bg-blue-500 text-white border-blue-500";
 
 function Item({
   children,

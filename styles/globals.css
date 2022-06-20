@@ -54,15 +54,16 @@ body {
   }
 
   .slider .track {
-    @apply mt-1 h-1.5 bg-gray-300 rounded-full;
+    @apply h-1.5 bg-gray-300 rounded-full;
+    margin-top: 0.3125rem;
   }
 
   .slider .track.track-0 {
-    @apply bg-blue-500 rounded-full;
+    @apply bg-gradient-to-b from-blue-400 to-blue-500 rounded-full;
   }
 
   .slider .thumb {
-    @apply h-3.5 w-3.5 bg-blue-500 rounded-full;
+    @apply h-4 w-4 bg-gradient-to-b from-blue-400 to-blue-500 rounded-full shadow;
     transition: box-shadow 0.15s ease;
   }
 
@@ -76,10 +77,11 @@ body {
 
   .slider .mark {
     @apply ml-1.5 h-3.5 w-0.5 bg-gray-300;
+    margin-top: 0.0625rem;
   }
 
   .slider .active-mark {
-    @apply bg-blue-500;
+    @apply bg-gradient-to-b from-blue-400 to-blue-500;
   }
 
   /* Tooltips */
