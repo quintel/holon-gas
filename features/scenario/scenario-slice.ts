@@ -333,6 +333,8 @@ export const requestStateSelector = (state: RootState) => ({
   isFailure: state.scenario.requestState === RequestState.Failure,
 });
 
+export const scenarioIdSelector = (state: RootState) => state.scenario.scenarioId;
+
 /**
  * Creates a function which can be used to fetch a future value from a result set. If no such
  * result exists, 0 is returned.

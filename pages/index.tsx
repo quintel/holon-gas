@@ -13,13 +13,17 @@ import {
   uiReadySelector,
   requestStateSelector,
   sendAPIRequest,
+  scenarioIdSelector,
 } from "../features/scenario/scenario-slice";
 
 import { clearState } from "../features/scenario/browser-storage";
 
 const Home: NextPage = () => {
   const { isFailure } = useAppSelector(requestStateSelector);
+
   const uiReady = useAppSelector(uiReadySelector);
+  const scenarioId = useAppSelector(scenarioIdSelector);
+
   const dispatch = useAppDispatch();
 
   // Sends an initial API request to ETEngine to set default input values and get data for charts.
@@ -43,7 +47,7 @@ const Home: NextPage = () => {
   } else if (!uiReady) {
     content = <InitialLoading />;
   } else {
-    content = <App />;
+    content = <App scenarioId={scenarioId} />;
   }
 
   return (

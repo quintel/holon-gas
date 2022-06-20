@@ -11,7 +11,7 @@ import ToolHeader from "../components/ToolHeader";
 
 import helpTexts from "../data/help-texts";
 
-export default function App(): React.ReactElement {
+export default function App({ scenarioId }: { scenarioId?: number }): React.ReactElement {
   return (
     <div className="container mx-auto flex flex-wrap text-sm lg:flex-nowrap">
       <div className="flex w-full flex-wrap pt-6 md:w-1/2 xl:w-2/3">
@@ -105,7 +105,11 @@ export default function App(): React.ReactElement {
           Want more options? Go to the full version of the
           <br />
           <a
-            href="https://pro.energytransitionmodel.com/"
+            href={
+              scenarioId
+                ? `https://beta.pro.energytransitionmodel.com/scenarios/${scenarioId}/load`
+                : "https://pro.energytransitionmodel.com/"
+            }
             className="p-1 text-blue-500 hover:text-blue-700"
             target="_blank"
             rel="noreferrer"
