@@ -4,7 +4,7 @@ import Tour from "../features/tour/Tour";
 
 const ToolHeader: React.FC<{}> = () => {
   return (
-    <div className="-mb-2 flex w-full flex-wrap items-center justify-between gap-3 px-3 pt-5 lg:justify-center xl:justify-between">
+    <div className="-mb-2 flex w-full flex-wrap items-center justify-center gap-3 px-3 pt-5 lg:justify-between">
       <h1 className="text-xl font-medium">Russian Gas Tool</h1>
       <div className="flex items-center">
         <Tour />
