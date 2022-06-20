@@ -36,7 +36,7 @@ export default function CapitalFlowBarChart(): React.ReactElement {
   return (
     <ColorBandedBarChart
       value={capitalFlow}
-      bands={[{ color: "blue" }]}
+      bands={[{ color: "indigo" }]}
       max={400}
       formatter={formatEuros}
       tickAmount={4}

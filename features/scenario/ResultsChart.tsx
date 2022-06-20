@@ -84,7 +84,7 @@ export default function ResultsChart(): React.ReactElement {
         columnWidth: "50%",
       },
     },
-    colors: ["#9ca3af", "#34d399", "#fbbf24", "#60a5fa", "#f9a8d4", "#a3e635"],
+    colors: ["#9ca3af", "#34d399", "#fbbf24", "#818cf8", "#f9a8d4", "#a3e635"],
     dataLabels: {
       enabled: false,
     },

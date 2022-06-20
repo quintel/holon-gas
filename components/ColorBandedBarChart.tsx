@@ -1,6 +1,7 @@
 import CompactBarChart from "./CompactBarChart";
 
 const colors = {
+  indigo: "#818cf8",
   blue: "#60a5fa",
   red: "#f87171",
   yellow: "#fbbf24",
