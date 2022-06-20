@@ -33,8 +33,9 @@ interface Result {
 export interface ScenarioState {
   currentRequestId: undefined | string;
   initialRequestState: RequestState;
-  requestState: RequestState;
+  initialResults: { [k: string]: Result };
   inputs: ReturnType<typeof createInputState>;
+  requestState: RequestState;
   results: { [k: string]: Result };
   scenarioId: null | number;
   selectedPreset: string;
@@ -85,8 +86,9 @@ function createInitialState(preset: PresetSchema): ScenarioState {
   return {
     currentRequestId: undefined,
     initialRequestState: RequestState.Idle,
-    requestState: RequestState.Idle,
+    initialResults: {},
     inputs: createInputState(preset),
+    requestState: RequestState.Idle,
     results: {},
     scenarioId: null,
     selectedPreset: preset.key,
@@ -232,7 +234,6 @@ const scenarioSlice = createSlice({
     });
 
     builder.addCase(sendAPIRequest.fulfilled, (state, action) => {
-      console.log(action);
       if (action.payload.errors && action.payload.errors.length > 0) {
         state.requestState = RequestState.Failure;
 
@@ -247,6 +248,10 @@ const scenarioSlice = createSlice({
         // Do nothing if this is a response to an older request or if the HTTP request returned
         // validation errors.
         return;
+      }
+
+      if (state.initialRequestState === RequestState.Inflight) {
+        state.initialResults = action.payload.gqueries;
       }
 
       state.results = action.payload.gqueries;
@@ -331,6 +336,22 @@ export const createFutureResultSelector = (key: string) => {
   return (state: RootState) => {
     if (state.scenario.results[key]) {
       return state.scenario.results[key].future;
+    }
+
+    return 0;
+  };
+};
+
+/**
+ * Creates a function which compares the current future result with the value when the scenario was
+ * first created.
+ */
+export const createFutureResultDeltaSelector = (key: string) => {
+  return (state: RootState) => {
+    const { results, initialResults } = state.scenario;
+
+    if (results[key] && initialResults[key]) {
+      return initialResults[key].future - results[key].future;
     }
 
     return 0;

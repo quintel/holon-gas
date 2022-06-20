@@ -3,36 +3,38 @@ import dynamic from "next/dynamic";
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 import { useAppSelector } from "../hooks";
-import { createFutureResultSelector } from "./scenario-slice";
+import { createFutureResultDeltaSelector } from "./scenario-slice";
 
 import { INITIAL_RUSSIAN_GAS } from "../../data/queries";
 
 const reductionToSeries = (reduction: number) => {
-  return reduction < 0 ? -reduction : 0;
+  return reduction < 0 ? 0 : reduction;
 };
 
 export default function ResultsChart(): React.ReactElement {
-  const reductionElectricityProduction = useAppSelector(
-    createFutureResultSelector("reduction_demand_natural_gas_electricity_production")
+  const reductionElectricityProduction = reductionToSeries(
+    useAppSelector(
+      createFutureResultDeltaSelector("reduction_demand_natural_gas_electricity_production")
+    )
   );
 
-  const reductionBuildings = useAppSelector(
-    createFutureResultSelector("reduction_final_demand_natural_gas_buildings")
+  const reductionBuildings = reductionToSeries(
+    useAppSelector(createFutureResultDeltaSelector("reduction_final_demand_natural_gas_buildings"))
   );
 
-  const reductionHouseholds = useAppSelector(
-    createFutureResultSelector("reduction_final_demand_natural_gas_households")
+  const reductionHouseholds = reductionToSeries(
+    useAppSelector(createFutureResultDeltaSelector("reduction_final_demand_natural_gas_households"))
   );
 
-  const reductionIndustry = useAppSelector(
-    createFutureResultSelector("reduction_final_demand_natural_gas_industry")
+  const reductionIndustry = reductionToSeries(
+    useAppSelector(createFutureResultDeltaSelector("reduction_final_demand_natural_gas_industry"))
   );
 
   const russianGas =
-    INITIAL_RUSSIAN_GAS +
-    reductionElectricityProduction +
-    reductionBuildings +
-    reductionHouseholds +
+    INITIAL_RUSSIAN_GAS -
+    reductionElectricityProduction -
+    reductionBuildings -
+    reductionHouseholds -
     reductionIndustry;
 
   const series = [
@@ -42,19 +44,19 @@ export default function ResultsChart(): React.ReactElement {
     },
     {
       name: "Reduction from electricity production",
-      data: [0, reductionToSeries(reductionElectricityProduction)],
+      data: [0, reductionElectricityProduction],
     },
     {
       name: "Reduction in buildings",
-      data: [0, reductionToSeries(reductionBuildings)],
+      data: [0, reductionBuildings],
     },
     {
       name: "Reduction in households",
-      data: [0, reductionToSeries(reductionHouseholds)],
+      data: [0, reductionHouseholds],
     },
     {
       name: "Reduction in industry",
-      data: [0, reductionToSeries(reductionIndustry)],
+      data: [0, reductionIndustry],
     },
   ];
 
@@ -74,7 +76,7 @@ export default function ResultsChart(): React.ReactElement {
         columnWidth: "75%",
       },
     },
-    colors: ["#9ca3af", "#34d399", "#c4b5fd", "#60a5fa", "#f9a8d4", "#fbbf24"],
+    colors: ["#9ca3af", "#34d399", "#fbbf24", "#60a5fa", "#f9a8d4"],
     dataLabels: {
       enabled: false,
     },

@@ -17,7 +17,7 @@ export default function CompactBarChart({
   height = 100,
   formatter,
   max,
-  min,
+  min = 0,
   series,
   tickAmount,
 }: Props): React.ReactElement {

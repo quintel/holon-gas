@@ -4,7 +4,7 @@ import ColorBandedBarChart from "../../components/ColorBandedBarChart";
 import CapitalFlowBarChart from "./CapitalFlowBarChart";
 
 import { useAppSelector } from "../hooks";
-import { createFutureResultSelector } from "./scenario-slice";
+import { createFutureResultDeltaSelector } from "./scenario-slice";
 
 function round(value: number): number {
   return Math.round(value * 100) / 100;
@@ -26,7 +26,7 @@ function formatPercent(value: number): string {
 
 export default function SecondaryResults(): React.ReactElement {
   const co2Change = useAppSelector(
-    createFutureResultSelector("dashboard_co2_emissions_versus_start_year")
+    createFutureResultDeltaSelector("dashboard_co2_emissions_versus_start_year")
   );
 
   return (

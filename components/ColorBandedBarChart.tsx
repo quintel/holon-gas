@@ -46,7 +46,7 @@ export default function ColorBandedBarChart({
       colors={[colorForValue(value, bands)]}
       formatter={formatter}
       series={[{ name: "", data: [value] }]}
-      min={Math.min(value, min ?? value)}
+      min={Math.min(value, min ?? 0)}
       max={Math.max(value, max ?? value)}
       tickAmount={tickAmount}
     />
