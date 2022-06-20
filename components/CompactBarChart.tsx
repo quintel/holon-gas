@@ -52,6 +52,16 @@ export default function CompactBarChart({
         horizontal: true,
       },
     },
+    annotations: {
+      xaxis: [
+        {
+          x: 0,
+          strokeDashArray: 0,
+          borderColor: "#00000011",
+          offsetX: 1,
+        },
+      ],
+    },
     colors,
     xaxis: {
       categories: ["Results"],
@@ -62,6 +72,7 @@ export default function CompactBarChart({
       tickAmount,
       min,
       max,
+      axisBorder: { show: false },
     },
     yaxis: {
       labels: { show: false },
