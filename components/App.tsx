@@ -14,9 +14,9 @@ import helpTexts from "../data/help-texts";
 export default function App(): React.ReactElement {
   return (
     <div className="container mx-auto flex flex-wrap text-sm lg:flex-nowrap">
-      <div className="flex w-full flex-wrap pt-6 xl:w-2/3">
+      <div className="flex w-full flex-wrap pt-6 md:w-1/2 xl:w-2/3">
         <ToolHeader />
-        <div className="w-full p-6 xl:w-1/2">
+        <div className="w-full p-3 pt-6 xl:w-1/2">
           <PresetSelection />
           <div id="production">
             <FieldGroup title="Gas production" className="mb-6">
@@ -42,7 +42,7 @@ export default function App(): React.ReactElement {
             </FieldGroup>
           </div>
         </div>
-        <div className="w-full px-6 md:pt-6 xl:w-1/2">
+        <div className="w-full px-3 md:pt-4 xl:w-1/2">
           <div id="savings">
             <FieldGroup title="Savings at home and office" className="mb-6">
               <Input id="electricity_storage_behind_the_meter" />
@@ -94,7 +94,7 @@ export default function App(): React.ReactElement {
           </div>
         </div>
       </div>
-      <div className="sticky top-0 w-full self-start px-6 md:pt-12 xl:w-1/3">
+      <div className="sticky top-0 w-full self-start pl-6 pr-3 md:w-1/2 md:pt-12 xl:w-1/3">
         <div id="results">
           <h2 className="text-lg">Results</h2>
           <ResultsChart />
