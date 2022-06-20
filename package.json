@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@fontsource/inter": "^4.5.11",
     "@headlessui/react": "^1.6.1",
     "@reduxjs/toolkit": "^1.8.1",
     "@tippyjs/react": "^4.2.6",
