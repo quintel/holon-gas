@@ -31,6 +31,8 @@ export default function CompactBarChart({
           speed: 250,
         },
       },
+      fontFamily:
+        "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif",
       toolbar: {
         show: false,
       },
