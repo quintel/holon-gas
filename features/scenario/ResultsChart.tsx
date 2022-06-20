@@ -40,23 +40,23 @@ export default function ResultsChart(): React.ReactElement {
   const series = [
     {
       name: "Gas imported from Russia",
-      data: [INITIAL_RUSSIAN_GAS, Math.max(0, russianGas)],
+      data: [Math.max(0, russianGas)],
     },
     {
       name: "Reduction from electricity production",
-      data: [0, reductionElectricityProduction],
+      data: [reductionElectricityProduction],
     },
     {
       name: "Reduction in buildings",
-      data: [0, reductionBuildings],
+      data: [reductionBuildings],
     },
     {
       name: "Reduction in households",
-      data: [0, reductionHouseholds],
+      data: [reductionHouseholds],
     },
     {
       name: "Reduction in industry",
-      data: [0, reductionIndustry],
+      data: [reductionIndustry],
     },
   ];
 
@@ -73,7 +73,7 @@ export default function ResultsChart(): React.ReactElement {
     },
     plotOptions: {
       bar: {
-        columnWidth: "75%",
+        columnWidth: "50%",
       },
     },
     colors: ["#9ca3af", "#34d399", "#fbbf24", "#60a5fa", "#f9a8d4"],
@@ -88,7 +88,8 @@ export default function ResultsChart(): React.ReactElement {
       },
     },
     xaxis: {
-      categories: ["Before", "After"],
+      categories: ["Results"],
+      labels: { show: false },
     },
     yaxis: {
       title: {
