@@ -4,8 +4,6 @@ import { formatInput } from "../../data/inputs";
 
 import StatelessInput from "../../components/Input";
 
-import helpTexts from "../../data/help-texts";
-
 export default function Input({ id }: { id: InputKey }): React.ReactElement {
   const input = useAppSelector(createInputSelector(id));
   const dispatch = useAppDispatch();
