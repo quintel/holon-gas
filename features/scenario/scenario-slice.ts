@@ -38,7 +38,7 @@ export interface ScenarioState {
   inputs: ReturnType<typeof createInputState>;
   requestState: RequestState;
   results: { [k: string]: Result };
-  scenarioId: null | number;
+  scenarioId: undefined | number;
   selectedPreset: string;
 }
 
@@ -91,7 +91,7 @@ function createInitialState(preset: PresetSchema): ScenarioState {
     inputs: createInputState(preset),
     requestState: RequestState.Idle,
     results: {},
-    scenarioId: null,
+    scenarioId: undefined,
     selectedPreset: preset.key,
   };
 }
