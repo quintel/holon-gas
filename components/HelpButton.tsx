@@ -25,7 +25,7 @@ export default function HelpButton({ text }: { text: string }) {
     >
       <span
         role="button"
-        className="-mt-1 ml-2 inline-flex h-5 w-5 cursor-pointer items-center justify-center rounded-full border-2 border-gray-200 text-xs font-semibold text-gray-400 transition hover:border-gray-400 hover:text-gray-500"
+        className="inline-flex h-4 w-4 cursor-pointer items-center justify-center rounded bg-gray-400 text-xs font-medium text-gray-100 transition after:absolute after:inset-0 hover:bg-gray-500"
       >
         ?
       </span>

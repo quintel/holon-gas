@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 
-import HelpButton from "./HelpButton";
 import Slider from "./Slider";
 import InputDescription from "./InputDescription";
+import InputTitle from "./InputTitle";
 
 interface InputProps {
   description?: string;
@@ -56,10 +56,7 @@ export default function Input({
 
   return (
     <div className="pb-4 last:pb-0">
-      <p className="pb-1">
-        <span>{name}</span>
-        {helpText && <HelpButton text={helpText} />}
-      </p>
+      <InputTitle helpText={helpText}>{name}</InputTitle>
       {description && <InputDescription>{description}</InputDescription>}
       <div className="flex align-middle">
         <div className="w-3/4 pt-1">
