@@ -25,7 +25,7 @@ function formatPercent(value: number): string {
 }
 
 export default function SecondaryResults(): React.ReactElement {
-  const co2Change = useAppSelector(
+  const co2Change = -useAppSelector(
     createFutureResultDeltaSelector("dashboard_co2_emissions_versus_start_year")
   );
 
