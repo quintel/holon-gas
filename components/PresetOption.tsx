@@ -1,7 +1,9 @@
 import { RadioGroup } from "@headlessui/react";
 
-const baseClasses = "py-1 px-3 rounded cursor-pointer font-semibold bg-white mb-2";
-const checkedClasses = `${baseClasses} bg-gradient-to-b from-blue-400 to-blue-500 text-white`;
+const commonClasses =
+  "py-1 border px-3 bg-gradient-to-b rounded cursor-pointer font-medium mb-2 transition";
+const baseClasses = `${commonClasses} border-white bg-white text-gray-900`;
+const checkedClasses = `${commonClasses} border-blue-500 bg-blue-500 from-white/30 text-white`;
 
 interface Props {
   title: string;
