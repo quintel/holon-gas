@@ -1,8 +1,22 @@
 import { isEqual } from "lodash";
 
-import { ScenarioState } from "./scenario-slice";
+import { ScenarioState, API_HOST } from "./scenario-slice";
 import inputs from "../../data/inputs";
 import expectedQueries from "../../data/queries";
+
+/**
+ * Increment this whenver you wish to expire the cached state for all users.
+ */
+const SCHEMA_VERSION = 1;
+
+interface PersistedState {
+  scenario: ScenarioState;
+  version: string;
+}
+
+function currentSchemaVersion() {
+  return `v${SCHEMA_VERSION}:${API_HOST}`;
+}
 
 /**
  * Determines if the queries in the persisted scenario contain all the data needed to show the
@@ -27,7 +41,10 @@ function areInputsValid(currentInputs: ScenarioState["inputs"]) {
 }
 
 export function saveState(state: ScenarioState) {
-  localStorage.setItem("scenario-state", JSON.stringify(state));
+  localStorage.setItem(
+    "scenario-state",
+    JSON.stringify({ version: currentSchemaVersion(), scenario: state })
+  );
 }
 
 export function loadState(): ScenarioState | undefined {
@@ -41,14 +58,16 @@ export function loadState(): ScenarioState | undefined {
     return undefined;
   }
 
-  const parsed = JSON.parse(serializedState) as ScenarioState;
+  const parsed = JSON.parse(serializedState) as PersistedState;
 
   if (
-    areInputsValid(parsed.inputs) &&
-    areQueriesValid(parsed.results) &&
-    areQueriesValid(parsed.initialResults)
+    parsed.scenario &&
+    parsed.version === currentSchemaVersion() &&
+    areInputsValid(parsed.scenario.inputs) &&
+    areQueriesValid(parsed.scenario.results) &&
+    areQueriesValid(parsed.scenario.initialResults)
   ) {
-    return parsed;
+    return parsed.scenario;
   }
 
   return;
