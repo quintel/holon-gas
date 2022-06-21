@@ -40,7 +40,7 @@ export default function ResultsChart(): React.ReactElement {
       data: [Math.max(0, russianGas)],
     },
     {
-      name: "Extra gas production",
+      name: "Extra gas production or decreased demand",
       data: [reductionImport],
     },
     {
