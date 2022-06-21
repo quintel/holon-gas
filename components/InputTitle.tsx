@@ -9,7 +9,7 @@ export default function InputTitle({ children, helpText }: Props): React.ReactEl
   return (
     <p className="relative flex items-center pb-1">
       <span>{children}</span>
-      <div className="mx-3 h-px flex-grow bg-gray-200 last:mr-0" />
+      <span className="mx-3 block h-px flex-grow bg-gray-200 last:mr-0" />
       {helpText && <HelpButton text={helpText} />}
     </p>
   );
