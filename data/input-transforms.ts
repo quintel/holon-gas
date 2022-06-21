@@ -81,6 +81,15 @@ export const dumpTransforms: { [k: keyof typeof inputs]: InputSerializer } = {
     buildings_space_heater_heatpump_air_water_network_gas_share: 1.5 * (1 + value / 100),
     buildings_space_heater_heatpump_air_water_electricity_share: 11.1 * (1 + value / 100),
   }),
+  thermostat_settings_percentage: (key, value, all) => ({
+    // We don't need to transform thermostat_settings_reduce_temperature since both sliders affect
+    // the same ETM input.
+    households_useful_demand_heat_per_person: -(
+      0.1507 *
+      all.thermostat_settings_reduce_temperature.value *
+      (value / 100)
+    ),
+  }),
   /**
    * Other
    */
