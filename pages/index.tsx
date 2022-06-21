@@ -4,7 +4,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 
-import App from "../components/App";
+import App from "../features/scenario/App";
 import InitialLoading from "../components/InitialLoading";
 import ResponseError from "../components/ResponseError";
 

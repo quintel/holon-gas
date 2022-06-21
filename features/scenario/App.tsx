@@ -1,15 +1,15 @@
-import FieldGroup from "../components/FieldGroup";
-import FieldSubGroup from "../components/FieldSubGroup";
-import Input from "../features/scenario/Input";
-import InputDescription from "./InputDescription";
-import InsulationInput from "../features/scenario/InsulationInput";
-import LoadingStatus from "../features/scenario/LoadingStatus";
-import PresetSelection from "../features/scenario/PresetSelection";
-import ResultsChart from "../features/scenario/ResultsChart";
-import SecondaryResults from "../features/scenario/SecondaryResults";
-import ToolHeader from "../components/ToolHeader";
+import FieldGroup from "../../components/FieldGroup";
+import FieldSubGroup from "../../components/FieldSubGroup";
+import Input from "./Input";
+import InputDescription from "../../components/InputDescription";
+import InsulationInput from "./InsulationInput";
+import LoadingStatus from "./LoadingStatus";
+import PresetSelection from "./PresetSelection";
+import ResultsChart from "./ResultsChart";
+import SecondaryResults from "./SecondaryResults";
+import ToolHeader from "../../components/ToolHeader";
 
-import helpTexts from "../data/help-texts";
+import helpTexts from "../../data/help-texts";
 
 export default function App({ scenarioId }: { scenarioId?: number }): React.ReactElement {
   return (
