@@ -14,7 +14,7 @@ export default function PresetOptions({ title, value }: Props): React.ReactEleme
   return (
     <RadioGroup.Option
       value={value}
-      className="rounded ring-blue-300 ring-offset-2 focus-visible:ring"
+      className="rounded outline-none ring-blue-300 ring-offset-2 ring-offset-gray-200 focus-visible:ring"
     >
       {({ checked }) => <div className={checked ? checkedClasses : baseClasses}>{title}</div>}
     </RadioGroup.Option>
