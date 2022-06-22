@@ -10,7 +10,7 @@ const ToolHeader: React.FC<{}> = () => {
         <Tour />
 
         <Link href="/help">
-          <a className="inline-flex items-center rounded px-2 py-1 text-blue-500 transition hover:bg-gray-200 hover:text-blue-700 hover:no-underline">
+          <a className="inline-flex items-center rounded px-2 py-1 text-midnight-500 transition hover:bg-gray-200 hover:text-midnight-700 hover:no-underline">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="mr-1 h-6 w-6"

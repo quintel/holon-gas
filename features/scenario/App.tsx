@@ -110,7 +110,7 @@ export default function App({ scenarioId }: { scenarioId?: number }): React.Reac
                 ? `https://beta.pro.energytransitionmodel.com/scenarios/${scenarioId}/load`
                 : "https://pro.energytransitionmodel.com/"
             }
-            className="p-1 text-blue-500 hover:text-blue-700"
+            className="p-1 text-midnight-500 hover:text-midnight-700"
             target="_blank"
             rel="noreferrer"
           >

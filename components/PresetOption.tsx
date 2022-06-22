@@ -2,12 +2,12 @@ import { RadioGroup } from "@headlessui/react";
 
 const commonClasses = "font-medium";
 const baseClasses = `${commonClasses} text-gray-800`;
-const checkedClasses = `${commonClasses} text-green-700`;
+const checkedClasses = `${commonClasses} text-emerald-700`;
 
 function Pill({ checked }: { checked: boolean }) {
   const borderWidth = checked ? "10px" : "3.3px";
   const colorClasses = checked
-    ? "text-green-600"
+    ? "text-emerald-600"
     : "text-gray-400 bg-gray-50 group-hover:text-gray-600 transition-all scale-75";
 
   return (
@@ -46,7 +46,7 @@ export default function PresetOption({ title, value }: Props): React.ReactElemen
   return (
     <RadioGroup.Option
       value={value}
-      className="group mb-2 cursor-pointer rounded outline-none ring-blue-300 ring-offset-2 ring-offset-gray-200 focus-visible:ring"
+      className="group mb-2 cursor-pointer rounded outline-none ring-midnight-300 ring-offset-2 ring-offset-gray-200 focus-visible:ring"
     >
       {({ checked }) => (
         <div className="flex items-center">

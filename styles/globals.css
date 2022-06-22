@@ -24,11 +24,11 @@ body {
   }
 
   a {
-    @apply text-blue-600;
+    @apply text-midnight-600;
   }
 
   a:hover {
-    @apply text-blue-700 underline;
+    @apply text-midnight-700 underline;
   }
 
   .field-sub-group + .field-sub-group {
@@ -59,11 +59,11 @@ body {
   }
 
   .slider .track.track-0 {
-    @apply bg-gradient-to-b from-blue-400 to-blue-500 rounded-full;
+    @apply bg-gradient-to-b from-midnight-400 to-midnight-500 rounded-full;
   }
 
   .slider .thumb {
-    @apply h-4 w-4 bg-gradient-to-b from-blue-400 to-blue-500 rounded-full shadow;
+    @apply h-4 w-4 bg-gradient-to-b from-midnight-400 to-midnight-500 rounded-full shadow;
     transition: box-shadow 0.15s ease;
   }
 
@@ -81,13 +81,13 @@ body {
   }
 
   .slider .active-mark {
-    @apply bg-gradient-to-b from-blue-400 to-blue-500;
+    @apply bg-gradient-to-b from-midnight-400 to-midnight-500;
   }
 
   /* Tooltips */
 
   .tooltip a, .tooltip a:hover {
-    @apply text-blue-300;
+    @apply text-midnight-300;
   }
 
   .tooltip a[data-footnote-ref="true"] {

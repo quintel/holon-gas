@@ -12,7 +12,7 @@ const ResetButton: React.FC<{ onClick: () => void }> = ({ onClick }) => {
 
   return (
     <button
-      className={`inline-flex items-center rounded px-2 py-1 text-xs text-blue-500 transition hover:bg-gray-300 hover:text-blue-600 ${disabledClasses}`}
+      className={`inline-flex items-center rounded px-2 py-1 text-xs text-midnight-500 transition hover:bg-gray-300 hover:text-midnight-600 ${disabledClasses}`}
       onClick={onClick}
     >
       <svg

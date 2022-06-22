@@ -59,7 +59,7 @@ const Tour: React.FC<{}> = () => {
   return (
     <div>
       <button
-        className="inline-flex items-center rounded px-3 py-2 text-blue-500 transition hover:bg-gray-200 hover:text-blue-700 hover:no-underline active:bg-gray-300"
+        className="inline-flex items-center rounded px-3 py-2 text-midnight-500 transition hover:bg-gray-200 hover:text-midnight-700 hover:no-underline active:bg-gray-300"
         onClick={() => dispatch(startTour())}
       >
         <svg
