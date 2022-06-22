@@ -1,9 +1,6 @@
 import { RadioGroup } from "@headlessui/react";
 
-// const commonClasses = "py-1 px-3 bg-gradient-to-b rounded cursor-pointer font-medium transition";
-// const baseClasses = `${commonClasses} bg-white text-gray-900`;
-// const checkedClasses = `${commonClasses} bg-blue-500 from-white/30 text-white`;
-const commonClasses = "cursor-pointer font-medium";
+const commonClasses = "font-medium";
 const baseClasses = `${commonClasses} text-gray-800`;
 const checkedClasses = `${commonClasses} text-green-700`;
 
@@ -44,12 +41,11 @@ export default function PresetOptions({ title, value }: Props): React.ReactEleme
   return (
     <RadioGroup.Option
       value={value}
-      className="group mb-2 rounded outline-none ring-blue-300 ring-offset-2 ring-offset-gray-200 focus-visible:ring"
+      className="group mb-2 cursor-pointer rounded outline-none ring-blue-300 ring-offset-2 ring-offset-gray-200 focus-visible:ring"
     >
       {({ checked }) => (
         <div className="flex items-center">
           <Pill checked={checked} />
-          {/* {checked ? <CheckedPill /> : <UncheckedPill />} */}
           <div className={checked ? checkedClasses : baseClasses}>{title}</div>
         </div>
       )}
