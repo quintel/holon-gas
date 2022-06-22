@@ -37,7 +37,7 @@ interface Props {
   value: string;
 }
 
-export default function PresetOptions({ title, value }: Props): React.ReactElement {
+export default function PresetOption({ title, value }: Props): React.ReactElement {
   return (
     <RadioGroup.Option
       value={value}
