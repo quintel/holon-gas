@@ -34,6 +34,10 @@ function areQueriesValid(currentQueries: ScenarioState["results"]) {
  * Determines if the inputs in the persisted scenario contain the keys needed to show the scenario.
  */
 function areInputsValid(currentInputs: ScenarioState["inputs"]) {
+  if (!currentInputs) {
+    return false;
+  }
+
   const expectedInputs = Object.keys(inputs);
   const actualInputs = Object.keys(currentInputs);
 
