@@ -135,7 +135,7 @@ const inputs: { [k: string]: Input } = {
       concerted policy effort (see [^1]). Adding this to our original estimate, we arrive at a total
       theoretical increase of 14.5%.
 
-      [^1] IEA, “A 10-Point Plan to Reduce the European Union’s Reliance on Russian Natural Gas,” 2022.
+      [^1]: IEA, “A 10-Point Plan to Reduce the European Union’s Reliance on Russian Natural Gas,” 2022.
     `,
   },
   // Savings at home and in business
