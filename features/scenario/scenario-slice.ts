@@ -310,6 +310,7 @@ const scenarioSlice = createSlice({
     });
 
     builder.addCase(resetScenario.pending, (state) => {
+      state.selectedPreset = "custom";
       state.inputs = createInputState(presets.custom);
     });
   },
