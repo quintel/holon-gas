@@ -57,7 +57,7 @@ export default function SecondaryResults(): React.ReactElement {
         min={-20}
         max={20}
         value={co2Change * 100}
-        bands={[{ color: "red" }, { color: "green", at: 0 }]}
+        bands={[{ color: "green" }, { color: "red", at: 0 }]}
         formatter={formatPercent}
       />
     </div>
