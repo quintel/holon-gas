@@ -192,7 +192,7 @@ export const sendAPIRequest = createAsyncThunk(
 );
 
 export const resetScenario = createAsyncThunk("scenario/resetScenario", async (_, thunkAPI) => {
-  thunkAPI.dispatch(sendAPIRequest());
+  await thunkAPI.dispatch(sendAPIRequest());
 });
 
 /**
@@ -201,7 +201,7 @@ export const resetScenario = createAsyncThunk("scenario/resetScenario", async (_
 export const setInputValue = createAsyncThunk(
   "scenario/setInputValue",
   async (arg: { key: InputKey; value: Input["value"] }, thunkAPI) => {
-    thunkAPI.dispatch(sendAPIRequest());
+    await thunkAPI.dispatch(sendAPIRequest());
   }
 );
 
@@ -212,7 +212,7 @@ export const setInputValue = createAsyncThunk(
 export const setPreset = createAsyncThunk(
   "scenario/setPreset",
   async (arg: PresetKey, thunkAPI) => {
-    thunkAPI.dispatch(sendAPIRequest());
+    await thunkAPI.dispatch(sendAPIRequest());
   }
 );
 
