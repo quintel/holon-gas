@@ -354,7 +354,7 @@ const selectFutureDelta = (state: RootState, key: string) => {
   const { results, initialResults } = state.scenario;
 
   if (results[key] && initialResults[key]) {
-    return initialResults[key].future - results[key].future;
+    return results[key].future - initialResults[key].future;
   }
 
   return 0;
@@ -372,39 +372,29 @@ export const uiReadySelector = (state: RootState) =>
   state.scenario.initialRequestState === RequestState.Done;
 
 /**
+ * Sum the delta between multiple future results.
+ */
+const summedFutureDeltas = (state: RootState, keys: string[]): number =>
+  keys.reduce((acc, key) => acc + selectFutureDelta(state, key), 0);
+
+/**
  * Returns how much Russian gas is imported in the scenario.
  */
 export const importedRussianGasSelector = (state: RootState) => {
-  const reductionImport = Math.max(0, selectFutureDelta(state, "future_import_natural_gas"));
+  const reducedDemand = -summedFutureDeltas(state, [
+    "natural_gas_electricity_production_bcm",
+    "final_demand_natural_gas_buildings_bcm",
+    "final_demand_natural_gas_households_bcm",
+    "final_demand_natural_gas_industry_bcm",
+  ]);
 
-  const reductionElectricityProduction = Math.max(
-    0,
-    selectFutureDelta(state, "reduction_demand_natural_gas_electricity_production")
-  );
+  const increasedProduction = summedFutureDeltas(state, [
+    "import_lng_bcm",
+    "production_green_gas_bcm",
+    "production_natural_gas_bcm",
+  ]);
 
-  const reductionBuildings = Math.max(
-    0,
-    selectFutureDelta(state, "reduction_final_demand_natural_gas_buildings")
-  );
-
-  const reductionHouseholds = Math.max(
-    0,
-    selectFutureDelta(state, "reduction_final_demand_natural_gas_households")
-  );
-
-  const reductionIndustry = Math.max(
-    0,
-    selectFutureDelta(state, "reduction_final_demand_natural_gas_industry")
-  );
-
-  return (
-    INITIAL_RUSSIAN_GAS -
-    reductionImport -
-    reductionElectricityProduction -
-    reductionBuildings -
-    reductionHouseholds -
-    reductionIndustry
-  );
+  return INITIAL_RUSSIAN_GAS - increasedProduction - reducedDemand;
 };
 
 /**

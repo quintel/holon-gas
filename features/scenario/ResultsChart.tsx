@@ -5,33 +5,37 @@ const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 import { useAppSelector } from "../hooks";
 import { createFutureResultDeltaSelector, importedRussianGasSelector } from "./scenario-slice";
 
-const reductionToSeries = (reduction: number) => {
-  return reduction < 0 ? 0 : reduction;
-};
-
 export default function ResultsChart(): React.ReactElement {
   const russianGas = useAppSelector(importedRussianGasSelector);
 
-  const reductionImport = reductionToSeries(
-    useAppSelector(createFutureResultDeltaSelector("future_import_natural_gas"))
+  // Increased production
+
+  const importedLng = useAppSelector(createFutureResultDeltaSelector("import_lng_bcm"));
+
+  const increaseGreenGas = useAppSelector(
+    createFutureResultDeltaSelector("production_green_gas_bcm")
   );
 
-  const reductionElectricityProduction = reductionToSeries(
-    useAppSelector(
-      createFutureResultDeltaSelector("reduction_demand_natural_gas_electricity_production")
-    )
+  const increaseNaturalGas = useAppSelector(
+    createFutureResultDeltaSelector("production_natural_gas_bcm")
   );
 
-  const reductionBuildings = reductionToSeries(
-    useAppSelector(createFutureResultDeltaSelector("reduction_final_demand_natural_gas_buildings"))
+  // Decreased demand.
+
+  const reductionElectricityProduction = -useAppSelector(
+    createFutureResultDeltaSelector("natural_gas_electricity_production_bcm")
   );
 
-  const reductionHouseholds = reductionToSeries(
-    useAppSelector(createFutureResultDeltaSelector("reduction_final_demand_natural_gas_households"))
+  const reductionBuildings = -useAppSelector(
+    createFutureResultDeltaSelector("final_demand_natural_gas_buildings_bcm")
   );
 
-  const reductionIndustry = reductionToSeries(
-    useAppSelector(createFutureResultDeltaSelector("reduction_final_demand_natural_gas_industry"))
+  const reductionHouseholds = -useAppSelector(
+    createFutureResultDeltaSelector("final_demand_natural_gas_households_bcm")
+  );
+
+  const reductionIndustry = -useAppSelector(
+    createFutureResultDeltaSelector("final_demand_natural_gas_industry_bcm")
   );
 
   const series = [
@@ -40,24 +44,32 @@ export default function ResultsChart(): React.ReactElement {
       data: [Math.max(0, russianGas)],
     },
     {
-      name: "Extra gas production or decreased demand",
-      data: [reductionImport],
+      name: "Extra imported LNG",
+      data: [Math.max(0, importedLng)],
+    },
+    {
+      name: "Extra green gas production",
+      data: [Math.max(0, increaseGreenGas)],
+    },
+    {
+      name: "Extra natural gas production",
+      data: [Math.max(0, increaseNaturalGas)],
     },
     {
       name: "Reduction from electricity production",
-      data: [reductionElectricityProduction],
+      data: [Math.max(0, reductionElectricityProduction)],
     },
     {
       name: "Reduction in buildings",
-      data: [reductionBuildings],
+      data: [Math.max(0, reductionBuildings)],
     },
     {
       name: "Reduction in households",
-      data: [reductionHouseholds],
+      data: [Math.max(0, reductionHouseholds)],
     },
     {
       name: "Reduction in industry",
-      data: [reductionIndustry],
+      data: [Math.max(0, reductionIndustry)],
     },
   ];
 
@@ -84,7 +96,16 @@ export default function ResultsChart(): React.ReactElement {
         columnWidth: "50%",
       },
     },
-    colors: ["#9ca3af", "#34d399", "#fbbf24", "#818cf8", "#f9a8d4", "#a3e635"],
+    colors: [
+      "#9ca3af",
+      "#a6c0f3",
+      "#7f9feb",
+      "#5f7de3",
+      "#34d399",
+      "#fbbf24",
+      "#f9a8d4",
+      "#a3e635",
+    ],
     dataLabels: {
       enabled: false,
     },
