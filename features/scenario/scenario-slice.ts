@@ -192,7 +192,7 @@ export const sendAPIRequest = createAsyncThunk(
 );
 
 export const resetScenario = createAsyncThunk("scenario/resetScenario", async (_, thunkAPI) => {
-  await thunkAPI.dispatch(sendAPIRequest());
+  return (await thunkAPI.dispatch(sendAPIRequest())).payload;
 });
 
 /**
@@ -312,6 +312,12 @@ const scenarioSlice = createSlice({
     builder.addCase(resetScenario.pending, (state) => {
       state.selectedPreset = "custom";
       state.inputs = createInputState(presets.custom);
+    });
+
+    builder.addCase(resetScenario.fulfilled, (state, action) => {
+      if (!action.payload.errors) {
+        state.initialResults = action.payload.gqueries;
+      }
     });
   },
 });
