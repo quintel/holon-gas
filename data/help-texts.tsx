@@ -49,12 +49,36 @@ const gasUseInIndustry = `
   industry will have to be shut down altogether.
 `;
 
+const results = `
+  When we take our reference year to estimate the present year’s imports from Russia, we find that
+  166bcm worth of natural gas will have to be covered[^1]. However, the present discourse mentions a
+  155bcm target instead, based on imports for 2021 [^2], [^3].
+
+  [^1]: BP, “Stratistical Review of World Energy 2020,” 2020.
+  [^2]: European Commission, “Communication from the Commission to the European Parliament, the European Council, the Council, The European Economic and Social Committee and the Committee of the Regions,” 2022.
+  [^3]: IEA, “A 10-Point Plan to Reduce the European Union’s Reliance on Russian Natural Gas,” 2022.
+`;
+
+const capitalFlow = `
+  Taking the most recent costs of EU natural gas imports from Russia (February 2022 [^1]), we find a
+  gas import price of 1.73EUR per kg, considering a density of 0.829 kg/m3 [^2] and currency
+  exchange rate of 0.9117EUR/USD [^3].
+
+  [^1]: UN Comtrade, “UN Comtrade Database,” 2022. [Online]. Available: https://comtrade.un.org/Data/. [Accessed: 14-Jun-2022].
+  [^2]: CBS, “Weight units energy,” 2022. [Online]. Available: https://www.cbs.nl/en-gb/onze-diensten/methods/definitions/weight-units-energy#:~:text=- Natural gas%3A 1 m3 %3D,gas%3A variable dependent on composition. [Accessed: 14-Jun-2022].
+  [^3]: Exchange Rates UK, “US Dollar to Euro Spot Exchange Rates for 2022,” 2022. [Online]. Available: https://www.exchangerates.org.uk/USD-EUR-spot-exchange-rates-history-2022.html. [Accessed: 14-Jun-2022].
+`;
+
 const allMessages: Record<string, string> = {
   // Groups
   largeScaleEnergyStorage,
   coalPowerPlantCapacity,
   rooftopSolar,
   gasUseInIndustry,
+
+  // Charts
+  results,
+  capitalFlow,
 };
 
 export default allMessages;

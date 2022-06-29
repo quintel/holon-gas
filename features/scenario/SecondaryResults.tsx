@@ -2,6 +2,9 @@ import CompactBarChart from "../../components/CompactBarChart";
 
 import ColorBandedBarChart from "../../components/ColorBandedBarChart";
 import CapitalFlowBarChart from "./CapitalFlowBarChart";
+import HelpButton from "../../components/HelpButton";
+
+import helpTexts from "../../data/help-texts";
 
 import { useAppSelector } from "../hooks";
 import { createFutureResultDeltaSelector } from "./scenario-slice";
@@ -31,7 +34,12 @@ export default function SecondaryResults(): React.ReactElement {
 
   return (
     <div>
-      <h2 className="mt-3 text-lg">Capital flow to Russia</h2>
+      <div className="relative mt-3 flex">
+        <h2 className="text-lg">Capital flow to Russia</h2>
+        <div className="ml-auto">
+          <HelpButton text={helpTexts.results} />
+        </div>
+      </div>
       <p className="mb-1">Payments to Russia for gas this year</p>
       <CapitalFlowBarChart />
 

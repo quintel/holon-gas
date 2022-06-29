@@ -10,6 +10,7 @@ import SecondaryResults from "./SecondaryResults";
 import ToolHeader from "../../components/ToolHeader";
 
 import helpTexts from "../../data/help-texts";
+import HelpButton from "../../components/HelpButton";
 
 export default function App({ scenarioId }: { scenarioId?: number }): React.ReactElement {
   return (
@@ -96,7 +97,12 @@ export default function App({ scenarioId }: { scenarioId?: number }): React.Reac
       </div>
       <div className="sticky top-0 w-full self-start pl-6 pr-3 md:w-1/2 md:pt-12 xl:w-1/3">
         <div id="results">
-          <h2 className="text-lg">Results</h2>
+          <div className="relative flex">
+            <h2 className="text-lg">Results</h2>
+            <div className="ml-auto">
+              <HelpButton text={helpTexts.results} />
+            </div>
+          </div>
           <ResultsChart />
           <SecondaryResults />
         </div>
