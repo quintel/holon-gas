@@ -25,7 +25,7 @@ interface Props {
 function colorForValue(value: number, bands?: Band[]): string {
   if (bands && bands.length > 0) {
     for (const band of bands) {
-      if (band.at && value >= band.at) {
+      if (band.at != undefined && value >= band.at) {
         return colors[band.color];
       }
     }
