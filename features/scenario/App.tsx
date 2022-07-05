@@ -5,6 +5,7 @@ import InputDescription from "../../components/InputDescription";
 import InsulationInput from "./InsulationInput";
 import LoadingStatus from "./LoadingStatus";
 import PresetSelection from "./PresetSelection";
+import QueryResult from "./QueryResult";
 import ResultsChart from "./ResultsChart";
 import SecondaryResults from "./SecondaryResults";
 import ToolHeader from "../../components/ToolHeader";
@@ -38,6 +39,12 @@ export default function App({ scenarioId }: { scenarioId?: number }): React.Reac
               </FieldSubGroup>
               <Input id="injection_of_biomethane_in_gas_mix" />
               <Input id="lng_imports" />
+              <p className="-mt-3 pb-3 text-right text-xs text-gray-500">
+                <QueryResult
+                  query="import_lng_bcm"
+                  formatter={(value: number) => `approx. ${Math.round(value * 10) / 10} bcm`}
+                />
+              </p>
               <Input id="green_hydrogen" />
               <Input id="renewable_energy_capacity" />
             </FieldGroup>
