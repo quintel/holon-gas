@@ -98,7 +98,7 @@ export default function App({ scenarioId }: { scenarioId?: number }): React.Reac
       <div className="sticky top-0 w-full self-start pl-6 pr-3 md:w-1/2 md:pt-12 xl:w-1/3">
         <div id="results">
           <div className="relative flex">
-            <h2 className="text-lg">Results</h2>
+            <h2 className="text-lg">Gas imported from Russia</h2>
             <div className="ml-auto">
               <HelpButton text={helpTexts.results} />
             </div>
