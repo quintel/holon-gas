@@ -64,7 +64,7 @@ export default function SecondaryResults(): React.ReactElement {
       <ColorBandedBarChart
         min={-20}
         max={20}
-        value={co2Change * 100}
+        value={-co2Change * 100}
         bands={[{ color: "green" }, { color: "red", at: 0 }]}
         formatter={formatPercent}
       />
