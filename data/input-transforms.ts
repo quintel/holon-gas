@@ -56,9 +56,7 @@ export const dumpTransforms: { [k: keyof typeof inputs]: InputSerializer } = {
   electricity_storage_behind_the_meter: (key, value, all) => ({
     households_flexibility_p2p_electricity_market_penetration: value,
   }),
-  insulation: (key, value, all) => {
-    const index = Math.max(Math.min(Math.floor(value), all[key].max), all[key].max);
-
+  insulation: (key, index, all) => {
     // The insulation slider maps 0 to no growth, 1 to linear, and 2 to exponential growth. Each
     // value is included in an array in order.
     const values = {
