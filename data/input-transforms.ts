@@ -1,7 +1,8 @@
 import inputs from "./inputs";
 
-// Converts 1 bcm of gas to PJ.
-const bcmPerPJ = 35.17;
+// Converts 1 bcm of gas to PJ. In ETM all energy flows are in lower heating value (LHV), therefore
+// we have to use the LHV caloric value to calculate the volume LHV caloric values = 31.65 MJ / m3
+const bcmPerPJ = 31.65;
 
 type InputSerializer = (
   key: keyof typeof inputs,
