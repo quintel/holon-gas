@@ -17,6 +17,10 @@ function round(value: number): number {
  * Formats EUR values in column charts.
  */
 function formatEuros(value: number): string {
+  if (value < 0) {
+    return `-€${Math.abs(round(value))} billion`;
+  }
+
   return `€${round(value)} billion`;
 }
 
@@ -30,6 +34,10 @@ function formatPercent(value: number): string {
 export default function SecondaryResults(): React.ReactElement {
   const co2Change = -useAppSelector(
     createFutureResultDeltaSelector("dashboard_co2_emissions_versus_start_year")
+  );
+
+  const investmentCosts = -useAppSelector(
+    createFutureResultDeltaSelector("total_future_in_investment_cost_table")
   );
 
   return (
@@ -46,16 +54,12 @@ export default function SecondaryResults(): React.ReactElement {
       <h2 className="mt-3 text-lg">Costs</h2>
       <p className="mb-1">Required (one-off) investment</p>
       <div className="pb-4">
-        <CompactBarChart
+        <ColorBandedBarChart
           min={0}
-          max={100}
-          series={[
-            { name: "Green investment costs", data: [65] },
-            { name: "Non-green investment costs", data: [35] },
-          ]}
-          colors={["#34d399", "#f87171"]}
-          formatter={() => "??"}
-          height={120}
+          max={400}
+          value={investmentCosts < 0 ? -investmentCosts : 0}
+          bands={[{ color: "yellow" }]}
+          formatter={formatEuros}
         />
       </div>
 
