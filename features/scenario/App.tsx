@@ -114,12 +114,14 @@ export default function App({ scenarioId }: { scenarioId?: number }): React.Reac
           </div>
           <ResultsChart />
           <div className="relative flex pt-3">
-            <h2 className="text-lg">Natural gas demand</h2>
+            <h2 className="text-lg">Gas supply and demand</h2>
             <div className="ml-auto">
-              <HelpButton text={helpTexts.naturalGasDemand} />
+              <HelpButton text={helpTexts.gasSupplyAndDemand} />
             </div>
           </div>
-          <DemandChart />
+          <div className="pb-3">
+            <DemandChart />
+          </div>
           <SecondaryResults />
         </div>
         <div className="mt-8 text-center"></div>

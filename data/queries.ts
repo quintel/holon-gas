@@ -9,7 +9,8 @@ const queries = [
   "production_natural_gas_bcm",
   "total_future_in_investment_cost_table",
 
-  // Gas demand chart
+  // Gas supply and demand chart
+  "extraction_of_natural_gas_bcm",
   "gas_agriculture_in_mekko_of_primary_demand_bcm",
   "gas_buildings_in_mekko_of_primary_demand_bcm",
   "gas_bunkers_in_mekko_of_primary_demand_bcm",
@@ -18,6 +19,7 @@ const queries = [
   "gas_industry_in_mekko_of_primary_demand_bcm",
   "gas_other_in_mekko_of_primary_demand_bcm",
   "gas_transport_in_mekko_of_primary_demand_bcm",
+  "import_of_natural_gas_bcm",
 ];
 
 export const INITIAL_RUSSIAN_GAS = 166.0; // bcm

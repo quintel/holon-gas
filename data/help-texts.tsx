@@ -59,10 +59,9 @@ const results = `
   [^3]: IEA, “A 10-Point Plan to Reduce the European Union’s Reliance on Russian Natural Gas,” 2022.
 `;
 
-const naturalGasDemand = `
-  This chart shows the total demand for natural gas in your scenario, including the original value.
-  Gas may be supplied by imports from Russia, imports from other countries, or by domestic
-  production.
+const gasSupplyAndDemand = `
+  This chart shows the total demand and supply for natural gas in your scenario. Gas may be supplied
+  by imports from Russia, imports from other countries, or by domestic production.
 `;
 
 const capitalFlow = `
@@ -84,7 +83,7 @@ const allMessages: Record<string, string> = {
 
   // Charts
   results,
-  naturalGasDemand,
+  gasSupplyAndDemand,
   capitalFlow,
 };
 
