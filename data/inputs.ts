@@ -204,8 +204,9 @@ const inputs: { [k: string]: Input } = {
   },
   thermostat_settings_percentage: {
     value: 0,
-    max: 100,
+    max: 30,
     min: 0,
+    step: 1,
     name: "Share of participating households",
     description: oneLine`
       What share of households would be willing to reduce their heat demand by lowering their home
@@ -214,7 +215,7 @@ const inputs: { [k: string]: Input } = {
   },
   thermostat_settings_reduce_temperature: {
     value: 0,
-    max: 2,
+    max: 1,
     min: 0.0,
     step: 0.1,
     recommended: 1,
