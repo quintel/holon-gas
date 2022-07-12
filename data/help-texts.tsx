@@ -59,6 +59,12 @@ const results = `
   [^3]: IEA, “A 10-Point Plan to Reduce the European Union’s Reliance on Russian Natural Gas,” 2022.
 `;
 
+const naturalGasDemand = `
+  This chart shows the total demand for natural gas in your scenario, including the original value.
+  Gas may be supplied by imports from Russia, imports from other countries, or by domestic
+  production.
+`;
+
 const capitalFlow = `
   Taking the most recent costs of EU natural gas imports from Russia (February 2022 [^1]), we find a
   gas import price of 1.73EUR per kg, considering a density of 0.829 kg/m3 [^2] and currency
@@ -78,6 +84,7 @@ const allMessages: Record<string, string> = {
 
   // Charts
   results,
+  naturalGasDemand,
   capitalFlow,
 };
 

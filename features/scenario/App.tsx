@@ -116,7 +116,7 @@ export default function App({ scenarioId }: { scenarioId?: number }): React.Reac
           <div className="relative flex pt-3">
             <h2 className="text-lg">Natural gas demand</h2>
             <div className="ml-auto">
-              <HelpButton text={helpTexts.results} />
+              <HelpButton text={helpTexts.naturalGasDemand} />
             </div>
           </div>
           <DemandChart />
