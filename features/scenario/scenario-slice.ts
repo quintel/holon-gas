@@ -14,7 +14,8 @@ import { INITIAL_RUSSIAN_GAS } from "../../data/queries";
 export type InputKey = keyof typeof inputs;
 export type PresetKey = keyof typeof presets;
 
-export const API_HOST = "https://beta.engine.energytransitionmodel.com";
+// export const API_HOST = "https://beta.engine.energytransitionmodel.com";
+export const API_HOST = "http://localhost:3000";
 
 interface Result {
   /**
@@ -341,6 +342,19 @@ export const requestStateSelector = (state: RootState) => ({
 });
 
 export const scenarioIdSelector = (state: RootState) => state.scenario.scenarioId;
+
+/**
+ * Selects an initial result value.
+ */
+export const createInitialResultSelector = (key: string) => {
+  return (state: RootState) => {
+    if (state.scenario.initialResults[key]) {
+      return state.scenario.initialResults[key].future;
+    }
+
+    return 0;
+  };
+};
 
 /**
  * Creates a function which can be used to fetch a future value from a result set. If no such

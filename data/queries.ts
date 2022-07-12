@@ -8,6 +8,16 @@ const queries = [
   "production_green_gas_bcm",
   "production_natural_gas_bcm",
   "total_future_in_investment_cost_table",
+
+  // Gas demand chart
+  "gas_agriculture_in_mekko_of_primary_demand_bcm",
+  "gas_buildings_in_mekko_of_primary_demand_bcm",
+  "gas_bunkers_in_mekko_of_primary_demand_bcm",
+  "gas_export_in_mekko_of_primary_demand_bcm",
+  "gas_households_in_mekko_of_primary_demand_bcm",
+  "gas_industry_in_mekko_of_primary_demand_bcm",
+  "gas_other_in_mekko_of_primary_demand_bcm",
+  "gas_transport_in_mekko_of_primary_demand_bcm",
 ];
 
 export const INITIAL_RUSSIAN_GAS = 166.0; // bcm

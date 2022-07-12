@@ -1,3 +1,4 @@
+import DemandChart from "./DemandChart";
 import FieldGroup from "../../components/FieldGroup";
 import FieldSubGroup from "../../components/FieldSubGroup";
 import Input from "./Input";
@@ -112,6 +113,13 @@ export default function App({ scenarioId }: { scenarioId?: number }): React.Reac
             </div>
           </div>
           <ResultsChart />
+          <div className="relative flex pt-3">
+            <h2 className="text-lg">Natural gas demand</h2>
+            <div className="ml-auto">
+              <HelpButton text={helpTexts.results} />
+            </div>
+          </div>
+          <DemandChart />
           <SecondaryResults />
         </div>
         <div className="mt-8 text-center"></div>
