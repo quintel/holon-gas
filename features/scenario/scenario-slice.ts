@@ -133,7 +133,7 @@ const sendRequest = async (
     body: JSON.stringify({
       autobalance: true,
       gqueries: queries,
-      scenario: { user_values: { ...inputs, costs_gas: 133.0 } },
+      scenario: { user_values: inputs },
     }),
     signal,
   });

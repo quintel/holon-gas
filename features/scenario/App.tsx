@@ -22,6 +22,7 @@ export default function App({ scenarioId }: { scenarioId?: number }): React.Reac
           <PresetSelection />
           <div id="production">
             <FieldGroup title="Gas production" className="mb-6">
+              <Input id="gas_cost" />
               <Input id="extra_gas_from_groningen" />
               <Input id="extra_gas_from_eu" />
             </FieldGroup>

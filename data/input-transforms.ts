@@ -25,6 +25,7 @@ export const dumpTransforms: { [k: keyof typeof inputs]: InputSerializer } = {
   /**
    * Gas production
    */
+  gas_cost: (key, value, all) => ({ costs_gas: value }),
   extra_gas_from_groningen: transformExtraGas,
   extra_gas_from_eu: transformExtraGas,
   /**
@@ -141,6 +142,10 @@ const formatCelcius = (value: number, precision: number): string => {
   return `${value.toFixed(precision)}°C`;
 };
 
+const formatEuroPerMWh = (value: number, precision: number): string => {
+  return `€${value.toFixed(precision)} / MWh`;
+};
+
 /**
  * The insulation slider is a special case and uses a number internally, which maps to a
  * human-readable label.
@@ -162,6 +167,7 @@ const formatInsulation = (value: number): string => {
 export const formatTransforms: {
   [k: keyof typeof inputs]: (value: number, precision: number) => string;
 } = {
+  gas_cost: formatEuroPerMWh,
   extra_gas_from_groningen: formatBcm,
   extra_gas_from_eu: formatBcm,
   coal_power_plant_capacity_conventional: formatPercentage,

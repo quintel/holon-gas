@@ -2,6 +2,18 @@ import { oneLine, stripIndent } from "common-tags";
 import { dumpTransforms, formatTransforms } from "./input-transforms";
 
 const inputs: { [k: string]: Input } = {
+  gas_cost: {
+    value: 14.0,
+    max: 188.0,
+    min: 14.0,
+    step: 1,
+    name: "Gas price",
+    description: oneLine`
+      The gas price affects how competitive gas electricity plants are versus other generetion
+      options. Higher gas prices will cause other sources of electricity to be preferred over gas
+      sources.
+    `,
+  },
   extra_gas_from_groningen: {
     value: 3.9,
     max: 27.8,
