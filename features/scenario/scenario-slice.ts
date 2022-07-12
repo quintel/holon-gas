@@ -110,7 +110,7 @@ const createScenario = async () => {
     body: JSON.stringify({
       scenario: {
         area_code: "EU27_european_union_27_countries",
-        end_year: 2050,
+        end_year: 2020,
         source: "HOLON Russian Gas",
       },
     }),
