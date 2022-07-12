@@ -30,17 +30,6 @@ const Help: NextPage = () => {
           <span className="font-semibold">Help</span>
         </h1>
         <div className="prose prose-sm mt-4 pt-3 ">
-          <h3>The Tool</h3>
-          <p>
-            Cupcake ipsum dolor sit amet tart sugar plum. Biscuit cheesecake caramels halvah pie
-            wafer. Pastry tiramisu tootsie roll sesame snaps bonbon topping tootsie roll.
-          </p>
-          <p>
-            Sweet roll brownie muffin jelly beans danish. Dessert tart caramels jelly-o danish oat
-            cake lemon drops jelly beans oat cake. Chupa chups fruitcake oat cake cheesecake muffin
-            jelly beans fruitcake jelly beans jujubes. Gummi bears fruitcake ice cream marshmallow
-            soufflé pastry chocolate dragée.
-          </p>
           <h3>Sliders</h3>
           <p>
             Most settings in the model are controlled with a slider. You can change a value by
