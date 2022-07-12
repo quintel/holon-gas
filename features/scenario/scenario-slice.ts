@@ -14,8 +14,7 @@ import { INITIAL_RUSSIAN_GAS } from "../../data/queries";
 export type InputKey = keyof typeof inputs;
 export type PresetKey = keyof typeof presets;
 
-// export const API_HOST = "https://beta.engine.energytransitionmodel.com";
-export const API_HOST = "http://localhost:3000";
+export const API_HOST = "https://beta.engine.energytransitionmodel.com";
 
 interface Result {
   /**
