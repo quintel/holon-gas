@@ -62,12 +62,12 @@ export const dumpTransforms: { [k: keyof typeof inputs]: InputSerializer } = {
     // The insulation slider maps 0 to no growth, 1 to linear, and 2 to exponential growth. Each
     // value is included in an array in order.
     const values = {
-      households_insulation_level_apartments: [15.7, 16.038, 16.077],
-      households_insulation_level_corner_houses: [21.1, 22.6125, 23.47],
-      households_insulation_level_detached_houses: [13.1, 13.363, 13.383],
-      households_insulation_level_semi_detached_houses: [13.2, 13.225, 13.225],
-      households_insulation_level_terraced_houses: [21.0, 22.0, 22.288],
-      buildings_insulation_level: [46.2, 48.375, 49.024],
+      households_insulation_level_apartments: [0, 2.15, 2.4],
+      households_insulation_level_corner_houses: [0, 7.17, 11.23],
+      households_insulation_level_detached_houses: [0, 2.01, 2.16],
+      households_insulation_level_semi_detached_houses: [0, 0.19, 0.18],
+      households_insulation_level_terraced_houses: [0, 4.76, 6.13],
+      buildings_insulation_level: [0, 4.71, 6.11],
     };
 
     return Object.entries(values).reduce((acc, [k, v]) => {
