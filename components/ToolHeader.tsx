@@ -1,12 +1,14 @@
 import Link from "next/link";
 
-import Tour from "../features/tour/Tour";
+import ResetButton from "../features/scenario/ResetButton";
 
 const ToolHeader: React.FC<{}> = () => {
   return (
     <div className="-mb-2 flex w-full flex-wrap items-center justify-center gap-3 px-3 pt-5 lg:justify-between">
       <h1 className="text-xl font-medium">Russian Gas Tool</h1>
       <div className="flex items-center">
+        <ResetButton />
+
         <Link href="/help">
           <a className="inline-flex items-center rounded px-2 py-1 text-midnight-500 transition hover:bg-gray-200 hover:text-midnight-700 hover:no-underline">
             <svg

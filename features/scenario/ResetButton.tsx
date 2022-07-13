@@ -1,8 +1,10 @@
-import { useAppSelector } from "../hooks";
+import { useAppSelector, useAppDispatch } from "../hooks";
 
-import { isUnmodifiedSelector } from "./scenario-slice";
+import { isUnmodifiedSelector, resetScenario } from "./scenario-slice";
 
-const ResetButton: React.FC<{ onClick: () => void }> = ({ onClick }) => {
+const ResetButton: React.FC<{}> = () => {
+  const dispatch = useAppDispatch();
+
   const isUnmodified = useAppSelector(isUnmodifiedSelector);
   let disabledClasses = "";
 
@@ -12,8 +14,8 @@ const ResetButton: React.FC<{ onClick: () => void }> = ({ onClick }) => {
 
   return (
     <button
-      className={`inline-flex items-center rounded px-2 py-1 text-xs text-midnight-500 transition hover:bg-gray-300 hover:text-midnight-600 ${disabledClasses}`}
-      onClick={onClick}
+      className={`inline-flex items-center rounded px-2 py-1.5 text-sm text-midnight-500 transition hover:bg-gray-200 hover:text-midnight-700 ${disabledClasses}`}
+      onClick={() => dispatch(resetScenario())}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

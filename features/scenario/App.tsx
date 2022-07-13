@@ -20,7 +20,6 @@ export default function App({ scenarioId }: { scenarioId?: number }): React.Reac
       <div className="flex w-full flex-wrap pt-6 md:w-1/2 xl:w-2/3">
         <ToolHeader />
         <div className="w-full p-3 pt-6 xl:w-1/2">
-          <PresetSelection />
           <div id="production">
             <FieldGroup title="Gas production" className="mb-6">
               <Input id="gas_cost" />
