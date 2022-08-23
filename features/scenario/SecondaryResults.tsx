@@ -1,5 +1,3 @@
-import CompactBarChart from "../../components/CompactBarChart";
-
 import ColorBandedBarChart from "../../components/ColorBandedBarChart";
 import CapitalFlowBarChart from "./CapitalFlowBarChart";
 import HelpButton from "../../components/HelpButton";

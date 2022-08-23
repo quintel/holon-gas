@@ -1,4 +1,4 @@
-import { configureStore, Action } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 
 import scenarioReducer from "./scenario/scenario-slice";
 import tourReducer from "./tour/tour-slice";

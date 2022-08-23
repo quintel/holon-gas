@@ -5,7 +5,6 @@ import Input from "./Input";
 import InputDescription from "../../components/InputDescription";
 import InsulationInput from "./InsulationInput";
 import LoadingStatus from "./LoadingStatus";
-import PresetSelection from "./PresetSelection";
 import QueryResult from "./QueryResult";
 import ResultsChart from "./ResultsChart";
 import SecondaryResults from "./SecondaryResults";

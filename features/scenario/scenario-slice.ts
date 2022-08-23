@@ -1,6 +1,6 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-import { clearState, loadState, saveState } from "./browser-storage";
+import { loadState, saveState } from "./browser-storage";
 
 import { PresetSchema } from "../../data/inputs";
 

@@ -1,5 +1,5 @@
 import { useAppSelector } from "../hooks";
-import { createFutureResultDeltaSelector, importedRussianGasSelector } from "./scenario-slice";
+import { importedRussianGasSelector } from "./scenario-slice";
 
 import { RUSSIAN_GAS_PRICE } from "../../data/queries";
 
@@ -14,23 +14,6 @@ function formatEuros(value: number): string {
 
 export default function CapitalFlowBarChart(): React.ReactElement {
   const russianGas = useAppSelector(importedRussianGasSelector);
-
-  const reductionElectricityProduction = useAppSelector(
-    createFutureResultDeltaSelector("reduction_demand_natural_gas_electricity_production")
-  );
-
-  const reductionBuildings = useAppSelector(
-    createFutureResultDeltaSelector("reduction_final_demand_natural_gas_buildings")
-  );
-
-  const reductionHouseholds = useAppSelector(
-    createFutureResultDeltaSelector("reduction_final_demand_natural_gas_households")
-  );
-
-  const reductionIndustry = useAppSelector(
-    createFutureResultDeltaSelector("reduction_final_demand_natural_gas_industry")
-  );
-
   const capitalFlow = Math.max(0, russianGas * RUSSIAN_GAS_PRICE);
 
   return (

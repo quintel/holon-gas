@@ -1,5 +1,5 @@
 import { Fragment, useCallback } from "react";
-import Joyride, { ACTIONS, CallBackProps, EVENTS, STATUS, Step } from "react-joyride";
+import Joyride, { ACTIONS, CallBackProps, EVENTS, STATUS } from "react-joyride";
 
 import { useAppSelector, useAppDispatch } from "../hooks";
 import { startTour, closeTour, setStep, isActiveSelector, stepSelector } from "./tour-slice";
@@ -36,7 +36,7 @@ const renderContent = (content: string, id: string) => {
   );
 };
 
-const Tour: React.FC<{}> = () => {
+const Tour: React.FC = () => {
   const isActive = useAppSelector(isActiveSelector);
   const stepIndex = useAppSelector(stepSelector);
 

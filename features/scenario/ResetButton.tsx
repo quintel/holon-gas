@@ -2,7 +2,7 @@ import { useAppSelector, useAppDispatch } from "../hooks";
 
 import { isUnmodifiedSelector, resetScenario } from "./scenario-slice";
 
-const ResetButton: React.FC<{}> = () => {
+const ResetButton: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const isUnmodified = useAppSelector(isUnmodifiedSelector);
