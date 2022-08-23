@@ -18,6 +18,8 @@ const transformExtraGas: InputSerializer = (key, value, all) => ({
     all["extra_gas_from_groningen"].value * bcmPerPJ + all["extra_gas_from_eu"].value * bcmPerPJ,
 });
 
+export const noOp = () => ({});
+
 /**
  * Converts UI values to a hash of inputs to be sent to ETEngine.
  */
@@ -37,9 +39,9 @@ export const dumpTransforms: { [k: keyof typeof inputs]: InputSerializer } = {
   coal_power_plant_capacity_lignite: (key, value) => ({
     capacity_of_energy_power_ultra_supercritical_lignite: 41918.8 * (value / 100),
   }),
-  lng_imports: (key, value) => ({
-    energy_regasification_lng_share: value,
-  }),
+  // Do nothing. LNG imports are handled entirely in the front-end are are not communicated to the
+  // ETM.
+  lng_imports: noOp,
   injection_of_biomethane_in_gas_mix: (key, value) => ({
     green_gas_total_share: value,
   }),
@@ -171,7 +173,7 @@ export const formatTransforms: {
   extra_gas_from_eu: formatBcm,
   coal_power_plant_capacity_conventional: formatPercentage,
   coal_power_plant_capacity_lignite: formatPercentage,
-  lng_imports: formatPercentage,
+  lng_imports: formatBcm,
   renewable_energy_capacity: formatMW,
   rooftop_pv_households: formatPercentage,
   rooftop_pv_buildings: formatPercentage,

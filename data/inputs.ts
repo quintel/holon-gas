@@ -1,5 +1,5 @@
 import { oneLine, stripIndent } from "common-tags";
-import { dumpTransforms, formatTransforms } from "./input-transforms";
+import { dumpTransforms, formatTransforms, noOp } from "./input-transforms";
 
 const inputs: { [k: string]: Input } = {
   gas_cost: {
@@ -94,10 +94,10 @@ const inputs: { [k: string]: Input } = {
     `,
   },
   lng_imports: {
-    value: 10,
-    max: 20,
-    min: 10,
-    recommended: 15,
+    value: 0,
+    max: 60,
+    min: 0,
+    recommended: 20,
     step: 0.1,
     name: "Increase Liquified Natural Gas (LNG) imports",
     description: "What share of the natural gas supply should be met by LNG imports?",
@@ -332,6 +332,10 @@ export function dumpInput(
   all: typeof inputs
 ): { [k: string]: number } {
   return dumpTransforms[key]?.(key, value, all) || {};
+}
+
+export function isServerSide(key: keyof typeof inputs) {
+  return dumpTransforms[key] !== noOp;
 }
 
 /**
