@@ -107,8 +107,6 @@ export default function ResultsChart(): React.ReactElement {
     },
   ];
 
-  console.log(futureSupply.extraction_of_natural_gas);
-
   const options = {
     annotations: {
       yaxis: [
