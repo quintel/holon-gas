@@ -31,8 +31,8 @@ const Slider: React.FC<SliderProps> = ({
       value={value}
       disabled={disabled}
       marks={mark != undefined ? [mark] : undefined}
-      onChange={onChange || (() => {})}
-      onAfterChange={onFinalChange || (() => {})}
+      onChange={onChange || (() => undefined)}
+      onAfterChange={onFinalChange || (() => undefined)}
       renderMark={(props) => (
         <span {...props} className={mark && mark > value ? "mark" : "mark active-mark"} />
       )}

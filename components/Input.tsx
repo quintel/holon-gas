@@ -47,7 +47,7 @@ export default function Input({
   // Store the value of the slider internally. This allows us to show the slider moving, and update
   // the value as the user does so, without triggering an update to the application state until the
   // user finishes moving the slider.
-  let [currentValue, setCurrentValue] = useState(value);
+  const [currentValue, setCurrentValue] = useState(value);
 
   // If the value prop changes, update the internal state.
   useEffect(() => setCurrentValue(value), [value]);

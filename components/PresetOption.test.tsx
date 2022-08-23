@@ -6,7 +6,7 @@ import PresetOption from "./PresetOption";
 describe("PresetOption", () => {
   it("renders the radio button", () => {
     render(
-      <RadioGroup value="something-else" onChange={() => {}}>
+      <RadioGroup value="something-else" onChange={() => undefined}>
         <PresetOption title="My option" value="test" />
       </RadioGroup>
     );
@@ -16,7 +16,7 @@ describe("PresetOption", () => {
 
   it("renders the radio button when checked", () => {
     render(
-      <RadioGroup value="test" onChange={() => {}}>
+      <RadioGroup value="test" onChange={() => undefined}>
         <PresetOption title="My option" value="test" />
       </RadioGroup>
     );
