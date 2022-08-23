@@ -3,14 +3,18 @@ import dynamic from "next/dynamic";
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 import { useAppSelector } from "../hooks";
-import { createFutureResultDeltaSelector, importedRussianGasSelector } from "./scenario-slice";
+import {
+  createFutureResultDeltaSelector,
+  createInputSelector,
+  importedRussianGasSelector,
+} from "./scenario-slice";
 
 export default function ResultsChart(): React.ReactElement {
   const russianGas = useAppSelector(importedRussianGasSelector);
 
   // Increased production
 
-  const importedLng = useAppSelector(createFutureResultDeltaSelector("import_lng_bcm"));
+  const importedLng = useAppSelector(createInputSelector("lng_imports")).value;
 
   const increaseGreenGas = useAppSelector(
     createFutureResultDeltaSelector("production_green_gas_bcm")

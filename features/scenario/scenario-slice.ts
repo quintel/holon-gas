@@ -5,7 +5,7 @@ import { loadState, saveState } from "./browser-storage";
 import { PresetSchema } from "../../data/inputs";
 
 import presets from "../../data/presets";
-import inputs, { dumpInput } from "../../data/inputs";
+import inputs, { dumpInput, isServerSide } from "../../data/inputs";
 import queries from "../../data/queries";
 
 import { Input } from "../../data/inputs";
@@ -201,7 +201,9 @@ export const resetScenario = createAsyncThunk("scenario/resetScenario", async (_
 export const setInputValue = createAsyncThunk(
   "scenario/setInputValue",
   async (arg: { key: InputKey; value: Input["value"] }, thunkAPI) => {
-    await thunkAPI.dispatch(sendAPIRequest());
+    if (isServerSide(arg.key)) {
+      await thunkAPI.dispatch(sendAPIRequest());
+    }
   }
 );
 
@@ -407,13 +409,15 @@ export const importedRussianGasSelector = (state: RootState) => {
     "final_demand_natural_gas_industry_bcm",
   ]);
 
-  const increasedProduction = summedFutureDeltas(state, [
-    "import_lng_bcm",
+  let increasedProduction = summedFutureDeltas(state, [
     "production_green_gas_bcm",
     "production_natural_gas_bcm",
   ]);
 
-  return INITIAL_RUSSIAN_GAS - increasedProduction - reducedDemand;
+  // Manually include imported LNG.
+  increasedProduction += state.scenario.inputs.lng_imports.value;
+
+  return Math.max(INITIAL_RUSSIAN_GAS - increasedProduction - reducedDemand, 0);
 };
 
 /**
