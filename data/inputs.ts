@@ -131,10 +131,10 @@ const inputs: { [k: string]: Input } = {
     `,
   },
   renewable_energy_capacity: {
-    value: 489762,
-    max: 560822,
-    min: 489762,
-    recommended: 520822,
+    value: 257677,
+    max: 295040,
+    min: 257677,
+    recommended: 283445,
     name: "Renewable energy capacity",
     description: oneLine`
       How much renewable energy should be installed as alternative to natural gas as electricity
