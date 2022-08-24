@@ -7,7 +7,7 @@ import expectedQueries from "../../data/queries";
 /**
  * Increment this whenver you wish to expire the cached state for all users.
  */
-const SCHEMA_VERSION = 6;
+const SCHEMA_VERSION = 7;
 
 interface PersistedState {
   scenario: ScenarioState;
