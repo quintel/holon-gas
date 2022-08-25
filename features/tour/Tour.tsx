@@ -108,19 +108,19 @@ const Tour: React.FC = () => {
           {
             target: "#tour-results-costs",
             content: renderContent(tourTexts.resultsCosts, "results-costs"),
-            placement: "left-start",
+            placement: "left-end",
             disableBeacon: true,
           },
           {
             target: "#tour-results-emissions",
             content: renderContent(tourTexts.resultsEmissions, "results-emissions"),
-            placement: "left-start",
+            placement: "left-end",
             disableBeacon: true,
           },
           {
             target: "#tour-etm",
             content: renderContent(tourTexts.etm, "etm"),
-            placement: "left-start",
+            placement: "left-end",
             disableBeacon: true,
           },
         ]}
