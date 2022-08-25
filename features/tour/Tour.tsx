@@ -1,4 +1,4 @@
-import { Fragment, useCallback } from "react";
+import { Fragment, useCallback, useEffect } from "react";
 import Joyride, { ACTIONS, CallBackProps, EVENTS, STATUS } from "react-joyride";
 
 import { useAppSelector, useAppDispatch } from "../hooks";
@@ -43,12 +43,19 @@ const Tour: React.FC = () => {
         action === ACTIONS.CLOSE
       ) {
         dispatch(closeTour());
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
       } else if (([EVENTS.STEP_AFTER, EVENTS.TARGET_NOT_FOUND] as string[]).includes(type)) {
         dispatch(setStep(index + (action === ACTIONS.PREV ? -1 : 1)));
       }
     },
     [dispatch]
   );
+
+  useEffect(() => {
+    if (stepIndex < 2) {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    }
+  }, [stepIndex]);
 
   return (
     <div>
@@ -120,6 +127,7 @@ const Tour: React.FC = () => {
         continuous
         stepIndex={stepIndex}
         run={isActive}
+        disableScrolling={stepIndex < 2}
         callback={callback}
         styles={{
           options: {
