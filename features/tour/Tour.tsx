@@ -18,18 +18,12 @@ const renderContent = (content: string, id: string) => {
           {content}
         </ReactMarkdown>
 
-        {id === "production" && (
-          <div className="mt-3 border-t-2">
-            <p>
-              Some sliders also have a recommended value. If you&apos;re uncertain about what value
-              to set, the recommended value is a sensible default.
-            </p>
-            <ExampleSlider initialValue={0} mark={50}>
-              <div className="flex justify-center">
-                <div className="">Recommended value</div>
-              </div>
-            </ExampleSlider>
-          </div>
+        {id === "slider-settings" && (
+          <ExampleSlider initialValue={0} mark={50}>
+            <div className="flex justify-center">
+              <div className="">Recommended value</div>
+            </div>
+          </ExampleSlider>
         )}
       </div>
     </Fragment>
@@ -81,26 +75,44 @@ const Tour: React.FC = () => {
       <Joyride
         steps={[
           {
-            target: "#presets",
-            content: renderContent(tourTexts.presets, "presets"),
+            target: "#gas-production",
+            content: renderContent(tourTexts.howItWorks, "gas-production"),
             placement: "right-start",
             disableBeacon: true,
           },
           {
-            target: "#production",
-            content: renderContent(tourTexts.production, "production"),
+            target: "#tour-slider-settings",
+            content: renderContent(tourTexts.sliderSettings, "slider-settings"),
             placement: "right-start",
             disableBeacon: true,
           },
           {
-            target: "#savings",
-            content: renderContent(tourTexts.savings, "savings"),
-            placement: "right-start",
+            target: "#tour-results-imports",
+            content: renderContent(tourTexts.resultsImports, "results-imports"),
+            placement: "left-start",
             disableBeacon: true,
           },
           {
-            target: "#results",
-            content: renderContent(tourTexts.results, "results"),
+            target: "#tour-results-capital-flow",
+            content: renderContent(tourTexts.resultsCapitalFlow, "results-capital-flow"),
+            placement: "left-start",
+            disableBeacon: true,
+          },
+          {
+            target: "#tour-results-costs",
+            content: renderContent(tourTexts.resultsCosts, "results-costs"),
+            placement: "left-start",
+            disableBeacon: true,
+          },
+          {
+            target: "#tour-results-emissions",
+            content: renderContent(tourTexts.resultsEmissions, "results-emissions"),
+            placement: "left-start",
+            disableBeacon: true,
+          },
+          {
+            target: "#tour-etm",
+            content: renderContent(tourTexts.etm, "etm"),
             placement: "left-start",
             disableBeacon: true,
           },

@@ -40,36 +40,42 @@ export default function SecondaryResults(): React.ReactElement {
 
   return (
     <div>
-      <div className="relative mt-3 flex">
-        <h2 className="text-lg">Capital flow to Russia</h2>
-        <div className="ml-auto">
-          <HelpButton text={helpTexts.results} />
+      <div id="tour-results-capital-flow">
+        <div className="relative mt-3 flex">
+          <h2 className="text-lg">Capital flow to Russia</h2>
+          <div className="ml-auto">
+            <HelpButton text={helpTexts.results} />
+          </div>
+        </div>
+        <p className="mb-1">Payments to Russia for gas this year</p>
+        <CapitalFlowBarChart />
+      </div>
+
+      <div id="tour-results-costs">
+        <h2 className="mt-3 text-lg">Costs</h2>
+        <p className="mb-1">Required (one-off) investment</p>
+        <div className="pb-4">
+          <ColorBandedBarChart
+            min={0}
+            max={400}
+            value={investmentCosts < 0 ? -investmentCosts : 0}
+            bands={[{ color: "yellow" }]}
+            formatter={formatEuros}
+          />
         </div>
       </div>
-      <p className="mb-1">Payments to Russia for gas this year</p>
-      <CapitalFlowBarChart />
 
-      <h2 className="mt-3 text-lg">Costs</h2>
-      <p className="mb-1">Required (one-off) investment</p>
-      <div className="pb-4">
+      <div id="tour-results-emissions">
+        <h2 className="mt-3 text-lg">Emissions</h2>
+        <p className="mb-1">Effect on EU emissions figures</p>
         <ColorBandedBarChart
-          min={0}
-          max={400}
-          value={investmentCosts < 0 ? -investmentCosts : 0}
-          bands={[{ color: "yellow" }]}
-          formatter={formatEuros}
+          min={-20}
+          max={20}
+          value={-co2Change * 100}
+          bands={[{ color: "green" }, { color: "red", at: 0 }]}
+          formatter={formatPercent}
         />
       </div>
-
-      <h2 className="mt-3 text-lg">Emissions</h2>
-      <p className="mb-1">Effect on EU emissions figures</p>
-      <ColorBandedBarChart
-        min={-20}
-        max={20}
-        value={-co2Change * 100}
-        bands={[{ color: "green" }, { color: "red", at: 0 }]}
-        formatter={formatPercent}
-      />
     </div>
   );
 }

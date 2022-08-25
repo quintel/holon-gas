@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import ResetButton from "../features/scenario/ResetButton";
+import Tour from "../features/tour/Tour";
 
 const ToolHeader: React.FC = () => {
   return (
@@ -8,6 +9,7 @@ const ToolHeader: React.FC = () => {
       <h1 className="text-xl font-medium">Russian Gas Tool</h1>
       <div className="flex items-center">
         <ResetButton />
+        <Tour />
 
         <Link href="/help">
           <a className="inline-flex items-center rounded px-2 py-1 text-midnight-500 transition hover:bg-gray-200 hover:text-midnight-700 hover:no-underline">
