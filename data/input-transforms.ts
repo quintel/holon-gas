@@ -86,9 +86,9 @@ export const dumpTransforms: { [k: keyof typeof inputs]: InputSerializer } = {
   thermostat_settings_percentage: (key, value, all) => ({
     // We don't need to transform thermostat_settings_reduce_temperature since both sliders affect
     // the same ETM input.
-    households_useful_demand_heat_per_person: Math.max(
+    holon_gas_households_useful_demand_heat_per_person_absolute: Math.max(
       -15.07 * all.thermostat_settings_reduce_temperature.value * (value / 100),
-      -5
+      -50
     ),
   }),
   /**

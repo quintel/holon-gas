@@ -204,7 +204,7 @@ const inputs: { [k: string]: Input } = {
   },
   thermostat_settings_percentage: {
     value: 0,
-    max: 30,
+    max: 100,
     min: 0,
     step: 1,
     name: "Share of participating households",
@@ -215,7 +215,7 @@ const inputs: { [k: string]: Input } = {
   },
   thermostat_settings_reduce_temperature: {
     value: 0,
-    max: 1,
+    max: 2,
     min: 0.0,
     step: 0.1,
     recommended: 1,
