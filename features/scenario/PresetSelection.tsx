@@ -31,7 +31,6 @@ export default function PresetSelection(): React.ReactElement {
       <RadioGroup value={currentPreset} onChange={onChange}>
         <PresetOption key="iea" value="iea" title="International Energy Agency (IEA)" />
         <PresetOption key="ec" value="ec" title="European Commission" />
-        <PresetOption key="nvde" value="nvde" title="Dutch Renewable Energy Association" />
         <PresetOption key="custom" value="custom" title="Custom" />
       </RadioGroup>
     </div>

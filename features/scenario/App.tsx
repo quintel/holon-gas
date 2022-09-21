@@ -5,6 +5,7 @@ import Input from "./Input";
 import InputDescription from "../../components/InputDescription";
 import InsulationInput from "./InsulationInput";
 import LoadingStatus from "./LoadingStatus";
+import PresetSelection from "./PresetSelection";
 import ResultsChart from "./ResultsChart";
 import SecondaryResults from "./SecondaryResults";
 import ToolHeader from "../../components/ToolHeader";
@@ -18,6 +19,7 @@ export default function App(): React.ReactElement {
       <div className="flex w-full flex-wrap pt-6 md:w-1/2 xl:w-2/3">
         <ToolHeader />
         <div className="w-full p-3 pt-6 xl:w-1/2">
+          <PresetSelection />
           <FieldGroup title="Gas production" className="mb-6" id="gas-production">
             <div id="tour-slider-settings">
               <Input id="gas_cost" />
