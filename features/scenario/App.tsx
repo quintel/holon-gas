@@ -21,7 +21,7 @@ export default function App(): React.ReactElement {
         <div className="w-full p-3 pt-6 xl:w-1/2">
           <PresetSelection />
           <FieldGroup title="Gas production" className="mb-6" id="gas-production">
-            <div id="tour-slider-settings">
+            <div id="tour-slider-settings" className="pb-4">
               <Input id="gas_cost" />
             </div>
             <Input id="extra_gas_from_groningen" />
