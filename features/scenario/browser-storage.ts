@@ -7,7 +7,7 @@ import expectedQueries from "../../data/queries";
 /**
  * Increment this whenver you wish to expire the cached state for all users.
  */
-const SCHEMA_VERSION = 8;
+const SCHEMA_VERSION = 9;
 
 interface PersistedState {
   scenario: ScenarioState;
@@ -71,7 +71,7 @@ export function loadState(): ScenarioState | undefined {
     areQueriesValid(parsed.scenario.results) &&
     areQueriesValid(parsed.scenario.initialResults)
   ) {
-    return parsed.scenario;
+    return { ...parsed.scenario, dirtyInputs: parsed.scenario.inputs };
   }
 
   return;

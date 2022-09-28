@@ -34,6 +34,7 @@ interface Result {
 
 export interface ScenarioState {
   currentRequestId: undefined | string;
+  dirtyInputs: ReturnType<typeof createInputState>;
   initialRequestState: RequestState;
   initialResults: { [k: string]: Result };
   inputs: ReturnType<typeof createInputState>;
@@ -88,6 +89,7 @@ function createInitialState(preset: PresetSchema): ScenarioState {
 
   return {
     currentRequestId: undefined,
+    dirtyInputs: createInputState(preset),
     initialRequestState: RequestState.Idle,
     initialResults: {},
     inputs: createInputState(preset),
@@ -153,12 +155,22 @@ const constrainedInputValue = (value: number, { min, max }: Input) => {
 };
 
 /**
+ * Given two lists of inputs, copies the values from the first to the second.
+ *
+ */
+const copyInputValues = (from: { [k: string]: Input }, to: { [k: string]: Input }) => {
+  for (const [key, input] of Object.entries(from)) {
+    to[key].value = input.value;
+  }
+};
+
+/**
  * Iterates through all UI inputs and returns an object containing the values to be sent to the API.
  */
-const dumpInputs = (inputs: RootState["scenario"]) => {
-  return Object.keys(inputs.inputs).reduce((rest, key) => {
-    const input = inputs.inputs[key];
-    return { ...rest, ...dumpInput(key, input.value, inputs.inputs) };
+const dumpInputs = (state: RootState["scenario"]) => {
+  return Object.keys(state.dirtyInputs).reduce((rest, key) => {
+    const input = state.dirtyInputs[key];
+    return { ...rest, ...dumpInput(key, input.value, state.dirtyInputs) };
   }, {});
 };
 
@@ -264,6 +276,9 @@ const scenarioSlice = createSlice({
         state.initialResults = action.payload.gqueries;
       }
 
+      // Set the input values from the dirtyInputs.
+      copyInputValues(state.dirtyInputs, state.inputs);
+
       state.results = action.payload.gqueries;
       state.scenarioId = action.payload.scenario.id;
       state.initialRequestState = RequestState.Done;
@@ -272,9 +287,14 @@ const scenarioSlice = createSlice({
       saveState(state);
     });
 
-    builder.addCase(sendAPIRequest.rejected, (state) => {
+    builder.addCase(sendAPIRequest.rejected, (state, action) => {
       if (state.initialRequestState === RequestState.Inflight) {
         state.initialRequestState = RequestState.Failure;
+      }
+
+      // Reset the dirty input state.
+      if (action.meta.requestId != state.currentRequestId) {
+        copyInputValues(state.inputs, state.dirtyInputs);
       }
 
       state.requestState = RequestState.Failure;
@@ -287,12 +307,17 @@ const scenarioSlice = createSlice({
       const input = state.inputs[action.meta.arg.key];
 
       if (input) {
-        state.inputs[action.meta.arg.key] = {
+        state.dirtyInputs[action.meta.arg.key] = {
           ...input,
           value: constrainedInputValue(action.meta.arg.value, input),
         };
         state.selectedPreset = "custom";
       }
+    });
+
+    builder.addCase(setInputValue.fulfilled, (state) => {
+      // Set the input values from the dirtyInputs.
+      copyInputValues(state.dirtyInputs, state.inputs);
     });
 
     // Presets
