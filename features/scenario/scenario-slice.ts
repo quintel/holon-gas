@@ -345,12 +345,13 @@ const scenarioSlice = createSlice({
 
     builder.addCase(resetScenario.pending, (state) => {
       state.selectedPreset = "custom";
-      state.inputs = createInputState(presets.custom);
+      state.dirtyInputs = createInputState(presets.custom);
     });
 
     builder.addCase(resetScenario.fulfilled, (state, action) => {
       if (!action.payload.errors) {
         state.initialResults = action.payload.gqueries;
+        state.inputs = createInputState(presets.custom);
       }
     });
   },
