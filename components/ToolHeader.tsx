@@ -1,6 +1,5 @@
 import Link from "next/link";
 
-import ResetButton from "../features/scenario/ResetButton";
 import Tour from "../features/tour/Tour";
 
 const ToolHeader: React.FC = () => {
@@ -8,7 +7,6 @@ const ToolHeader: React.FC = () => {
     <div className="-mb-2 flex w-full flex-wrap items-center justify-center gap-3 px-3 pt-5 lg:justify-between">
       <h1 className="text-xl font-medium">Russian Gas Tool</h1>
       <div className="flex items-center">
-        <ResetButton />
         <Tour />
 
         <Link href="/help">
