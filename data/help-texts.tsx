@@ -75,7 +75,7 @@ const capitalFlow = `
 `;
 
 const presetEC = `
-  The European commission proposed a number of endeavors to displace the EU’s imports of Russian
+  The European Commission proposed a number of endeavors to displace the EU’s imports of Russian
   natural gas[^1], looking at short- and long term replacement estimates. The preset includes the
   measures that could be duplicated in our model, excluding pipeline import diversification. When
   the European Commission’s scenario demands a slider setting beyond the theoretical maximum, the
