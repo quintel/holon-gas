@@ -335,7 +335,7 @@ const scenarioSlice = createSlice({
 
       for (const inputKey of inputKeys) {
         if (preset.values[inputKey] != undefined) {
-          state.inputs[inputKey] = {
+          state.dirtyInputs[inputKey] = {
             ...inputs[inputKey],
             value: constrainedInputValue(preset.values[inputKey], inputs[inputKey]),
           };

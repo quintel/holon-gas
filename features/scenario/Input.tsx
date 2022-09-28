@@ -5,7 +5,7 @@ import { formatInput } from "../../data/inputs";
 import StatelessInput from "../../components/Input";
 
 export default function Input({ id }: { id: InputKey }): React.ReactElement {
-  const input = useAppSelector(createInputSelector(id));
+  const input = useAppSelector(createInputSelector(id, true));
   const dispatch = useAppDispatch();
 
   const formatValue = (value: number, precision: number) => {
