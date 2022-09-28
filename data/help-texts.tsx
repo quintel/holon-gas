@@ -76,7 +76,7 @@ const capitalFlow = `
 
 const presetEC = `
   The European commission proposed a number of endeavors to displace the EU’s imports of Russian
-  Natural gas[^1], looking at short- and long term replacement estimates. The preset includes the
+  natural gas[^1], looking at short- and long term replacement estimates. The preset includes the
   measures that could be duplicated in our model, excluding pipeline import diversification. When
   the European Commission’s scenario demands a slider setting beyond the theoretical maximum, the
   latter is taken instead.
@@ -87,7 +87,7 @@ const presetEC = `
 const presetIEA = `
   The IEA proposed a 10-point plan to reduce the EU’s reliance on natural gas[^1]. The preset
   includes the measures that could be duplicated in our model, excluding nuclear energy and fixing
-  methane leaks. When the iea preset demands a slider setting beyond the theoretical maximum, the
+  methane leaks. When the IEA preset demands a slider setting beyond the theoretical maximum, the
   latter is taken instead.
 
   [^1]: IEA, “A 10-Point Plan to Reduce the European Union’s Reliance on Russian Natural Gas,” 2022.
