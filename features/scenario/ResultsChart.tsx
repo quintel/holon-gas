@@ -2,80 +2,15 @@ import dynamic from "next/dynamic";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
-import { useAppSelector } from "../hooks";
-import {
-  createFutureResultDeltaSelector,
-  createInputSelector,
-  importedRussianGasSelector,
-} from "./scenario-slice";
+interface Props {
+  series: { name: string; value: number }[];
+}
 
-export default function ResultsChart(): React.ReactElement {
-  const russianGas = useAppSelector(importedRussianGasSelector);
-
-  // Increased production
-
-  const importedLng = useAppSelector(createInputSelector("lng_imports")).value;
-
-  const increaseGreenGas = useAppSelector(
-    createFutureResultDeltaSelector("production_green_gas_bcm")
-  );
-
-  const increaseNaturalGas = useAppSelector(
-    createFutureResultDeltaSelector("production_natural_gas_bcm")
-  );
-
-  // Decreased demand.
-
-  const reductionElectricityProduction = -useAppSelector(
-    createFutureResultDeltaSelector("natural_gas_electricity_production_bcm")
-  );
-
-  const reductionBuildings = -useAppSelector(
-    createFutureResultDeltaSelector("final_demand_natural_gas_buildings_bcm")
-  );
-
-  const reductionHouseholds = -useAppSelector(
-    createFutureResultDeltaSelector("final_demand_natural_gas_households_bcm")
-  );
-
-  const reductionIndustry = -useAppSelector(
-    createFutureResultDeltaSelector("final_demand_natural_gas_industry_bcm")
-  );
-
-  const series = [
-    {
-      name: "Gas imported from Russia",
-      data: [Math.max(0, russianGas)],
-    },
-    {
-      name: "Extra imported LNG",
-      data: [Math.max(0, importedLng)],
-    },
-    {
-      name: "Extra green gas production",
-      data: [Math.max(0, increaseGreenGas)],
-    },
-    {
-      name: "Extra natural gas production",
-      data: [Math.max(0, increaseNaturalGas)],
-    },
-    {
-      name: "Reduction from electricity production",
-      data: [Math.max(0, reductionElectricityProduction)],
-    },
-    {
-      name: "Reduction in buildings",
-      data: [Math.max(0, reductionBuildings)],
-    },
-    {
-      name: "Reduction in households",
-      data: [Math.max(0, reductionHouseholds)],
-    },
-    {
-      name: "Reduction in industry",
-      data: [Math.max(0, reductionIndustry)],
-    },
-  ];
+export default function ResultsChart(props: Props): React.ReactElement {
+  const series = props.series.map((s) => ({
+    name: s.name,
+    data: [Math.max(0, s.value)],
+  }));
 
   const options = {
     chart: {

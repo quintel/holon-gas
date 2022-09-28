@@ -1,4 +1,3 @@
-import DemandChart from "./DemandChart";
 import FieldGroup from "../../components/FieldGroup";
 import FieldSubGroup from "../../components/FieldSubGroup";
 import Input from "./Input";
@@ -6,12 +5,10 @@ import InputDescription from "../../components/InputDescription";
 import InsulationInput from "./InsulationInput";
 import LoadingStatus from "./LoadingStatus";
 import PresetSelection from "./PresetSelection";
-import ResultsChart from "./ResultsChart";
-import SecondaryResults from "./SecondaryResults";
+import Results from "./Results";
 import ToolHeader from "../../components/ToolHeader";
 
 import helpTexts from "../../data/help-texts";
-import HelpButton from "../../components/HelpButton";
 
 export default function App(): React.ReactElement {
   return (
@@ -96,25 +93,7 @@ export default function App(): React.ReactElement {
         </div>
       </div>
       <div className="sticky top-0 w-full self-start pl-6 pr-3 md:w-1/2 md:pt-12 xl:w-1/3">
-        <div className="relative flex">
-          <h2 className="text-lg">Gas imported from Russia</h2>
-          <div className="ml-auto">
-            <HelpButton text={helpTexts.results} />
-          </div>
-        </div>
-        <ResultsChart />
-        <div id="tour-results-imports">
-          <div className="relative flex pt-3">
-            <h2 className="text-lg">Gas supply and demand</h2>
-            <div className="ml-auto">
-              <HelpButton text={helpTexts.gasSupplyAndDemand} />
-            </div>
-          </div>
-          <div className="pb-3">
-            <DemandChart />
-          </div>
-        </div>
-        <SecondaryResults />
+        <Results />
         <div className="mt-6 px-5 pb-6 text-center text-xs leading-5 text-gray-500" id="tour-etm">
           Want more options? Go to the full version of the
           <br />

@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import { loadState, saveState } from "./browser-storage";
 
@@ -38,6 +39,7 @@ export interface ScenarioState {
   inputs: ReturnType<typeof createInputState>;
   requestState: RequestState;
   results: { [k: string]: Result };
+  resultsRegion: "eu" | "nl";
   scenarioId: undefined | number;
   selectedPreset: string;
 }
@@ -91,6 +93,7 @@ function createInitialState(preset: PresetSchema): ScenarioState {
     inputs: createInputState(preset),
     requestState: RequestState.Idle,
     results: {},
+    resultsRegion: "eu",
     scenarioId: undefined,
     selectedPreset: preset.key,
   };
@@ -221,7 +224,11 @@ export const setPreset = createAsyncThunk(
 const scenarioSlice = createSlice({
   name: "scenario",
   initialState: createInitialState(presets.custom),
-  reducers: {},
+  reducers: {
+    setResultsRegion(state, action: PayloadAction<ScenarioState["resultsRegion"]>) {
+      state.resultsRegion = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     // API Requests
     // ------------
@@ -344,6 +351,8 @@ export const requestStateSelector = (state: RootState) => ({
 
 export const scenarioIdSelector = (state: RootState) => state.scenario.scenarioId;
 
+export const resultsRegionSelector = (state: RootState) => state.scenario.resultsRegion;
+
 /**
  * Selects an initial result value.
  */
@@ -420,6 +429,20 @@ export const importedRussianGasSelector = (state: RootState) => {
   return Math.max(INITIAL_RUSSIAN_GAS - increasedProduction - reducedDemand, 0);
 };
 
+export const importedRussianGasSelectorWithoutProduction = (state: RootState) => {
+  const reducedDemand = -summedFutureDeltas(state, [
+    "natural_gas_electricity_production_bcm",
+    "final_demand_natural_gas_buildings_bcm",
+    "final_demand_natural_gas_households_bcm",
+    "final_demand_natural_gas_industry_bcm",
+  ]);
+
+  // Manually include imported LNG.
+  const increasedProduction = state.scenario.inputs.lng_imports.value;
+
+  return Math.max(INITIAL_RUSSIAN_GAS - increasedProduction - reducedDemand, 0);
+};
+
 /**
  * Returns if the user has modified any of the inputs from the default "Custom" preset
  */
@@ -435,4 +458,5 @@ export const isUnmodifiedSelector = (state: RootState) => {
   return true;
 };
 
+export const { setResultsRegion } = scenarioSlice.actions;
 export default scenarioSlice.reducer;
