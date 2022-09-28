@@ -39,7 +39,7 @@ function Item({
 }
 
 export default function InsulationInput({ id }: { id: InputKey }): React.ReactElement {
-  const input = useAppSelector(createInputSelector(id));
+  const input = useAppSelector(createInputSelector(id, true));
   const dispatch = useAppDispatch();
 
   const onChange = useCallback(

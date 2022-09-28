@@ -356,10 +356,15 @@ const scenarioSlice = createSlice({
   },
 });
 
-export const createInputSelector = (key: InputKey): ((state: RootState) => Input) => {
+export const createInputSelector = (
+  key: InputKey,
+  dirty?: boolean
+): ((state: RootState) => Input) => {
   return (state: RootState) => {
-    if (state.scenario.inputs[key]) {
-      return state.scenario.inputs[key];
+    const inputs = dirty ? state.scenario.dirtyInputs : state.scenario.inputs;
+
+    if (inputs[key]) {
+      return inputs[key];
     }
 
     throw new Error(`No such input: ${key}`);
