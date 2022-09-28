@@ -9,6 +9,7 @@ const preset: PresetSchema = {
     extra_gas_from_eu: 29.7,
     lng_imports: 20,
     renewable_energy_capacity: 295040,
+    injection_of_biomethane_in_gas_mix: 7.3,
     growth_of_installed_heat_pumps: 8.3,
     insulation: 1,
     thermostat_settings_percentage: 74,
