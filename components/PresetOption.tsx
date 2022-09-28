@@ -1,5 +1,7 @@
 import { RadioGroup } from "@headlessui/react";
 
+import HelpButton from "./HelpButton";
+
 const commonClasses = "font-medium";
 const baseClasses = `${commonClasses} text-gray-800`;
 const checkedClasses = `${commonClasses} text-emerald-700`;
@@ -38,22 +40,26 @@ function Pill({ checked }: { checked: boolean }) {
 }
 
 interface Props {
+  helpText?: string;
   title: string;
   value: string;
 }
 
-export default function PresetOption({ title, value }: Props): React.ReactElement {
+export default function PresetOption({ helpText, title, value }: Props): React.ReactElement {
   return (
-    <RadioGroup.Option
-      value={value}
-      className="group mb-2 cursor-pointer rounded outline-none ring-midnight-300 ring-offset-2 ring-offset-gray-200 focus-visible:ring"
-    >
-      {({ checked }) => (
-        <div className="flex items-center">
-          <Pill checked={checked} />
-          <div className={checked ? checkedClasses : baseClasses}>{title}</div>
-        </div>
-      )}
-    </RadioGroup.Option>
+    <div className="flex">
+      <RadioGroup.Option
+        value={value}
+        className="group flex-1 cursor-pointer rounded py-1 outline-none ring-midnight-300 ring-offset-2 ring-offset-gray-200 focus-visible:ring"
+      >
+        {({ checked }) => (
+          <div className="flex items-center">
+            <Pill checked={checked} />
+            <div className={checked ? checkedClasses : baseClasses}>{title}</div>
+          </div>
+        )}
+      </RadioGroup.Option>
+      {helpText ? <HelpButton text={helpText} fillContainer={false} /> : null}
+    </div>
   );
 }

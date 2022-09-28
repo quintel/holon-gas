@@ -9,6 +9,8 @@ import { presetSelector, setPreset } from "./scenario-slice";
 
 import { PresetKey } from "../../data/presets";
 
+import helpTexts from "../../data/help-texts";
+
 export default function PresetSelection(): React.ReactElement {
   const currentPreset = useAppSelector(presetSelector) || "custom";
 
@@ -29,8 +31,18 @@ export default function PresetSelection(): React.ReactElement {
         gas. Try one below, or create your own scenario:
       </p>
       <RadioGroup value={currentPreset} onChange={onChange}>
-        <PresetOption key="iea" value="iea" title="International Energy Agency (IEA)" />
-        <PresetOption key="ec" value="ec" title="European Commission" />
+        <PresetOption
+          key="iea"
+          value="iea"
+          title="International Energy Agency (IEA)"
+          helpText={helpTexts.presetIEA}
+        />
+        <PresetOption
+          key="ec"
+          value="ec"
+          title="European Commission"
+          helpText={helpTexts.presetEC}
+        />
         <PresetOption key="custom" value="custom" title="Custom" />
       </RadioGroup>
     </div>

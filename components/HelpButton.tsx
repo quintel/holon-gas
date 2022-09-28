@@ -14,18 +14,27 @@ function TooltipContent({ text }: { text: string }) {
   );
 }
 
-export default function HelpButton({ text }: { text: string }) {
+export default function HelpButton({
+  text,
+  fillContainer = true,
+  placement = "auto",
+}: {
+  text: string;
+  fillContainer?: boolean;
+  placement?: React.ComponentProps<typeof Tippy>["placement"];
+}) {
+  const fillClasses = fillContainer ? "after:absolute after:inset-0" : "";
   return (
     <Tippy
       content={<TooltipContent text={text} />}
       interactive={true}
       trigger="click"
-      placement="auto"
-      maxWidth={600}
+      placement={placement}
+      maxWidth={425}
     >
       <span
         role="button"
-        className="inline-flex h-4 w-4 cursor-pointer items-center justify-center rounded bg-gray-400 text-xs font-medium text-gray-100 transition after:absolute after:inset-0 hover:bg-gray-500"
+        className={`${fillClasses} inline-flex h-4 w-4 cursor-pointer items-center justify-center rounded bg-gray-400 text-xs font-medium text-gray-100 transition hover:bg-gray-500`}
       >
         ?
       </span>
