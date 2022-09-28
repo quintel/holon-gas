@@ -178,7 +178,7 @@ export default function ResultsChart(): React.ReactElement {
       },
       labels: {
         formatter(value: number) {
-          return value.toFixed(1);
+          return value.toFixed(0);
         },
         style: {
           fontSize: "0.875rem",
