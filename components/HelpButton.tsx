@@ -24,6 +24,7 @@ export default function HelpButton({
   placement?: React.ComponentProps<typeof Tippy>["placement"];
 }) {
   const fillClasses = fillContainer ? "after:absolute after:inset-0" : "";
+
   return (
     <Tippy
       content={<TooltipContent text={text} />}

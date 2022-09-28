@@ -59,7 +59,11 @@ export default function PresetOption({ helpText, title, value }: Props): React.R
           </div>
         )}
       </RadioGroup.Option>
-      {helpText ? <HelpButton text={helpText} fillContainer={false} /> : null}
+      {helpText ? (
+        <span className="mt-1">
+          <HelpButton text={helpText} fillContainer={false} />
+        </span>
+      ) : null}
     </div>
   );
 }
